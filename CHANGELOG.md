@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.10](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.9...v0.1.10) (2023-10-30)
+
+
+### Bug Fixes
+
+* add k3d to test workflow ([ae46119](https://github.com/defenseunicorns/uds-k3d/commit/ae461191641f7151259fa48deea88fee3dfae70d))
+
+
+### Miscellaneous
+
+* add codeowners ([87f67ea](https://github.com/defenseunicorns/uds-k3d/commit/87f67ead297ed78634ba65fd9fcab1d6a7a9dfd5))
+
 ## [0.1.9](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.8...v0.1.9) (2023-10-30)
 
 
