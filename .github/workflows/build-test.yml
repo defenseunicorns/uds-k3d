@@ -2,7 +2,10 @@ name: Test UDS Capability
 
 on:
   pull_request:
-    branches: ["main"]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - "CODEOWNERS"
 
 permissions:
   id-token: write
@@ -20,6 +23,9 @@ jobs:
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
           version: v0.31.0-rc1
+
+      - run: "curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash"
+        shell: bash
 
       - name: Create Zarf Package
         run: zarf package create --confirm
