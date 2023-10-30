@@ -25,4 +25,4 @@ jobs:
         run: zarf package create --confirm
 
       - name: Deploy the capability
-        run: zarf package deploy zarf-package-uds-k3d-dev-multi-*.tar.zst --confirm
+        run: zarf package deploy zarf-package-uds-k3d-multi-*.tar.zst --confirm

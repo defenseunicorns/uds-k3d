@@ -30,6 +30,8 @@ jobs:
       packages: write
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Setup Zarf
         uses: defenseunicorns/setup-zarf@main
         with:
@@ -47,4 +49,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the capability
-        run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability
+        run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns

@@ -1,6 +1,7 @@
 # UDS K3d Environment
 
-> [!IMPORTANT] Warning: This package should only be used for development and testing purposes. It is not intended for production use and all data is overwritten when the package is re-deployed.
+>[!IMPORTANT]
+>This package should only be used for development and testing purposes. It is not intended for production use and all data is overwritten when the package is re-deployed.
 
 This zarf package serves as a universal dev (local & remote) and test environment for testing [UDS Core](https://github.com/defenseunicorns/uds-core), invidual UDS Capabilities, and UDS capabilities aggregated via the [UDS CLI](https://github.com/defenseunicorns/uds-cli).
 
@@ -20,8 +21,10 @@ This package is published via CI, but can be created locally with the following 
 
 ## Deploy
 
-[Steps used to deploy the UDS Capability]
+# x-release-please-start-version
+`zarf package deploy oci://ghcr.io/defenseunicorns/uds-k3d:0.1.7-multi`
+# x-release-please-end
 
 ## Remove
 
-You can run `zarf package remove` or `k3d cluster delete uds` (uds is the default cluster name).
+`k3d cluster delete uds` (uds is the default cluster name).
