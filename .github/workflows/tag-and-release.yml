@@ -1,4 +1,4 @@
-name: Publish UDS Package
+name: Publish UDS Capability
 
 on:
   push:
