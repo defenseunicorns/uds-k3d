@@ -7,7 +7,7 @@ metadata:
   architecture: multi
   yolo: true
   # x-release-please-start-version
-  version: "0.1.0"
+  version: "0.1.7"
   # x-release-please-end
 
 variables:
