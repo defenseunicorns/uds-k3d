@@ -2,16 +2,85 @@
 
 kind: ZarfPackageConfig
 metadata:
-  name: example
-  description: "Example description"
+  name: uds-k3d-dev
+  description: "UDS K3d Cluster Setup. WARNING: This will destroy the cluster if it already exists."
+  architecture: multi
+  yolo: true
   # x-release-please-start-version
-  version: "0.0.1"
+  version: "0.1.0"
   # x-release-please-end
 
+variables:
+  - name: CLUSTER_NAME
+    description: "Name of the cluster"
+    default: "uds"
+
+  - name: K3D_IMAGE
+    description: "K3d image to use"
+    default: "rancher/k3s:v1.27.4-k3s1"
 
 components:
-  - name: test
+  - name: destroy-cluster
+    required: true
+    description: "Optionally destroy the cluster before creating it"
     actions:
-      onCreate:
+      onDeploy:
+        before:
+          - cmd: k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}
+            description: "Destroy the cluster"
+
+  - name: create-cluster
+    required: true
+    description: "Create the k3d cluster"
+    actions:
+      onDeploy:
+        before:
+          - cmd: echo "B0D07F1F43F246409516ADBDCCC86FCE" > tmp-machine-id
+            description: "Create a machine-id file for the nodes"
+          - cmd: |
+              k3d cluster create \
+              -p "80:20080@server:*" \
+              -p "443:20443@server:*" \
+              --api-port 6550 \
+              --k3s-arg "--disable=traefik@server:*" \
+              --k3s-arg "--disable=metrics-server@server:*" \
+              --k3s-arg "--disable=servicelb@server:*" \
+              --image ${ZARF_VAR_K3D_IMAGE} \
+              --volume $(pwd)/tmp-machine-id:/etc/machine-id@server:* \
+              ${ZARF_VAR_CLUSTER_NAME}
+            description: "Create the cluster"
         after:
-        - cmd: echo "What can Doug do for you?"
+          - cmd: rm -f tmp-machine-id
+        onSuccess:
+          - cmd: |
+              echo "You can access this cluster over SSH (note http redirect will redirect to port 80 instead of 8080):"
+              echo "ssh -N -L 8080:localhost:80 -L 8443:localhost:443 -L 6550:localhost:6550"
+              echo
+              echo "To get the kubeconfig:"
+              echo "k3d kubeconfig get ${ZARF_VAR_CLUSTER_NAME}"
+            description: "Print out information about how to access the cluster remotely"
+      onRemove:
+        before:
+          - cmd: k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}
+            description: "Destroy the cluster"
+
+  - name: loadbalancer-stack
+    required: true
+    description: "Install MetalLB and HAProxy to provide a load balancer for the cluster"
+    actions:
+      onDeploy:
+        before:
+          - cmd: ./zarf tools kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}' | cut -d'.' -f1-3
+            description: "Load network ip base for MetalLB"
+            setVariables:
+              - name: BASE_IP
+    charts:
+      - name: metallb
+        url: https://metallb.github.io/metallb
+        namespace: metallb-system
+        version: 0.13.11
+    manifests:
+      - name: metallb-config
+        files:
+          - "manifests/metallb.yaml"
+          - "manifests/haproxy.yaml"

@@ -1,32 +1,27 @@
-## Welcome to the UDS Capability Template!
+# UDS K3d Environment
 
-1. Update [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [DEVELOPMENT_MAINTENANCE.md](docs/DEVELOPMENT_MAINTENANCE.md)
-1. Populate [CODEOWNERS](CODEOWNERS), [README.md](README.md)
-1. Verify [LICENSE](LICENSE)
-1. Add [manifests](manifests/), [values](values/), [pepr modules](pepr/), and [docs](docs/)
-1. Complete [zarf.yaml](zarf.yaml)
-1. Flesh out the [pipeline](.github/)
-1. Update the [renovate.json](renovate.json) to match your dependencies
-1. Delete this section
+> [!IMPORTANT] Warning: This package should only be used for development and testing purposes. It is not intended for production use and all data is overwritten when the package is re-deployed.
 
-***
+This zarf package serves as a universal dev (local & remote) and test environment for testing [UDS Core](https://github.com/defenseunicorns/uds-core), invidual UDS Capabilities, and UDS capabilities aggregated via the [UDS CLI](https://github.com/defenseunicorns/uds-cli).
 
-# [CAPABILITY REPOSITORY NAME]
-
-[Short description]
+UDS K3d intentionally does not address airgap concerns for K3d or the load balancer logic deployed in this package. This allows running `zarf init` or deploying a Zarf Init Package via a UDS Bundle after the UDS K3d environment is deployed.
 
 ## Prerequisites
 
-[Bulleted-list, commands, etc; describing expected versions, deployed software, and other requirements]
+- [Zarf](https://docs.zarf.dev/docs/getting-started#installing-zarf) v0.31.0-rc1 or later
+- [K3d](https://k3d.io/#installation) v5 or later
+- [Docker](https://docs.docker.com/get-docker/) or [Podman](https://podman.io/getting-started/installation) for running K3d
 
 ## Create
 
-[Steps used to build the UDS Capability]
+This package is published via CI, but can be created locally with the following command:
+
+`zarf package create`
 
 ## Deploy
 
- [Steps used to deploy the UDS Capability]
+[Steps used to deploy the UDS Capability]
 
 ## Remove
 
-[Steps used to remove the UDS Capability]
+You can run `zarf package remove` or `k3d cluster delete uds` (uds is the default cluster name).

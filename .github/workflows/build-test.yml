@@ -1,0 +1,28 @@
+name: Test UDS Capability
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test-clean-install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Zarf
+        uses: defenseunicorns/setup-zarf@main
+        with:
+          # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
+          version: v0.31.0-rc1
+
+      - name: Create Zarf Package
+        run: zarf package create --confirm
+
+      - name: Deploy the capability
+        run: zarf package deploy zarf-package-uds-k3d-dev-multi-*.tar.zst --confirm
