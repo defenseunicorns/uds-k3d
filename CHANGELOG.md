@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.9](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.8...v0.1.9) (2023-10-30)
+
+
+### Features
+
+* deploy to common 🦄 shorthand repo ([579f0b8](https://github.com/defenseunicorns/uds-k3d/commit/579f0b8fb4f0aa93f03763d1e5f56e7fe4cd842c))
+
+
+### Miscellaneous
+
+* fix readme release annotation ([d0ea198](https://github.com/defenseunicorns/uds-k3d/commit/d0ea1987e3a69f06dece471eb96a51bbdf232ff2))
+
 ## [0.1.8](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.7...v0.1.8) (2023-10-30)
 
 
