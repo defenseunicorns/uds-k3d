@@ -49,4 +49,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the capability
-        run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns
+        run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
