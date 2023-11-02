@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.11](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.10...v0.1.11) (2023-11-02)
+
+
+### Features
+
+* publish multi/arm/amd packages for UDS CLI happiness ([#6](https://github.com/defenseunicorns/uds-k3d/issues/6)) ([861ce6d](https://github.com/defenseunicorns/uds-k3d/commit/861ce6d4c76edc283b8737929f7a071aecce1fb3))
+
 ## [0.1.10](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.9...v0.1.10) (2023-10-30)
 
 
