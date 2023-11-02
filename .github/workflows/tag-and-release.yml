@@ -36,10 +36,14 @@ jobs:
         uses: defenseunicorns/setup-zarf@main
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
-          version: v0.31.0-rc1
+          version: v0.31.0
 
+      # This is really fake to help UDS CLI not be sad
       - name: Create Zarf Package
-        run: zarf package create --confirm
+        run: |
+          zarf package create --confirm
+          zarf package create --confirm -a arm64
+          zarf package create --confirm -a amd64
 
       - name: Login to GHCR
         uses: docker/login-action@v3
@@ -49,4 +53,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the capability
-        run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/packages
+        run: |
+          for file in zarf-package-uds-k3d-*.tar.zst; do
+            zarf package publish $file oci://ghcr.io/defenseunicorns/packages
+          done
