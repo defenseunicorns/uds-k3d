@@ -2,7 +2,6 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: dev
-  namespace: metallb-system
 spec:
   addresses:
     - "###ZARF_VAR_BASE_IP###.200-###ZARF_VAR_BASE_IP###.215"
@@ -11,4 +10,3 @@ apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
   name: empty
-  namespace: metallb-system

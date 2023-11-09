@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: haproxy-config
-  namespace: metallb-system
 data:
   haproxy.cfg: |
     global
@@ -69,7 +68,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: haproxy
-  namespace: metallb-system
 spec:
   selector:
     matchLabels:

@@ -36,8 +36,6 @@ components:
     actions:
       onDeploy:
         before:
-          - cmd: echo "B0D07F1F43F246409516ADBDCCC86FCE" > tmp-machine-id
-            description: "Create a machine-id file for the nodes"
           - cmd: |
               k3d cluster create \
               -p "80:20080@server:*" \
@@ -47,11 +45,8 @@ components:
               --k3s-arg "--disable=metrics-server@server:*" \
               --k3s-arg "--disable=servicelb@server:*" \
               --image ${ZARF_VAR_K3D_IMAGE} \
-              --volume $(pwd)/tmp-machine-id:/etc/machine-id@server:* \
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
-        after:
-          - cmd: rm -f tmp-machine-id
         onSuccess:
           - cmd: |
               echo "You can access this cluster over SSH (note http redirect will redirect to port 80 instead of 8080):"
@@ -59,15 +54,14 @@ components:
               echo
               echo "To get the kubeconfig:"
               echo "k3d kubeconfig get ${ZARF_VAR_CLUSTER_NAME}"
+              echo
+              echo "This cluster can be destroyed with:"
+              echo "k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}"
             description: "Print out information about how to access the cluster remotely"
-      onRemove:
-        before:
-          - cmd: k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}
-            description: "Destroy the cluster"
 
-  - name: loadbalancer-stack
+  - name: uds-dev-stack
     required: true
-    description: "Install MetalLB and HAProxy to provide a load balancer for the cluster"
+    description: "Install MetalLB, HAProxy, and Ensure MachineID to meet UDS developer needs without later config changes"
     actions:
       onDeploy:
         before:
@@ -78,10 +72,12 @@ components:
     charts:
       - name: metallb
         url: https://metallb.github.io/metallb
-        namespace: metallb-system
+        namespace: uds-dev-stack
         version: 0.13.11
     manifests:
-      - name: metallb-config
+      - name: uds-dev-stack
+        namespace: uds-dev-stack
         files:
+          - "manifests/machineid.yaml"
           - "manifests/metallb.yaml"
           - "manifests/haproxy.yaml"
