@@ -22,7 +22,7 @@ This package is published via CI, but can be created locally with the following 
 
 ## Deploy
 
-`zarf package deploy oci://defenseunicorns/uds-k3d:0.1.11`<!-- {x-release-please-version} -->`-multi`
+`zarf package deploy oci://defenseunicorns/uds-k3d:0.1.12`<!-- {x-release-please-version} -->`-multi`
 
 ## Remove
 
