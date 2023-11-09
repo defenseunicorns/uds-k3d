@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.12](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.11...v0.1.12) (2023-11-09)
+
+
+### Features
+
+* use daemonset for machineid instead of docker mount ([#8](https://github.com/defenseunicorns/uds-k3d/issues/8)) ([2a49404](https://github.com/defenseunicorns/uds-k3d/commit/2a494044e71228a29cdb102d3f85e53dd4873f35))
+
 ## [0.1.11](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.10...v0.1.11) (2023-11-02)
 
 
