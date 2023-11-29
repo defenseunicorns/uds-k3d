@@ -44,6 +44,7 @@ components:
               --k3s-arg "--disable=traefik@server:*" \
               --k3s-arg "--disable=metrics-server@server:*" \
               --k3s-arg "--disable=servicelb@server:*" \
+              --k3s-arg "--disable=local-storage@server:*" \
               --image ${ZARF_VAR_K3D_IMAGE} \
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
@@ -61,7 +62,7 @@ components:
 
   - name: uds-dev-stack
     required: true
-    description: "Install MetalLB, HAProxy, and Ensure MachineID to meet UDS developer needs without later config changes"
+    description: "Install MetalLB, HAProxy, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes"
     actions:
       onDeploy:
         before:
@@ -74,10 +75,14 @@ components:
         url: https://metallb.github.io/metallb
         namespace: uds-dev-stack
         version: 0.13.11
-    manifests:
       - name: uds-dev-stack
+        version: 0.1.0
+        localPath: chart
         namespace: uds-dev-stack
-        files:
-          - "manifests/machineid.yaml"
-          - "manifests/metallb.yaml"
-          - "manifests/haproxy.yaml"
+      - name: minio
+        version: 5.0.14
+        namespace: uds-dev-stack
+        url: https://charts.min.io/
+        valuesFiles:
+          - "values/minio-values.yaml"
+
