@@ -5,7 +5,7 @@
   "extends": [
     "config:base"
   ],
-  "timezone": "TIME_ZONE",
+  "timezone": "America/Chicago",
   "repositories": ["CAPABILITY_REPO"],
   "ignorePaths": ["IGNORE_PATHS"],
   "rebaseStalePrs": true,
