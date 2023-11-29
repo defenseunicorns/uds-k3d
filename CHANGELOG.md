@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.13](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.12...v0.1.13) (2023-11-29)
+
+
+### Features
+
+* add minio and local-path-rwx to dev stack and refactor dev stack manifests into helm chart ([#10](https://github.com/defenseunicorns/uds-k3d/issues/10)) ([3648fa0](https://github.com/defenseunicorns/uds-k3d/commit/3648fa0c219f40b07a2d8ce7ebebe0afe9c22cd2))
+
+
+### Miscellaneous
+
+* **deps:** replace docker image k8s.gcr.io/pause to 3.9 ([#13](https://github.com/defenseunicorns/uds-k3d/issues/13)) ([0235f05](https://github.com/defenseunicorns/uds-k3d/commit/0235f050bd355e21372c90e3f1cd914b0e0479f3))
+* **deps:** update dependency defenseunicorns/zarf to v0.31.2 ([#14](https://github.com/defenseunicorns/uds-k3d/issues/14)) ([3e433f4](https://github.com/defenseunicorns/uds-k3d/commit/3e433f48e2269d78ed51634e580c69ca44e4401a))
+* **deps:** update docker image k8s.gcr.io/pause to v3.9 ([#17](https://github.com/defenseunicorns/uds-k3d/issues/17)) ([c3b6e0c](https://github.com/defenseunicorns/uds-k3d/commit/c3b6e0c29a5d77917ba38eafbdd51436bcda0f37))
+* update renovate config ([#11](https://github.com/defenseunicorns/uds-k3d/issues/11)) ([d3a44bc](https://github.com/defenseunicorns/uds-k3d/commit/d3a44bcbd043357b8fbbb5794a771d3452b3f286))
+
 ## [0.1.12](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.11...v0.1.12) (2023-11-09)
 
 
