@@ -8,7 +8,7 @@ metadata:
   url: https://github.com/defenseunicorns/uds-k3d
   yolo: true
   # x-release-please-start-version
-  version: "0.1.13"
+  version: "0.1.14"
   # x-release-please-end
 
 variables:
