@@ -36,7 +36,7 @@ jobs:
         uses: defenseunicorns/setup-zarf@main
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
-          version: v0.31.2
+          version: v0.31.3
 
       # This is really fake to help UDS CLI not be sad
       - name: Create Zarf Package
