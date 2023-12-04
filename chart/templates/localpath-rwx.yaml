@@ -1,14 +1,8 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: local-path-storage
-
----
-apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: local-path-provisioner-service-account
-  namespace: local-path-storage
+  namespace: {{ .Release.Namespace }}
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -41,14 +35,14 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: local-path-provisioner-service-account
-    namespace: local-path-storage
+    namespace: {{ .Release.Namespace }}
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: local-path-provisioner
-  namespace: local-path-storage
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
@@ -99,7 +93,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: local-path-config
-  namespace: local-path-storage
+  namespace: {{ .Release.Namespace }}
 data:
   config.json: |-
     {
