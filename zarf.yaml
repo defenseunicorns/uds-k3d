@@ -72,17 +72,16 @@ components:
               - name: BASE_IP
     charts:
       - name: metallb
-        url: https://metallb.github.io/metallb
         namespace: uds-dev-stack
+        url: https://metallb.github.io/metallb
         version: 0.13.11
       - name: uds-dev-stack
-        version: 0.1.0
+        namespace: uds-dev-stack
         localPath: chart
-        namespace: uds-dev-stack
+        version: 0.1.0
       - name: minio
-        version: 5.0.14
         namespace: uds-dev-stack
+        version: 5.0.14
         url: https://charts.min.io/
         valuesFiles:
           - "values/minio-values.yaml"
-
