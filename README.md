@@ -19,7 +19,7 @@ This zarf package serves as a universal dev (local & remote) and test environmen
 
 ## Deploy
 
-`zarf package deploy oci://defenseunicorns/uds-k3d:0.1.14`<!-- {x-release-please-version} -->`-multi`
+`zarf package deploy oci://defenseunicorns/uds-k3d:0.2.0`<!-- {x-release-please-version} -->`-multi`
 
 ## Create
 
