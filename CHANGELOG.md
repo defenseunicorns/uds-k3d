@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.14...v0.2.0) (2023-12-04)
+
+
+### Features
+
+* use uds-dev-stack for all namespaces ([#23](https://github.com/defenseunicorns/uds-k3d/issues/23)) ([3e80c89](https://github.com/defenseunicorns/uds-k3d/commit/3e80c890d4649f0f48675a266b306dff68934c40))
+
+
+### Miscellaneous
+
+* **deps:** update docker image rancher/local-path-provisioner to v0.0.26 ([#16](https://github.com/defenseunicorns/uds-k3d/issues/16)) ([e8a4a63](https://github.com/defenseunicorns/uds-k3d/commit/e8a4a63aa61b17a790cebe57e60d02ec9912351f))
+
 ## [0.1.14](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.13...v0.1.14) (2023-11-30)
 
 
