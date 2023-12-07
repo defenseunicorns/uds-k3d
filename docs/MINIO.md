@@ -31,6 +31,9 @@ mc mb myalias/mybucket
 
 # Create a User (mc cli only)
 mc admin user add myalias bob bobs-secret 
+
+# List policies
+mc admin policy ls myalias
 ```
 
 ### AWS CLI
