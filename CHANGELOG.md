@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.2.0...v0.2.1) (2023-12-07)
+
+
+### Bug Fixes
+
+* update policy value and document using minio ([#26](https://github.com/defenseunicorns/uds-k3d/issues/26)) ([b564248](https://github.com/defenseunicorns/uds-k3d/commit/b564248e739ee016085d7ae101d0cb7dd6955b75))
+
 ## [0.2.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.1.14...v0.2.0) (2023-12-04)
 
 
