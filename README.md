@@ -16,7 +16,6 @@ This zarf package serves as a universal dev (local & remote) and test environmen
 - [K3d](https://k3d.io/#installation) v5 or later
 - [Docker](https://docs.docker.com/get-docker/) or [Podman](https://podman.io/getting-started/installation) for running K3d
 
-
 ## Deploy
 
 `zarf package deploy oci://defenseunicorns/uds-k3d:0.2.0`<!-- {x-release-please-version} -->`-multi`
@@ -30,3 +29,7 @@ This package is published via CI, but can be created locally with the following 
 ## Remove
 
 `k3d cluster delete uds` (uds is the default cluster name).
+
+## Additional Info
+
+- [Configuring Minio](docs/MINIO.md)
