@@ -20,6 +20,10 @@ variables:
     description: "K3d image to use"
     default: "rancher/k3s:v1.27.4-k3s1"
 
+  - name: K3D_EXTRA_ARGS
+    description: "Optionally pass k3d arguments to the default"
+    default: ""
+
 components:
   - name: destroy-cluster
     required: true
@@ -45,7 +49,7 @@ components:
               --k3s-arg "--disable=metrics-server@server:*" \
               --k3s-arg "--disable=servicelb@server:*" \
               --k3s-arg "--disable=local-storage@server:*" \
-              --image ${ZARF_VAR_K3D_IMAGE} \
+              --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
         onSuccess:
