@@ -32,4 +32,16 @@ This package is published via CI, but can be created locally with the following 
 
 ## Additional Info
 
+You can set extra k3d args by setting the deploy-time ZARF_VAR_K3D_EXTRA_ARGS.
+Set Extra k3d args:
+
+```yaml
+package:
+  deploy:
+    set:
+      k3d_extra_args: "--agents 2"
+```
+
+Configure MinIO:
+
 - [Configuring Minio](docs/MINIO.md)
