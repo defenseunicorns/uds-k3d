@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.2.1...v0.2.2) (2023-12-19)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/zarf to v0.31.4 ([#29](https://github.com/defenseunicorns/uds-k3d/issues/29)) ([e32e831](https://github.com/defenseunicorns/uds-k3d/commit/e32e831a2f531bc0a257063cd6c5e030d92b42be))
+
 ## [0.2.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.2.0...v0.2.1) (2023-12-07)
 
 
