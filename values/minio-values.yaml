@@ -1,6 +1,30 @@
 replicas: 1
 mode: standalone
 
+image:
+  repository: cgr.dev/chainguard/minio
+  tag: latest-dev
+
+mcImage:
+  repository: cgr.dev/chainguard/minio-client
+  tag: latest-dev
+
+## Additional volumes to minio container
+extraVolumes:   
+  - name: entrypoint-script-volume
+    configMap:
+      name: entrypoint-script
+      defaultMode: 0777  
+
+## Additional volumeMounts to minio container
+extraVolumeMounts: 
+  - name: entrypoint-script-volume
+    mountPath: /usr/bin/docker-entrypoint.sh
+    subPath: docker-entrypoint.sh
+    
+
+
+
 # Some reasonable requests instead of the bonkers defaults
 resources:
   requests:
