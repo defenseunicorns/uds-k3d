@@ -7,17 +7,17 @@ resources:
     memory: 256Mi
     cpu: 150m
 persistence:
-  size: 50Gi 
+  size: 50Gi
 
 buckets:
   - name: test
 
-policies: 
+policies:
   - name: readwrite-username-policy
     statements:
-      - effect: Allow  # this is the default
+      - effect: Allow # this is the default
         resources:
-          - 'arn:aws:s3:::${aws:username}*/*'
+          - "arn:aws:s3:::${aws:username}*/*"
         actions:
           - "s3:AbortMultipartUpload"
           - "s3:GetObject"
@@ -25,7 +25,7 @@ policies:
           - "s3:PutObject"
           - "s3:ListMultipartUploadParts"
       - resources:
-          - 'arn:aws:s3:::${aws:username}*'
+          - "arn:aws:s3:::${aws:username}*"
         actions:
           - "s3:CreateBucket"
           - "s3:DeleteBucket"
