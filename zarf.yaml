@@ -62,7 +62,7 @@ components:
 
   - name: uds-dev-stack
     required: true
-    description: "Install MetalLB, HAProxy, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes"
+    description: "Install MetalLB, NGINX, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes"
     actions:
       onDeploy:
         before:
@@ -78,7 +78,7 @@ components:
       - name: uds-dev-stack
         namespace: uds-dev-stack
         localPath: chart
-        version: 0.1.0
+        version: 0.2.0
       - name: minio
         namespace: uds-dev-stack
         version: 5.0.14
