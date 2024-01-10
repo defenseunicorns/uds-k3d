@@ -13,7 +13,8 @@ data:
         map $ssl_preread_server_name $selected_upstream {
             hostnames;  
             *.admin.uds.dev backend_admin;
-            keycloak.uds.dev backend_keycloak;
+            keycloak.uds.dev backend_passthrough;
+            login.uds.dev backend_passthrough;
             *.uds.dev backend_tenant;
         }
 
@@ -25,7 +26,7 @@ data:
             server ###ZARF_VAR_BASE_IP###.201:443; 
         }
 
-        upstream backend_keycloak {
+        upstream backend_passthrough {
             server ###ZARF_VAR_BASE_IP###.202:443;
         }
 
