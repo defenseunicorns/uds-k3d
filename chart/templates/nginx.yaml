@@ -66,7 +66,7 @@ spec:
       containers:
         - name: nginx
           # This is a copy of the official nginx 1.25.3 image on GHCR to avoid rate limiting
-          image: ghcr.io/defenseunicorns/packages/uds-k3d-nginx:alpine
+          image: ghcr.io/defenseunicorns/oss/uds-k3d-nginx:alpine-1.25.3
           command: ["nginx", "-g", "daemon off;"]
           ports:
             - containerPort: 80
