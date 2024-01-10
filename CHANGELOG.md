@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.2.1...v0.3.0) (2024-01-10)
+
+
+### Features
+
+* switch to nginx from haproxy for lower resource use ([#35](https://github.com/defenseunicorns/uds-k3d/issues/35)) ([041226f](https://github.com/defenseunicorns/uds-k3d/commit/041226f59f5bb151679fc0070d81d52357ffcaf4))
+
+
+### Bug Fixes
+
+* update release process for zarf 0.32 ([#36](https://github.com/defenseunicorns/uds-k3d/issues/36)) ([a8a9acb](https://github.com/defenseunicorns/uds-k3d/commit/a8a9acb28098ae4aa0e7b3c783e86b4f567995b4))
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/zarf to v0.31.4 ([#29](https://github.com/defenseunicorns/uds-k3d/issues/29)) ([e32e831](https://github.com/defenseunicorns/uds-k3d/commit/e32e831a2f531bc0a257063cd6c5e030d92b42be))
+* **deps:** update dependency defenseunicorns/zarf to v0.32.1 ([#34](https://github.com/defenseunicorns/uds-k3d/issues/34)) ([cd8db52](https://github.com/defenseunicorns/uds-k3d/commit/cd8db5287113946683241b941f4006ce26222406))
+
 ## [0.2.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.2.0...v0.2.1) (2023-12-07)
 
 
