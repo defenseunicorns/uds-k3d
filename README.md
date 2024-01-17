@@ -39,7 +39,7 @@ Set Extra k3d args:
 package:
   deploy:
     set:
-      k3d_extra_args: "--agents 2"
+      k3d_extra_args: "--gpus=1"
 ```
 
 Configure MinIO:
