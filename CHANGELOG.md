@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.3.0...v0.3.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* add zarf var for k3d_extra_args ([#32](https://github.com/defenseunicorns/uds-k3d/issues/32)) ([6f8cb93](https://github.com/defenseunicorns/uds-k3d/commit/6f8cb93cf8d568e12fdf1e217c11905249b730e4))
+
 ## [0.3.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.2.1...v0.3.0) (2024-01-10)
 
 
