@@ -10,7 +10,13 @@ persistence:
   size: 50Gi
 
 buckets:
-  - name: test
+  - name: uds-loki
+
+# loki user
+users:
+  - accessKey: uds-loki
+    secretKey: logging-secret
+    policy: readwrite-username-policy
 
 policies:
   - name: readwrite-username-policy
