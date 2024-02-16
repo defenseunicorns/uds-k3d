@@ -10,7 +10,13 @@ persistence:
   size: 50Gi
 
 buckets:
-  - name: test
+  - name: uds
+
+# uds test user
+users:
+  - accessKey: uds
+    secretKey: uds-secret
+    policy: readwrite-username-policy
 
 policies:
   - name: readwrite-username-policy

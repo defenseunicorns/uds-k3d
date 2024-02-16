@@ -1,6 +1,13 @@
 # Minio Usage Examples
 
-By default, the provided Minio instance provisions a minimal set up policies beyond the defaults. However, no service accounts, additional users or buckets are provisioned.
+By default, the provided Minio instance provisions a minimal set up that includes a single bucket named `uds` that is accessible by the `uds` user:
+
+```
+users:
+  - accessKey: uds
+    secretKey: uds-secret
+    policy: readwrite-username-policy
+```
 
 You can port-forward ```kubectl port-forward service/minio 9000:9000 -n uds-dev-stack``` to access the service externally from where you can use any s3 compatible client to configure your buckets or the minio (mc) cli to handle other configurations, users or policy management. Similar functions could be performed in-cluster as well via a Job or other means.
 
@@ -90,10 +97,12 @@ If you are building a uds bundle and are using uds-k3d as a base for that bundle
 
 This example will override the default users and buckets provisioned in the minio instance. These are bundle create time overrides.
 
+> **_NOTE:_** Because the underlying fields for `users` and `buckets` are arrays, overriding these options via values will result in the default `uds` user and `uds` bucket not being created.
+
 ```yaml
 # uds-bundle.yaml
 
-zarf-packages:
+packages:
   - name: uds-k3d-dev
     repository: ghcr.io/defenseunicorns/packages/uds-k3d
     ref: 0.2.0
@@ -124,7 +133,7 @@ This example will show how to expose the ability to override the default users, 
 ```yaml
 # uds-bundle.yaml
 
-zarf-packages:
+packages:
   - name: uds-k3d-dev
     repository: ghcr.io/defenseunicorns/packages/uds-k3d
     ref: 0.2.0
@@ -161,7 +170,7 @@ bundle:
           users:
             - accessKey: console
                 secretKey: "console-secret"
-                policy: consoleAdmin            
+                policy: consoleAdmin
           policies:
             - name: example-policy
               statements:
@@ -182,5 +191,4 @@ bundle:
                     - "s3:GetBucketLocation"
                     - "s3:ListBucket"
                     - "s3:ListBucketMultipartUploads"
-
 ```
