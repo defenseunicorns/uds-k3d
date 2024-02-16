@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.3.1...v0.4.0) (2024-02-16)
+
+
+### Features
+
+* add loki user and bucket ([#41](https://github.com/defenseunicorns/uds-k3d/issues/41)) ([509114d](https://github.com/defenseunicorns/uds-k3d/commit/509114d9f2269d141a1dff3b3f37ab9f8fe9e3a4))
+
 ## [0.3.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.3.0...v0.3.1) (2024-01-17)
 
 
