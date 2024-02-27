@@ -18,17 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Zarf
-        uses: defenseunicorns/setup-zarf@main
-        with:
-          # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
-          version: v0.32.1
+      - name: Setup UDS
+        if: always()
+        uses: defenseunicorns/uds-common/.github/actions/setup@v0.2.1
 
-      - run: "curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash"
-        shell: bash
+      - name: Create and deploy the uds-k3d package
+        run: uds run
 
-      - name: Create Zarf Package
-        run: zarf package create --confirm
+      - name: Validate uds-k3d package
+        run: uds run validate
 
-      - name: Deploy the capability
-        run: zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm
