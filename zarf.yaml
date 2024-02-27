@@ -39,6 +39,7 @@ components:
     actions:
       onDeploy:
         before:
+          - cmd: kubectl create configmap coredns-custom --namespace=kube-system --from-literal=uds.override='rewrite name regex (.*\.uds\.dev) host.k3d.internal' --dry-run=client -o yaml > core-dns-custom.yaml
           - cmd: |
               k3d cluster create \
               -p "80:20080@server:*" \
@@ -48,6 +49,8 @@ components:
               --k3s-arg "--disable=metrics-server@server:*" \
               --k3s-arg "--disable=servicelb@server:*" \
               --k3s-arg "--disable=local-storage@server:*" \
+              --k3s-arg "--disable=servicelb@server:*" \
+              --volume ${PWD}/core-dns-custom.yaml:/var/lib/rancher/k3s/server/manifests/dns-custom.yaml \
               --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
