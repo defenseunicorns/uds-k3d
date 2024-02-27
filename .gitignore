@@ -6,4 +6,3 @@ build/
 zarf-sbom
 tmp/
 zarf-config.yaml
-core-dns-custom.yaml
