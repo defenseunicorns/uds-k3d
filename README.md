@@ -49,3 +49,7 @@ package:
 Configure MinIO:
 
 - [Configuring Minio](docs/MINIO.md)
+
+### DNS Assumptions:
+
+- [DNS Assumptions](docs/DNS.md)

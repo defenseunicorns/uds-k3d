@@ -73,6 +73,9 @@ components:
             description: "Load network ip base for MetalLB"
             setVariables:
               - name: BASE_IP
+        after:
+          - cmd: ./zarf tools kubectl rollout restart deployment coredns -n kube-system
+            description: "Restart CoreDNS to pick up internal DNS override for uds.dev"
     charts:
       - name: metallb
         namespace: uds-dev-stack
