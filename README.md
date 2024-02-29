@@ -12,8 +12,8 @@ This zarf package serves as a universal dev (local & remote) and test environmen
 
 ## Prerequisites
 
-- [Zarf](https://docs.zarf.dev/docs/getting-started#installing-zarf) v0.31.0 or later
-- [K3d](https://k3d.io/#installation) v5 or later
+- [Zarf](https://docs.zarf.dev/docs/getting-started#installing-zarf) version: 0.31.0
+- [K3d](https://k3d.io/#installation) version: 5.4.6
 - [Docker](https://docs.docker.com/get-docker/) or [Podman](https://podman.io/getting-started/installation) for running K3d
 
 ## Deploy

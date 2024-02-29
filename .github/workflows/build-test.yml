@@ -24,7 +24,8 @@ jobs:
           # renovate: datasource=github-tags depName=defenseunicorns/zarf versioning=semver
           version: v0.32.4
 
-      - run: "curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash"
+      # renovate: datasource=github-tags depName=k3d-io/k3d versioning=semver
+      - run: "curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v5.6.0 bash"
         shell: bash
 
       - name: Create Zarf Package

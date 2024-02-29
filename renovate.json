@@ -49,14 +49,33 @@
       "datasourceTemplate": "helm"
     },
     {
-      "description": "Match on comments for zarf github actions in yaml files.",
+      "description": "Match on comments for zarf and k3d github actions in yaml files.",
       "fileMatch": ["./.+\\.ya?ml$"],
       "matchStrings": [
         "# renovate: datasource=github-tags depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?version:\\s*(?<currentValue>.*)\\s",
-        "# renovate: datasource=github-tags depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?version:\\s*['\"](?<currentValue>.*)['\"]\\s"
+        "# renovate: datasource=github-tags depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?version:\\s*['\"](?<currentValue>.*)['\"]\\s",
+        "# renovate: datasource=github-tags depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*\\sTAG=(?<currentValue>.*)\\sbash.*"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
       "datasourceTemplate": "github-tags"
+    },
+    {
+      "depNameTemplate": "defenseunicorns/zarf",
+      "fileMatch": ["README\\.md"],
+      "matchStrings": [
+        "\\[Zarf\\].*\\sversion:[\\s]*(?<currentValue>v?\\d*[^\\s]?\\d*[^\\s]\\d*)"
+      ],
+      "datasourceTemplate": "github-tags",
+      "extractVersionTemplate": "^v(?<version>.*)$"
+    },
+    {
+      "depNameTemplate": "k3d-io/k3d",
+      "fileMatch": ["README\\.md"],
+      "matchStrings": [
+        "\\[K3d\\].*\\sversion:[\\s]*(?<currentValue>v?\\d*[^\\s]?\\d*[^\\s]\\d*)"
+      ],
+      "datasourceTemplate": "github-tags",
+      "extractVersionTemplate": "^v(?<version>.*)$"
     }
   ],
   "packageRules": [
