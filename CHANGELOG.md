@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.4.0...v0.5.0) (2024-03-01)
+
+
+### Features
+
+* internal uds.dev resolution ([#46](https://github.com/defenseunicorns/uds-k3d/issues/46)) ([e677483](https://github.com/defenseunicorns/uds-k3d/commit/e67748334ec45ab3a4361eaea9d674d0d9d4a5c8))
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/zarf to v0.32.4 ([#39](https://github.com/defenseunicorns/uds-k3d/issues/39)) ([0dd4735](https://github.com/defenseunicorns/uds-k3d/commit/0dd4735f93b50cad786459747108190536e544fd))
+* fix codeowners file ([#42](https://github.com/defenseunicorns/uds-k3d/issues/42)) ([a108b5f](https://github.com/defenseunicorns/uds-k3d/commit/a108b5f70a43f6dba8e2bc68043e5015d721be94))
+
 ## [0.4.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.3.1...v0.4.0) (2024-02-16)
 
 
