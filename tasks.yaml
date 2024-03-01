@@ -1,0 +1,29 @@
+tasks:
+  - name: default
+    description: "Build and deploy uds-k3d"
+    actions:
+      - description: "Build UDS K3d package"
+        cmd: "uds zarf package create --confirm"
+
+      - description: "Deploy UDS K3d package"
+        cmd: "uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm"
+
+  - name: validate
+    actions:
+      - description: Validate coredns is up
+        wait:
+          cluster:
+            kind: Pod
+            name: "k8s-app=kube-dns"
+            namespace: kube-system
+            condition: Ready
+      - description: Validate coredns is resolving *.uds.dev internally
+        cmd: |
+          set -e
+          FOO_IP=$(uds zarf tools kubectl run dig-test --image=arunvelsriram/utils -q --restart=Never --rm -i -- dig +short foo.uds.dev)
+          if [ "${FOO_IP}" != "127.0.0.1" ]; then
+            echo "CoreDNS is resolving foo.uds.dev to host.k3d.internal"
+          else
+            echo "CoreDNS patch failed, foo.uds.dev is resolving to 127.0.0.1"
+            exit 1
+          fi
