@@ -20,7 +20,7 @@ jobs:
 
       - name: Setup UDS
         if: always()
-        uses: defenseunicorns/uds-common/.github/actions/setup@v0.2.1
+        uses: defenseunicorns/uds-common/.github/actions/setup@v0.2.2
 
       - name: Create and deploy the uds-k3d package
         run: uds run
