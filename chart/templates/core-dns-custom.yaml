@@ -5,4 +5,6 @@ metadata:
   namespace: kube-system
 data:
   uds.override: |
-    rewrite name regex (.*\.uds\.dev) host.k3d.internal
+    rewrite stop {
+      name regex (.*\.uds\.dev) host.k3d.internal answer auto
+    }
