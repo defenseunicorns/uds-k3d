@@ -1,3 +1,7 @@
+variables:
+  - name: K3S_VERSION
+    default: "v1.28.7-k3s1"
+
 tasks:
   - name: default
     description: "Build and deploy uds-k3d"
@@ -27,3 +31,14 @@ tasks:
             echo "CoreDNS patch failed, foo.uds.dev is resolving to 127.0.0.1"
             exit 1
           fi
+
+  - name: build-image
+    actions:
+      - description: Build the custom k3s image
+        cmd: docker build -t ghcr.io/defenseunicorns/oss/uds-k3d-k3s:${K3S_VERSION} --build-arg K3S_TAG=${K3S_VERSION} docker/
+
+  - name: publish-image 
+    actions:
+      - task: build-image
+      - description: Publish the custom k3s image
+        cmd: docker push ghcr.io/defenseunicorns/oss/uds-k3d-k3s:${K3S_VERSION}
