@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - docker/**
+      - .github/workflows/publish-image.yaml
 
 jobs:
   publish-k3s-image:
