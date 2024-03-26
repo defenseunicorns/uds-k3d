@@ -1,0 +1,40 @@
+name: Publish k3s image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - docker/**
+      - .github/workflows/publish-image.yaml
+
+jobs:
+  publish-k3s-image:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ["v1.27.11-k3s1", "v1.28.7-k3s1", "v1.29.2-k3s1"]
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup UDS
+        if: always()
+        uses: defenseunicorns/uds-common/.github/actions/setup@v0.3.6
+        with:
+          username: ${{secrets.IRON_BANK_ROBOT_USERNAME}}
+          password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: dummy
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish the custom k3s image
+        run: uds run publish-image --set VERSION=${{matrix.version}}
