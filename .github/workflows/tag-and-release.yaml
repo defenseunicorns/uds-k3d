@@ -46,9 +46,6 @@ jobs:
           username: dummy
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish the custom k3s image
-        run: uds run publish-image
-
       - name: Publish the capability
         run: |
           uds zarf package create --confirm -a arm64 -o oci://ghcr.io/defenseunicorns/packages
