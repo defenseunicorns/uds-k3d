@@ -38,6 +38,7 @@ tasks:
           set -e
           # uds zarf tools download-init does not work in 0.9.4 - https://github.com/defenseunicorns/uds-cli/issues/517
           uds zarf package pull oci://ghcr.io/defenseunicorns/packages/init:v$(uds zarf version)
+          mv zarf-init-amd64-v$(uds zarf version).tar.zst zarf-init-amd64-$(uds zarf version).tar.zst
           # Test zarf init due to containerd issue - https://github.com/defenseunicorns/zarf/issues/592
           uds zarf init --confirm
 
