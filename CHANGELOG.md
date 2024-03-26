@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.6.0...v0.7.0) (2024-03-26)
+
+
+### Features
+
+* add custom k3s image ([#55](https://github.com/defenseunicorns/uds-k3d/issues/55)) ([707f7d5](https://github.com/defenseunicorns/uds-k3d/commit/707f7d5b07d9ecf7317439704a3d738b42ff01fb))
+
+
+### Bug Fixes
+
+* buildx for publish image ([#59](https://github.com/defenseunicorns/uds-k3d/issues/59)) ([427af5c](https://github.com/defenseunicorns/uds-k3d/commit/427af5c615d1b8f9f87a68dab97d13ad483e99c3))
+
+
+### Miscellaneous
+
+* **deps:** update docker/setup-buildx-action action to v3.2.0 ([#54](https://github.com/defenseunicorns/uds-k3d/issues/54)) ([e7a639d](https://github.com/defenseunicorns/uds-k3d/commit/e7a639d75f1fc3b8a49f0963a1cb8e4ea7ec0cfc))
+* **deps:** update google-github-actions/release-please-action action to v4 ([#21](https://github.com/defenseunicorns/uds-k3d/issues/21)) ([8e8400d](https://github.com/defenseunicorns/uds-k3d/commit/8e8400de5a83f3702eb94a59471eb2f99cdc21df))
+* switch to common renovate config ([#60](https://github.com/defenseunicorns/uds-k3d/issues/60)) ([61e015b](https://github.com/defenseunicorns/uds-k3d/commit/61e015bcb37d811ec0f7cec0c3762d7650190064))
+
 ## [0.6.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.5.0...v0.6.0) (2024-03-09)
 
 
