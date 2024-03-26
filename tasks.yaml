@@ -33,6 +33,11 @@ tasks:
             echo "CoreDNS patch failed, foo.uds.dev is resolving to 127.0.0.1"
             exit 1
           fi
+      - description: Validate zarf init
+        cmd: |
+          set -e
+          uds zarf package pull oci://ghcr.io/defenseunicorns/packages/init:$(uds zarf version)
+          uds zarf init --confirm
 
   - name: build-image
     actions:
