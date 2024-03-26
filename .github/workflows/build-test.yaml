@@ -14,6 +14,10 @@ permissions:
 jobs:
   test-clean-install:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image: ["rancher/k3s", "ghcr.io/defenseunicorns/oss/uds-k3d-k3s"]
+        version: ["v1.27.11-k3s1", "v1.28.7-k3s1", "v1.29.2-k3s1"]
 
     steps:
       - uses: actions/checkout@v4
@@ -26,10 +30,11 @@ jobs:
           password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
 
       - name: Build the custom k3s image
-        run: uds run build-image
+        if: ${{matrix.image}} != "rancher/k3s"
+        run: uds run build-image --set K3S_VERSION=${{matrix.version}}
 
       - name: Create and deploy the uds-k3d package
-        run: uds run
+        run: uds run --set IMAGE_PATH=${{matrix.image}} --set K3S_VERSION=${{matrix.version}}
 
       - name: Validate uds-k3d package
         run: uds run validate

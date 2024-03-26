@@ -11,6 +11,9 @@ on:
 jobs:
   publish-k3s-image:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ["v1.27.11-k3s1", "v1.28.7-k3s1", "v1.29.2-k3s1"]
 
     permissions:
       contents: read
@@ -34,7 +37,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the custom k3s image
-        run: |
-          uds run publish-image --set K3S_VERSION=v1.27.11-k3s1
-          uds run publish-image
-          uds run publish-image --set K3S_VERSION=v1.29.2-k3s1
+        run: uds run publish-image --set K3S_VERSION=${{matrix.version}}

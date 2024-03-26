@@ -12,7 +12,7 @@ tasks:
         cmd: "uds zarf package create --confirm"
 
       - description: "Deploy UDS K3d package"
-        cmd: "uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm"
+        cmd: "uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm --set K3D_IMAGE=${IMAGE_PATH}:${K3S_VERSION}"
 
   - name: validate
     actions:
