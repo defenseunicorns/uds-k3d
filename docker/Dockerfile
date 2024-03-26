@@ -1,4 +1,4 @@
-ARG K3S_TAG="v1.28.7-k3s1"
+ARG K3S_TAG="v1.28.8-k3s1"
 
 FROM rancher/k3s:$K3S_TAG as k3s
 
