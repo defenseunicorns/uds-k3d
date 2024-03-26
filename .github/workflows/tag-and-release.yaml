@@ -34,7 +34,7 @@ jobs:
 
       - name: Setup UDS
         if: always()
-        uses: defenseunicorns/uds-common/.github/actions/setup@v0.3.6
+        uses: defenseunicorns/uds-common/.github/actions/setup@v0.3.7
         with:
           username: ${{secrets.IRON_BANK_ROBOT_USERNAME}}
           password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
