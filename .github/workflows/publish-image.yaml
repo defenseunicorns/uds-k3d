@@ -37,4 +37,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the custom k3s image
-        run: uds run publish-image --set K3S_VERSION=${{matrix.version}}
+        run: uds run publish-image --set VERSION=${{matrix.version}}

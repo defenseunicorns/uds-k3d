@@ -1,7 +1,7 @@
 variables:
-  - name: K3S_VERSION
+  - name: VERSION
     default: "v1.28.7-k3s1"
-  - name: IMAGE_PATH
+  - name: IMAGE_NAME
     default: "ghcr.io/defenseunicorns/oss/uds-k3d-k3s"
 
 tasks:
@@ -12,7 +12,7 @@ tasks:
         cmd: "uds zarf package create --confirm"
 
       - description: "Deploy UDS K3d package"
-        cmd: "uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm --set K3D_IMAGE=${IMAGE_PATH}:${K3S_VERSION}"
+        cmd: "uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm --set K3D_IMAGE=${IMAGE_NAME}:${VERSION}"
 
   - name: validate
     actions:
@@ -45,10 +45,9 @@ tasks:
   - name: build-image
     actions:
       - description: Build the custom k3s image
-        cmd: docker build -t ${IMAGE_PATH}:${K3S_VERSION} --build-arg K3S_TAG=${K3S_VERSION} docker/
+        cmd: docker build -t ${IMAGE_NAME}:${VERSION} --build-arg K3S_TAG=${VERSION} docker/
 
   - name: publish-image 
     actions:
-      - task: build-image
       - description: Publish the custom k3s image
-        cmd: docker push ${IMAGE_PATH}:${K3S_VERSION}
+        cmd: docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ${IMAGE_NAME}:${VERSION} docker

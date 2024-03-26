@@ -35,10 +35,10 @@ jobs:
 
       - name: Build the custom k3s image
         if: ${{matrix.image}} != "rancher/k3s"
-        run: uds run build-image --set K3S_VERSION=${{matrix.version}}
+        run: uds run build-image --set VERSION=${{matrix.version}}
 
       - name: Create and deploy the uds-k3d package
-        run: uds run --set IMAGE_PATH=${{matrix.image}} --set K3S_VERSION=${{matrix.version}}
+        run: uds run --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}}
 
       - name: Validate uds-k3d package
         run: uds run validate

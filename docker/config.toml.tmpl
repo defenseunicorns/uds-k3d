@@ -3,6 +3,7 @@ version = 2
 
 [plugins."io.containerd.internal.v1.opt"]
   path = "/var/lib/rancher/k3s/agent/containerd"
+
 [plugins."io.containerd.grpc.v1.cri"]
   stream_server_address = "127.0.0.1"
   stream_server_port = "10010"
@@ -18,7 +19,6 @@ version = 2
 [plugins."io.containerd.grpc.v1.cri".cni]
   bin_dir = "/bin"
   conf_dir = "/var/lib/rancher/k3s/agent/etc/cni/net.d"
-
 
 [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
   runtime_type = "io.containerd.runc.v2"
