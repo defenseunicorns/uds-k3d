@@ -16,8 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: ["rancher/k3s", "ghcr.io/defenseunicorns/oss/uds-k3d-k3s"]
+        image: ["ghcr.io/defenseunicorns/oss/uds-k3d-k3s"]
         version: ["v1.27.11-k3s1", "v1.28.7-k3s1", "v1.29.2-k3s1"]
+        # Test the default image as well
+        include:
+          - image: "rancher/k3s"
+            version: "v1.27.4-k3s1"
 
     steps:
       - uses: actions/checkout@v4
