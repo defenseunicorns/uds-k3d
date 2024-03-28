@@ -24,11 +24,11 @@ jobs:
             version: "v1.27.4-k3s1"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Setup UDS
         if: always()
-        uses: defenseunicorns/uds-common/.github/actions/setup@v0.3.6
+        uses: defenseunicorns/uds-common/.github/actions/setup@264ec430c4079129870820e70c4439f3f3d57cbc # v0.3.9
         with:
           username: ${{secrets.IRON_BANK_ROBOT_USERNAME}}
           password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
