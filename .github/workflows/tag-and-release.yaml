@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Create Release Tag
         id: tag
-        uses: google-github-actions/release-please-action@v4
+        uses: google-github-actions/release-please-action@a37ac6e4f6449ce8b3f7607e4d97d0146028dc0b # v4
         with:
           command: manifest # use configs in release-please-config.json
       - id: release-flag
@@ -30,17 +30,17 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
 
       - name: Setup UDS
         if: always()
-        uses: defenseunicorns/uds-common/.github/actions/setup@v0.3.6
+        uses: defenseunicorns/uds-common/.github/actions/setup@05f42bb3117b66ebef8c72ae050b34bce19385f5 # v0.3.6
         with:
           username: ${{secrets.IRON_BANK_ROBOT_USERNAME}}
           password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
 
       - name: Login to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3
         with:
           registry: ghcr.io
           username: dummy
