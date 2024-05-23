@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.6.0...v0.7.0) (2024-05-23)
+
+
+### Features
+
+* add custom k3s image ([#55](https://github.com/defenseunicorns/uds-k3d/issues/55)) ([707f7d5](https://github.com/defenseunicorns/uds-k3d/commit/707f7d5b07d9ecf7317439704a3d738b42ff01fb))
+
+
+### Bug Fixes
+
+* broken validate task ([#71](https://github.com/defenseunicorns/uds-k3d/issues/71)) ([fbe6146](https://github.com/defenseunicorns/uds-k3d/commit/fbe6146536d93f2ebcb89a67176df72bbd44f198))
+* buildx for publish image ([#59](https://github.com/defenseunicorns/uds-k3d/issues/59)) ([427af5c](https://github.com/defenseunicorns/uds-k3d/commit/427af5c615d1b8f9f87a68dab97d13ad483e99c3))
+
+
+### Miscellaneous
+
+* **deps:** pin dependencies ([#66](https://github.com/defenseunicorns/uds-k3d/issues/66)) ([122380a](https://github.com/defenseunicorns/uds-k3d/commit/122380afe200f251eac85f51df1de06cbf082337))
+* **deps:** update actions/checkout digest to a5ac7e5 ([#70](https://github.com/defenseunicorns/uds-k3d/issues/70)) ([01422ba](https://github.com/defenseunicorns/uds-k3d/commit/01422ba11eb5b68664691953067c4baa45f03713))
+* **deps:** update defenseunicorns/uds-common action to v0.4.2 ([#61](https://github.com/defenseunicorns/uds-k3d/issues/61)) ([c92cf9d](https://github.com/defenseunicorns/uds-k3d/commit/c92cf9d4356f164dead4a58eeeca55e1e612f62d))
+* **deps:** update defenseunicorns/uds-common action to v0.4.3 ([#77](https://github.com/defenseunicorns/uds-k3d/issues/77)) ([4960e94](https://github.com/defenseunicorns/uds-k3d/commit/4960e946159d4681c235e5303f9ecb6a69fcbac0))
+* **deps:** update defenseunicorns/uds-common digest to a6fba9c ([#72](https://github.com/defenseunicorns/uds-k3d/issues/72)) ([d2da739](https://github.com/defenseunicorns/uds-k3d/commit/d2da739759c5a973c91db0dfee39377881dddfc8))
+* **deps:** update docker/setup-buildx-action action to v3.2.0 ([#54](https://github.com/defenseunicorns/uds-k3d/issues/54)) ([e7a639d](https://github.com/defenseunicorns/uds-k3d/commit/e7a639d75f1fc3b8a49f0963a1cb8e4ea7ec0cfc))
+* **deps:** update docker/setup-buildx-action action to v3.3.0 ([#68](https://github.com/defenseunicorns/uds-k3d/issues/68)) ([770d3ed](https://github.com/defenseunicorns/uds-k3d/commit/770d3ed9e3905a4a5a9668e6a8051b081893ffe2))
+* **deps:** update google-github-actions/release-please-action action to v4 ([#21](https://github.com/defenseunicorns/uds-k3d/issues/21)) ([8e8400d](https://github.com/defenseunicorns/uds-k3d/commit/8e8400de5a83f3702eb94a59471eb2f99cdc21df))
+* **deps:** update google-github-actions/release-please-action digest to e4dc86b ([#74](https://github.com/defenseunicorns/uds-k3d/issues/74)) ([27e0723](https://github.com/defenseunicorns/uds-k3d/commit/27e0723c7c5a453ad8fc8c109596d1726ca96508))
+* **deps:** update helm release metallb to v0.14.5 ([#62](https://github.com/defenseunicorns/uds-k3d/issues/62)) ([381ec21](https://github.com/defenseunicorns/uds-k3d/commit/381ec21285f770c3186705244c1b20736286d129))
+* **deps:** update helm release minio to v5.2.0 ([#63](https://github.com/defenseunicorns/uds-k3d/issues/63)) ([d826b55](https://github.com/defenseunicorns/uds-k3d/commit/d826b550d33c1df6b8899501b8d011d064f9bfa2))
+* switch to common renovate config ([#60](https://github.com/defenseunicorns/uds-k3d/issues/60)) ([61e015b](https://github.com/defenseunicorns/uds-k3d/commit/61e015bcb37d811ec0f7cec0c3762d7650190064))
+* update codeowners ([#69](https://github.com/defenseunicorns/uds-k3d/issues/69)) ([9f6391d](https://github.com/defenseunicorns/uds-k3d/commit/9f6391d955430e5fb6587f26e63adfc28a15cd59))
+* update to latest k3s patches, switch port mapping to standard ports ([#76](https://github.com/defenseunicorns/uds-k3d/issues/76)) ([6339460](https://github.com/defenseunicorns/uds-k3d/commit/63394606f77a8c78c7b47b8c46a7d8a6b88c1157))
+
 ## [0.6.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.5.0...v0.6.0) (2024-03-09)
 
 
