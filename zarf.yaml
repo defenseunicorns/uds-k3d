@@ -87,7 +87,7 @@ components:
         version: 0.2.0
       - name: minio
         namespace: uds-dev-stack
-        version: 5.0.14
+        version: 5.2.0
         url: https://charts.min.io/
         valuesFiles:
           - "values/minio-values.yaml"
