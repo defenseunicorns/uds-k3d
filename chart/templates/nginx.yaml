@@ -71,9 +71,9 @@ spec:
           command: ["nginx", "-g", "daemon off;"]
           ports:
             - containerPort: 80
-              hostPort: 20080
+              hostPort: 80
             - containerPort: 443
-              hostPort: 20443
+              hostPort: 443
           volumeMounts:
             - name: config-volume
               mountPath: /etc/nginx/nginx.conf

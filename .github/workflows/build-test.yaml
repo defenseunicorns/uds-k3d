@@ -17,11 +17,7 @@ jobs:
     strategy:
       matrix:
         image: ["ghcr.io/defenseunicorns/oss/uds-k3d-k3s"]
-        version: ["v1.27.11-k3s1", "v1.28.7-k3s1", "v1.29.2-k3s1"]
-        # Test the default image as well
-        include:
-          - image: "rancher/k3s"
-            version: "v1.27.4-k3s1"
+        version: ["v1.27.13-k3s1", "v1.28.9-k3s1", "v1.29.4-k3s1"]
 
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
@@ -35,10 +31,10 @@ jobs:
 
       - name: Build the custom k3s image
         if: ${{matrix.image}} != "rancher/k3s"
-        run: uds run build-image --set VERSION=${{matrix.version}}
+        run: uds run build-image --set VERSION=${{matrix.version}} --no-progress
 
       - name: Create and deploy the uds-k3d package
-        run: uds run --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}}
+        run: uds run --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}} --no-progress
 
       - name: Validate uds-k3d package
-        run: uds run validate
+        run: uds run validate --no-progress
