@@ -1,18 +1,20 @@
 variables:
   - name: VERSION
-    default: "v1.28.7-k3s1"
+    default: "v1.28.9-k3s1"
   - name: IMAGE_NAME
     default: "ghcr.io/defenseunicorns/oss/uds-k3d-k3s"
+  - name: K3D_EXTRA_ARGS
+    default: ""
 
 tasks:
   - name: default
     description: "Build and deploy uds-k3d"
     actions:
       - description: "Build UDS K3d package"
-        cmd: "uds zarf package create --confirm"
+        cmd: "uds zarf package create --confirm --no-progress"
 
       - description: "Deploy UDS K3d package"
-        cmd: "uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm --set K3D_IMAGE=${IMAGE_NAME}:${VERSION}"
+        cmd: "uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm --set K3D_IMAGE=${IMAGE_NAME}:${VERSION} --set K3D_EXTRA_ARGS=\"${K3D_EXTRA_ARGS}\" --no-progress"
 
   - name: validate
     actions:
@@ -36,10 +38,9 @@ tasks:
       - description: Validate zarf init
         cmd: |
           set -e
-          # uds zarf tools download-init does not work in 0.9.4 - https://github.com/defenseunicorns/uds-cli/issues/517
-          uds zarf package pull oci://ghcr.io/defenseunicorns/packages/init:$(uds zarf version)
+          uds zarf tools download-init --no-progress
           # Test zarf init due to containerd issue - https://github.com/defenseunicorns/zarf/issues/592
-          uds zarf init --confirm
+          uds zarf init --confirm --no-progress
 
   - name: build-image
     actions:
