@@ -80,14 +80,14 @@ components:
       - name: metallb
         namespace: uds-dev-stack
         url: https://metallb.github.io/metallb
-        version: 0.13.11
+        version: 0.14.5
       - name: uds-dev-stack
         namespace: uds-dev-stack
         localPath: chart
         version: 0.2.0
       - name: minio
         namespace: uds-dev-stack
-        version: 5.0.14
+        version: 5.2.0
         url: https://charts.min.io/
         valuesFiles:
           - "values/minio-values.yaml"

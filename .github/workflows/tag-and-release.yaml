@@ -30,11 +30,11 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
 
       - name: Setup UDS
         if: always()
-        uses: defenseunicorns/uds-common/.github/actions/setup@05f42bb3117b66ebef8c72ae050b34bce19385f5 # v0.3.6
+        uses: defenseunicorns/uds-common/.github/actions/setup@b2e8b25930c953ef893e7c787fe350f0d8679ee2 # v0.4.2
         with:
           username: ${{secrets.IRON_BANK_ROBOT_USERNAME}}
           password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
