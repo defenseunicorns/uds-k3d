@@ -17,7 +17,7 @@ variables:
 
   - name: K3D_IMAGE
     description: "K3d image to use"
-    default: "rancher/k3s:v1.27.4-k3s1"
+    default: "ghcr.io/defenseunicorns/oss/uds-k3d-k3s:v1.28.9-k3s1"
 
   - name: K3D_EXTRA_ARGS
     description: "Optionally pass k3d arguments to the default"
@@ -41,8 +41,8 @@ components:
         before:
           - cmd: |
               k3d cluster create \
-              -p "80:20080@server:*" \
-              -p "443:20443@server:*" \
+              -p "80:80@server:*" \
+              -p "443:443@server:*" \
               --api-port 6550 \
               --k3s-arg "--disable=traefik@server:*" \
               --k3s-arg "--disable=metrics-server@server:*" \
