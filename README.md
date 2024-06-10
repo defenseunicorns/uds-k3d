@@ -42,7 +42,7 @@ Set Extra k3d args:
 package:
   deploy:
     set:
-      k3d_extra_args: "--gpus=1"
+      k3d_extra_args: "--k3s-arg --gpus=1 --k3s-arg --<arg2>=<value>"
 ```
 
 Configure MinIO:
