@@ -1,8 +1,8 @@
 variables:
   - name: VERSION
-    default: "v1.28.9-k3s1"
+    default: "v1.29.6-k3s2"
   - name: IMAGE_NAME
-    default: "ghcr.io/defenseunicorns/oss/uds-k3d-k3s"
+    default: "rancher/k3s"
   - name: K3D_EXTRA_ARGS
     default: ""
 
@@ -42,12 +42,12 @@ tasks:
           # Test zarf init due to containerd issue - https://github.com/defenseunicorns/zarf/issues/592
           uds zarf init --confirm --no-progress
 
-  - name: build-image
-    actions:
-      - description: Build the custom k3s image
-        cmd: docker build -t ${IMAGE_NAME}:${VERSION} --build-arg K3S_TAG=${VERSION} docker/
+  # - name: build-image
+  #   actions:
+  #     - description: Build the custom k3s image
+  #       cmd: docker build -t ${IMAGE_NAME}:${VERSION} --build-arg K3S_TAG=${VERSION} docker/
 
-  - name: publish-image 
-    actions:
-      - description: Publish the custom k3s image
-        cmd: docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ${IMAGE_NAME}:${VERSION} docker
+  # - name: publish-image
+  #   actions:
+  #     - description: Publish the custom k3s image
+  #       cmd: docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ${IMAGE_NAME}:${VERSION} docker

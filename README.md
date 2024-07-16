@@ -3,16 +3,22 @@
 > [!IMPORTANT]
 > This package should only be used for development and testing purposes. It is not intended for production use and all data is overwritten when the package is re-deployed.
 
-This zarf package serves as a universal dev (local & remote) and test environment for testing [UDS Core](https://github.com/defenseunicorns/uds-core), invidual UDS Capabilities, and UDS capabilities aggregated via the [UDS CLI](https://github.com/defenseunicorns/uds-cli). If working with a remote cluster over SSH, you can use SSH port-forwarding to connect:
+This zarf package serves as a universal dev (local & remote) and test environment for testing [UDS Core](https://github.com/defenseunicorns/uds-core), individual UDS Capabilities, and UDS capabilities aggregated via the [UDS CLI](https://github.com/defenseunicorns/uds-cli). If working with a remote cluster over SSH, you can use SSH port-forwarding to connect:
 
-`ssh -N -L 8080:localhost:80 -L 8443:localhost:443 -L 6550:localhost:6550`
+```console
+# Non-standard ports
+ssh -N -L 8080:localhost:80 -L 8443:localhost:443 -L 6550:localhost:6550 <your-remote-host>
+
+# Standard ports (requires sudo)
+sudo ssh -N -L 80:localhost:80 -L 443:localhost:443 -L 6550:localhost:6550 <your-remote-host>
+```
 
 > [!NOTE]
 > UDS K3d intentionally does not address airgap concerns for K3d or the load balancer logic deployed in this package. This allows running `zarf init` or deploying a Zarf Init Package via a UDS Bundle after the UDS K3d environment is deployed.
 
 ## Prerequisites
 
-- [UDS cli](https://github.com/defenseunicorns/uds-cli/blob/main/README.md#install) & [K3d](https://k3d.io/#installation) using the versions specified in the [uds-common repo](https://github.com/defenseunicorns/uds-common/blob/main/README.md#supported-tool-versions)
+- [UDS CLI](https://github.com/defenseunicorns/uds-cli/blob/main/README.md#install) & [K3d](https://k3d.io/#installation) using the versions specified in the [uds-common repo](https://github.com/defenseunicorns/uds-common/blob/main/README.md#supported-tool-versions)
 - [Docker](https://docs.docker.com/get-docker/) or [Podman](https://podman.io/getting-started/installation) for running K3d
 
 ## Deploy
@@ -35,8 +41,7 @@ This package is published via CI, but can be created locally with the following 
 
 ## Additional Info
 
-You can set extra k3d args by setting the deploy-time ZARF_VAR_K3D_EXTRA_ARGS.
-Set Extra k3d args:
+You can set extra k3d args by setting the deploy-time ZARF_VAR_K3D_EXTRA_ARGS. See below `zarf-config.yaml` example k3d args:
 
 ```yaml
 package:

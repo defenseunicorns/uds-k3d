@@ -1,19 +1,20 @@
 name: Publish k3s image
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - docker/**
-      - .github/workflows/publish-image.yaml
+# Workflow is not currently being used, switched to a manual trigger only
+on: workflow_dispatch
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - docker/**
+  #     - .github/workflows/publish-image.yaml
 
 jobs:
   publish-k3s-image:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ["v1.27.13-k3s1", "v1.28.9-k3s1", "v1.29.4-k3s1"]
+        version: ["v1.28.11-k3s2", "v1.29.6-k3s2", "v1.30.2-k3s2"]
 
     permissions:
       contents: read
