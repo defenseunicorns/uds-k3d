@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.7.0...v0.8.0) (2024-07-16)
+
+
+### Miscellaneous
+
+* **deps:** update actions/checkout digest to 692973e ([#84](https://github.com/defenseunicorns/uds-k3d/issues/84)) ([ff44cce](https://github.com/defenseunicorns/uds-k3d/commit/ff44cce500216ab57f17e01b97e440c9120339ad))
+* **deps:** update defenseunicorns/uds-common action to v0.8.0 ([#81](https://github.com/defenseunicorns/uds-k3d/issues/81)) ([f9eab1d](https://github.com/defenseunicorns/uds-k3d/commit/f9eab1dcc0c89e5d425cce1fe89bbb022964e4ba))
+* **deps:** update docker/login-action digest to 0d4c9c5 ([#79](https://github.com/defenseunicorns/uds-k3d/issues/79)) ([0fcbb5a](https://github.com/defenseunicorns/uds-k3d/commit/0fcbb5af5e6ba72fb24f718f4625aced8c7ec1d5))
+* **deps:** update docker/setup-buildx-action action to v3.4.0 ([#87](https://github.com/defenseunicorns/uds-k3d/issues/87)) ([85cc784](https://github.com/defenseunicorns/uds-k3d/commit/85cc7843a4a90109f7782c47fd9264a6755ea66f))
+* **deps:** update googleapis/release-please-action action to v4.1.3 ([#82](https://github.com/defenseunicorns/uds-k3d/issues/82)) ([2ede840](https://github.com/defenseunicorns/uds-k3d/commit/2ede84035b20d652541efefa1eabc50eae7c8024))
+* **deps:** update helm release metallb to v0.14.6 ([#90](https://github.com/defenseunicorns/uds-k3d/issues/90)) ([5c510bb](https://github.com/defenseunicorns/uds-k3d/commit/5c510bbac61528096fec2dd38c2a067ece3986d3))
+* **deps:** update rancher/local-path-provisioner docker tag to v0.0.28 ([#80](https://github.com/defenseunicorns/uds-k3d/issues/80)) ([d9af211](https://github.com/defenseunicorns/uds-k3d/commit/d9af2113a061b309000ddf6b554680068b176e87))
+* **deps:** update registry.k8s.io/pause docker tag to v3.10 ([#78](https://github.com/defenseunicorns/uds-k3d/issues/78)) ([85b6fa4](https://github.com/defenseunicorns/uds-k3d/commit/85b6fa46a7b92c925fefa84b0b16738513704d2b))
+* update k3s version, comment out custom image (https://github.com/defenseunicorns/uds-k3d/pull/92) ([9a5776d](https://github.com/defenseunicorns/uds-k3d/commit/9a5776d824cffe75078b3af6abd43de7dabcb2c1))
+
 ## [0.7.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.6.0...v0.7.0) (2024-05-23)
 
 
