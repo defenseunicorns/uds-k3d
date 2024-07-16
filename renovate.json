@@ -5,5 +5,19 @@
     ":semanticPrefixFixDepsChoreOthers",
     "replacements:all",
     "workarounds:all"
+  ],
+  "packageRules": [
+    {
+      "matchFileNames": ["chart/**", "zarf.yaml"],
+      "excludePackageNames": ["rancher/k3s"],
+      "groupName": "dev-stack",
+      "commitMessageTopic": "dev-stack"
+    },
+    {
+      "matchFileNames": [".github/workflows/**", ".github/actions/**"],
+      "groupName": "githubactions",
+      "commitMessageTopic": "githubactions",
+      "pinDigests": true
+    }
   ]
 }

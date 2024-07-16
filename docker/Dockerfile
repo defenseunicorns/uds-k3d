@@ -1,5 +1,5 @@
-ARG K3S_TAG="v1.28.9-k3s1"
+ARG K3S_TAG="v1.29.6-k3s2"
 
 FROM rancher/k3s:$K3S_TAG as k3s
 
-COPY config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+# Do custom image things
