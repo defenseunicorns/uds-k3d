@@ -29,6 +29,11 @@ jobs:
           username: ${{secrets.IRON_BANK_ROBOT_USERNAME}}
           password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
 
+      # Step is not currently being used, could be uncommented if custom image support is needed in the future
+      # - name: Build the custom k3s image
+      #   if: ${{matrix.image}} != "rancher/k3s"
+      #   run: uds run build-image --set VERSION=${{matrix.version}} --no-progress
+
       - name: Create and deploy the uds-k3d package
         run: uds run --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}} --no-progress
 
