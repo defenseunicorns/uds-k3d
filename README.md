@@ -41,7 +41,7 @@ This package is published via CI, but can be created locally with the following 
 
 ## Start and Stop
 
-To turn stop and start an existing UDS K3d cluster gracefully without disrupting the `host.k3d.internal` CoreDNS rewrite for `*.uds.dev`, use the following to start and stop the cluster before machine hibernation, suspension, restart, or shutoff:
+To stop and start an existing UDS K3d cluster gracefully, without disrupting the `host.k3d.internal` CoreDNS rewrite for `*.uds.dev`, use the following to start and stop the cluster before machine hibernation, suspension, restart, or shutoff:
 
 ```bash
 # to stop the default UDS cluster
