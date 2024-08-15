@@ -39,6 +39,18 @@ This package is published via CI, but can be created locally with the following 
 
 `k3d cluster delete uds` (uds is the default cluster name).
 
+## Start and Stop
+
+To turn stop and start an existing UDS K3d cluster gracefully without disrupting the `host.k3d.internal` CoreDNS rewrite for `*.uds.dev`, use the following to start and stop the cluster before machine hibernation, suspension, restart, or shutoff:
+
+```bash
+# to stop the default UDS cluster
+k3d cluster stop uds
+
+# to start the default UDS cluster
+k3d cluster start uds
+```
+
 ## Additional Info
 
 You can set extra k3d args by setting the deploy-time ZARF_VAR_K3D_EXTRA_ARGS. See below `zarf-config.yaml` example k3d args:
@@ -50,10 +62,10 @@ package:
       k3d_extra_args: "--k3s-arg --gpus=1 --k3s-arg --<arg2>=<value>"
 ```
 
-Configure MinIO:
+### Configure MinIO
 
 - [Configuring Minio](docs/MINIO.md)
 
-### DNS Assumptions:
+### DNS Assumptions
 
 - [DNS Assumptions](docs/DNS.md)
