@@ -13,8 +13,6 @@ data:
         map $ssl_preread_server_name $selected_upstream {
             hostnames;  
             *.admin.uds.dev backend_admin;
-            keycloak.uds.dev backend_passthrough;
-            login.uds.dev backend_passthrough;
             *.uds.dev backend_tenant;
         }
 
@@ -26,15 +24,22 @@ data:
             server ###ZARF_VAR_BASE_IP###.201:443; 
         }
 
-        upstream backend_passthrough {
-            server ###ZARF_VAR_BASE_IP###.202:443;
-        }
-
         server {
             listen 443;
             proxy_pass $selected_upstream;
             ssl_preread on;
         }
+
+        {{- range .Values.extraPorts }}
+        upstream backend_tenant_{{ . }} {
+            server ###ZARF_VAR_BASE_IP###.201:{{ . }}; 
+        }
+
+        server {
+            listen {{ . }};
+            proxy_pass backend_tenant_{{ . }};
+        }
+        {{- end }}
     }
 
     http {
@@ -74,6 +79,10 @@ spec:
               hostPort: 80
             - containerPort: 443
               hostPort: 443
+          {{- range .Values.extraPorts }}
+            - containerPort: {{ . }}
+              hostPort: {{ . }}
+          {{- end }}
           volumeMounts:
             - name: config-volume
               mountPath: /etc/nginx/nginx.conf
