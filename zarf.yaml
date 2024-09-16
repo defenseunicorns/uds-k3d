@@ -23,6 +23,10 @@ variables:
     description: "Optionally pass k3d arguments to the default"
     default: ""
 
+  - name: NGINX_EXTRA_PORTS
+    description: "Optionally allow more ports through Nginx (combine with K3D_EXTRA_ARGS '-p <port>:<port>@server:*')"
+    default: "[]"
+
 components:
   - name: destroy-cluster
     required: true
@@ -85,6 +89,8 @@ components:
         namespace: uds-dev-stack
         localPath: chart
         version: 0.2.0
+        valuesFiles:
+          - "values/dev-stack-values.yaml"
       - name: minio
         namespace: uds-dev-stack
         version: 5.2.0
