@@ -24,10 +24,6 @@ data:
             server ###ZARF_VAR_BASE_IP###.201:443; 
         }
 
-        upstream backend_passthrough {
-            server ###ZARF_VAR_BASE_IP###.202:443;
-        }
-
         server {
             listen 443;
             proxy_pass $selected_upstream;
