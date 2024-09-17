@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.8.0...v0.9.0) (2024-09-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* add extra port support ([#103](https://github.com/defenseunicorns/uds-k3d/issues/103))
+
+### Features
+
+* add extra port support ([#103](https://github.com/defenseunicorns/uds-k3d/issues/103)) ([9299bc5](https://github.com/defenseunicorns/uds-k3d/commit/9299bc5bf4da40ffd6e30596d01e5a8b50793217))
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack to v0.0.29 ([#102](https://github.com/defenseunicorns/uds-k3d/issues/102)) ([402b20e](https://github.com/defenseunicorns/uds-k3d/commit/402b20eb32cac3f19b0bc4cbc49e9578a60dca49))
+* **deps:** update githubactions ([#94](https://github.com/defenseunicorns/uds-k3d/issues/94)) ([fda8d99](https://github.com/defenseunicorns/uds-k3d/commit/fda8d99ce4925822e2bbfbe2610aa928e306182d))
+* **deps:** update githubactions ([#96](https://github.com/defenseunicorns/uds-k3d/issues/96)) ([a730642](https://github.com/defenseunicorns/uds-k3d/commit/a730642d76d2ada2695350ac360a9e3bd8d86847))
+* **deps:** update githubactions to v0.12.0 ([#101](https://github.com/defenseunicorns/uds-k3d/issues/101)) ([d110f93](https://github.com/defenseunicorns/uds-k3d/commit/d110f937a2c07e3fc107bcf1a01f2b56ea7a3130))
+* **deps:** update metallb to v0.14.8 ([#93](https://github.com/defenseunicorns/uds-k3d/issues/93)) ([b9c61c6](https://github.com/defenseunicorns/uds-k3d/commit/b9c61c625447ce2894a6660c6c207cf5b5258b8c))
+* **docs:** graceful k3d shutdown and startup ([#100](https://github.com/defenseunicorns/uds-k3d/issues/100)) ([876a19b](https://github.com/defenseunicorns/uds-k3d/commit/876a19b6984d9269354d6618befc819e3adaa006))
+* fix codeowners ([#97](https://github.com/defenseunicorns/uds-k3d/issues/97)) ([6daf597](https://github.com/defenseunicorns/uds-k3d/commit/6daf597ef0872e53c29c431a44aa45e9bbb2d663))
+* update k3s test versions, default to 1.30.4 ([#104](https://github.com/defenseunicorns/uds-k3d/issues/104)) ([1aa5cb3](https://github.com/defenseunicorns/uds-k3d/commit/1aa5cb3489e0df6e9115dad1b11baffb55ca7409))
+
 ## [0.8.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.7.0...v0.8.0) (2024-07-16)
 
 
