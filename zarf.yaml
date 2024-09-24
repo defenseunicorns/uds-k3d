@@ -30,6 +30,7 @@ variables:
   - name: COREDNS_OVERRIDES
     description: |
       "CoreDNS overrides for rewriting requests. Defaults for `*.uds.dev` are the UDS Core Istio tenant and admin gateways."
+    autoIndent: true
     default: |
       rewrite stop {
         name regex (.*\.uds\.dev) host.k3d.internal answer auto
