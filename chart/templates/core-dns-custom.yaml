@@ -5,12 +5,4 @@ metadata:
   namespace: kube-system
 data:
   uds.override: |
-    {{- if .Values.coreDnsOverrides }}
-    {{- if kindIs "string" .Values.coreDnsOverrides }}
-    {{ .Values.coreDnsOverrides | indent 4 }}
-    {{- else if kindIs "array" .Values.coreDnsOverrides }}
-    {{- range .Values.coreDnsOverrides }}
-    {{ . | indent 4 }}
-    {{- end }}
-    {{- end }}
-    {{- end }}
+{{ .Values.coreDnsOverrides | indent 4 }}
