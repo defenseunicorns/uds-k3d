@@ -27,6 +27,14 @@ variables:
     description: "Optionally allow more ports through Nginx (combine with K3D_EXTRA_ARGS '-p <port>:<port>@server:*')"
     default: "[]"
 
+  - name: COREDNS_OVERRIDES
+    description: |
+      "CoreDNS overrides for rewriting requests. Defaults for `*.uds.dev` are the UDS Core Istio tenant and admin gateways."
+    default: |
+      rewrite stop {
+        name regex (.*\.uds\.dev) host.k3d.internal answer auto
+      }
+
 components:
   - name: destroy-cluster
     required: true
