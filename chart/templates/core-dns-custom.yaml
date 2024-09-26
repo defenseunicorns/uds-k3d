@@ -5,4 +5,5 @@ metadata:
   namespace: kube-system
 data:
   uds.override: |
-{{ .Values.coreDnsOverrides | indent 4 }}
+{{ .Values.coreDnsDefaults | nindent 4 }}
+{{ .Values.coreDnsOverrides | nindent 4 }}

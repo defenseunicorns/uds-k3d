@@ -27,9 +27,9 @@ variables:
     description: "Optionally allow more ports through Nginx (combine with K3D_EXTRA_ARGS '-p <port>:<port>@server:*')"
     default: "[]"
 
-  - name: COREDNS_OVERRIDES
+  - name: COREDNS_DEFAULTS
     description: |
-      "CoreDNS overrides for rewriting requests. Defaults for `*.uds.dev` are the UDS Core Istio tenant and admin gateways."
+      "Default CoreDNS rewrites that resolve `*.uds.dev` requests to the UDS Core Istio tenant and admin gateways."
     autoIndent: true
     default: |
       rewrite {
