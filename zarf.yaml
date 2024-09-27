@@ -93,6 +93,11 @@ components:
         # x-release-please-end
         valuesFiles:
           - "values/dev-stack-values.yaml"
+        variables:
+          - name: COREDNS_OVERRIDES
+            # Defaults contain rewrites of `*.uds.dev` to the UDS core Istio tenant and admin gateways
+            description: "CoreDNS overrides"
+            path: coreDnsOverrides
       - name: minio
         namespace: uds-dev-stack
         version: 5.2.0
