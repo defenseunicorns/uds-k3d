@@ -13,7 +13,8 @@ The outcome of this is a pods in the cluster can resolve domains like sso.uds.de
 To add additional CoreDNS overrides, you can set the `coreDnsOverrides` value by supplying the following to the deployment command:
 
 ```bash
---set COREDNS_OVERRIDES="rewrite {
+--set COREDNS_OVERRIDES="
+rewrite {
   name regex (.*\.uds\.dev) host.k3d.internal answer auto
 }
 "
