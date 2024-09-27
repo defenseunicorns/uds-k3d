@@ -7,6 +7,17 @@ variables:
     default: ""
   - name: NGINX_EXTRA_PORTS
     default: "[]"
+  - name: COREDNS_OVERRIDES
+    default: |
+      rewrite stop {
+        name regex (.*\.admin\.uds\.dev) admin-ingressgateway.istio-admin-gateway.svc.cluster.local answer auto
+      }
+      rewrite stop {
+        name regex (.*\.uds\.dev) tenant-ingressgateway.istio-tenant-gateway.svc.cluster.local answer auto
+      }
+      rewrite stop {
+        name regex (.*\.uds\.dev) host.k3d.internal answer auto
+      }
 
 tasks:
   - name: default
@@ -21,6 +32,7 @@ tasks:
             --set K3D_IMAGE=${IMAGE_NAME}:${VERSION} \
             --set K3D_EXTRA_ARGS="${K3D_EXTRA_ARGS}" \
             --set NGINX_EXTRA_PORTS="${NGINX_EXTRA_PORTS}" \
+            --set COREDNS_OVERRIDES="${COREDNS_OVERRIDES}" \
             --no-progress --confirm
 
   - name: validate

@@ -10,6 +10,21 @@ This package includes a CoreDNS configuration override designed to rewrite reque
 
 The outcome of this is a pods in the cluster can resolve domains like sso.uds.dev to an address (not 127.0.0.1) that will ultimately get routed correctly.
 
+You can use Zarf Helm overrides to overwrite the overrides provided by default in this package. To do so you must have Zarf >= v0.33.0. An example of how one might use this override with the default UDS task is as follows:
+
+```bash
+# Define the overrides
+COREDNS_OVERRIDES=$(cat << 'EOF'
+rewrite stop {
+  name regex (.*\.uds\.dev) host.k3d.internal answer auto
+}
+EOF
+)
+
+# Now use the variable in your command
+uds run --set COREDNS_OVERRIDES="$COREDNS_OVERRIDES"
+```
+
 ## Nginx Configuration
 
 Additionally, the package includes Nginx configuration that assumes the use of `uds.dev` as the base domain. This configuration is tailored to support the development environment setup, ensuring that Nginx correctly handles requests and routes them within the cluster, based on the `uds.dev` domain.
