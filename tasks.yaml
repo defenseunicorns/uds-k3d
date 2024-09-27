@@ -7,6 +7,9 @@ variables:
     default: ""
   - name: NGINX_EXTRA_PORTS
     default: "[]"
+  - name: COREDNS_OVERRIDES
+    autoIndent: true
+    default: ""
 
 tasks:
   - name: default
@@ -21,6 +24,7 @@ tasks:
             --set K3D_IMAGE=${IMAGE_NAME}:${VERSION} \
             --set K3D_EXTRA_ARGS="${K3D_EXTRA_ARGS}" \
             --set NGINX_EXTRA_PORTS="${NGINX_EXTRA_PORTS}" \
+            --set COREDNS_OVERRIDES="${COREDNS_OVERRIDES}" \
             --no-progress --confirm
 
   - name: validate

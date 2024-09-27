@@ -10,6 +10,15 @@ This package includes a CoreDNS configuration override designed to rewrite reque
 
 The outcome of this is a pods in the cluster can resolve domains like sso.uds.dev to an address (not 127.0.0.1) that will ultimately get routed correctly.
 
+To add additional CoreDNS overrides, you can set the `coreDnsOverrides` value by supplying the following to the deployment command:
+
+```bash
+--set COREDNS_OVERRIDES="rewrite {
+  name regex (.*\.uds\.dev) host.k3d.internal answer auto
+}
+"
+```
+
 ## Nginx Configuration
 
 Additionally, the package includes Nginx configuration that assumes the use of `uds.dev` as the base domain. This configuration is tailored to support the development environment setup, ensuring that Nginx correctly handles requests and routes them within the cluster, based on the `uds.dev` domain.
