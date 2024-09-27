@@ -27,18 +27,6 @@ variables:
     description: "Optionally allow more ports through Nginx (combine with K3D_EXTRA_ARGS '-p <port>:<port>@server:*')"
     default: "[]"
 
-  - name: COREDNS_DEFAULTS
-    description: |
-      "Default CoreDNS rewrites that resolve `*.uds.dev` requests to the UDS Core Istio tenant and admin gateways."
-    autoIndent: true
-    default: |
-      rewrite {
-        name regex (.*admin\.uds\.dev) admin-ingressgateway.istio-admin-gateway.svc.cluster.local answer auto
-      }
-      rewrite {
-        name regex (.*\.uds\.dev) tenant-ingressgateway.istio-tenant-gateway.svc.cluster.local answer auto
-      }
-
 components:
   - name: destroy-cluster
     required: true
@@ -103,6 +91,11 @@ components:
         version: 0.2.0
         valuesFiles:
           - "values/dev-stack-values.yaml"
+        variables:
+          - name: COREDNS_OVERRIDES
+            # Defaults contain rewrites of `*.uds.dev` to the UDS core Istio tenant and admin gateways
+            description: "CoreDNS overrides"
+            path: coreDnsOverrides
       - name: minio
         namespace: uds-dev-stack
         version: 5.2.0

@@ -1,4 +1,1 @@
 extraPorts: ###ZARF_VAR_NGINX_EXTRA_PORTS###
-
-coreDnsDefaults: |
-  ###ZARF_VAR_COREDNS_DEFAULTS###
