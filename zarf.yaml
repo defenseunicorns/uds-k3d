@@ -88,7 +88,9 @@ components:
       - name: uds-dev-stack
         namespace: uds-dev-stack
         localPath: chart
-        version: 0.2.0
+        # x-release-please-start-version
+        version: 0.9.0
+        # x-release-please-end
         valuesFiles:
           - "values/dev-stack-values.yaml"
         variables:
