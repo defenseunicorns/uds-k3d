@@ -33,7 +33,7 @@ Additionally, the package includes Nginx configuration that assumes the use of `
 
 You can add an additional Gateway to the Nginx configuration by overriding the helm value `customGateway.domainName` with the desired domain name.
 
-i.e. to add a custom gateway with the domain `uds2.dev` you would add the following toyour helm overrides for the `uds-dev-stack` chart:
+For example, to add a custom gateway with the domain `uds2.dev` you would add the following helm overrides for the `uds-dev-stack` chart:
 
 ```yaml
 customGateway:
