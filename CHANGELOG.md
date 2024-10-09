@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.9.0...v0.10.0) (2024-10-09)
+
+
+### Features
+
+* add ability to support additional gateway/domain ([#115](https://github.com/defenseunicorns/uds-k3d/issues/115)) ([4c62e6c](https://github.com/defenseunicorns/uds-k3d/commit/4c62e6ce11de8ad39e98e2cb7990fe56f17192da))
+* implement graceful, modifiable CoreDNS helm overrides ([#112](https://github.com/defenseunicorns/uds-k3d/issues/112)) ([7fe1876](https://github.com/defenseunicorns/uds-k3d/commit/7fe1876859af840e47ff1acc03b93733748cd4f9))
+
+
+### Miscellaneous
+
+* allow volumeexpansion in localpath storageclass ([#111](https://github.com/defenseunicorns/uds-k3d/issues/111)) ([4d0fb5c](https://github.com/defenseunicorns/uds-k3d/commit/4d0fb5cae7c7ab0a0f971a4df07e5ab36ec90516))
+* **deps:** update githubactions ([#110](https://github.com/defenseunicorns/uds-k3d/issues/110)) ([868ace5](https://github.com/defenseunicorns/uds-k3d/commit/868ace5468e7366f44720812cb1203b6d5a69f66))
+* **deps:** update uds-common to v0.13.0 ([#107](https://github.com/defenseunicorns/uds-k3d/issues/107)) ([ac3f60d](https://github.com/defenseunicorns/uds-k3d/commit/ac3f60d611e2edf29ca09b404cf70630768fd385))
+
 ## [0.9.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.8.0...v0.9.0) (2024-09-17)
 
 
