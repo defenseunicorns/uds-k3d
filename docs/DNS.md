@@ -28,3 +28,14 @@ uds run --set COREDNS_OVERRIDES="$COREDNS_OVERRIDES"
 ## Nginx Configuration
 
 Additionally, the package includes Nginx configuration that assumes the use of `uds.dev` as the base domain. This configuration is tailored to support the development environment setup, ensuring that Nginx correctly handles requests and routes them within the cluster, based on the `uds.dev` domain.
+
+### Nginx Additional Gateway Support
+
+You can add an additional Gateway to the Nginx configuration by overriding the helm value `customGateway.domainName` with the desired domain name.
+
+For example, to add a custom gateway with the domain `uds2.dev` you would add the following helm overrides for the `uds-dev-stack` chart:
+
+```yaml
+customGateway:
+  domainName: uds2.dev
+```

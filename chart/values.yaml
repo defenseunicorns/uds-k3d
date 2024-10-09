@@ -7,3 +7,7 @@ coreDnsOverrides: |
   rewrite stop {
     name regex (.*\.uds\.dev) tenant-ingressgateway.istio-tenant-gateway.svc.cluster.local answer auto
   }
+
+# Enable the following to use a custom gateway
+# customGateway:
+#   domainName: uds2.dev
