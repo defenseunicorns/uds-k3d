@@ -32,7 +32,7 @@ jobs:
           ghToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create and deploy the uds-k3d package
-        run: uds run --set K3S_IMAGE_VERSION=${{matrix.k3s_image_version}} K3S_IMAGE_REPOSITORY=${{matrix.k3s_image_repository}} --no-progress
+        run: uds run --set K3S_IMAGE_VERSION=${{matrix.k3s_image_version}} --set K3S_IMAGE_REPOSITORY=${{matrix.k3s_image_repository}} --no-progress
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
