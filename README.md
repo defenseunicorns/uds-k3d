@@ -16,16 +16,17 @@ sudo ssh -N -L 80:localhost:80 -L 443:localhost:443 -L 6550:localhost:6550 <your
 > [!NOTE]
 > UDS K3d intentionally does not address airgap concerns for K3d or the load balancer logic deployed in this package. This allows running `zarf init` or deploying a Zarf Init Package via a UDS Bundle after the UDS K3d environment is deployed.
 
-## Prerequisites
+## Pre-Requisites
 
 - [UDS CLI](https://github.com/defenseunicorns/uds-cli/blob/main/README.md#install) & [K3d](https://k3d.io/#installation) using the versions specified in the [uds-common repo](https://github.com/defenseunicorns/uds-common/blob/main/README.md#supported-tool-versions)
 - [Docker](https://docs.docker.com/get-docker/) or [Podman](https://podman.io/getting-started/installation) for running K3d
+- See the [GPU Configuration](./docs/GPU.md) information for more details on enabling NVIDIA GPU support within the cluster
 
 ## Deploy
 
 <!-- x-release-please-start-version -->
 
-`uds zarf package deploy oci://defenseunicorns/uds-k3d:0.9.0`
+`uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:0.11.2`
 
 <!-- x-release-please-end -->
 
@@ -53,13 +54,13 @@ k3d cluster start uds
 
 ## Additional Info
 
-You can set extra k3d args by setting the deploy-time ZARF_VAR_K3D_EXTRA_ARGS. See below `zarf-config.yaml` example k3d args:
+You can set extra K3d arguments by setting the deploy-time `ZARF_VAR_K3D_EXTRA_ARGS`. See below `zarf-config.yaml` example below for K3d args examples:
 
 ```yaml
 package:
   deploy:
     set:
-      k3d_extra_args: "--k3s-arg --gpus=1 --k3s-arg --<arg2>=<value>"
+      k3d_extra_args: --k3s-arg "--<arg2>=<value>@server:*" --gpus=all
 ```
 
 ### Configure MinIO
@@ -69,3 +70,7 @@ package:
 ### DNS Assumptions
 
 - [DNS Assumptions](docs/DNS.md)
+
+### Enabling GPU Support
+
+- [GPU Workload Configuration](docs/GPU.md)

@@ -4,7 +4,7 @@ kind: ZarfPackageConfig
 metadata:
   name: uds-k3d
   description: "UDS K3d Cluster Setup. WARNING: This will destroy the cluster if it already exists."
-  url: https://github.com/defenseunicorns/uds-k3d
+  url: https://github.com/justinthelaw/uds-k3d
   yolo: true
   # x-release-please-start-version
   version: "0.9.0"
@@ -15,9 +15,21 @@ variables:
     description: "Name of the cluster"
     default: "uds"
 
-  - name: K3D_IMAGE
-    description: "K3d image to use"
-    default: "rancher/k3s:v1.30.4-k3s1"
+  - name: K3S_IMAGE_REPOSITORY
+    description: "K3s image repository to use"
+    default: "rancher/k3s"
+
+  - name: K3S_IMAGE_VERSION
+    description: "K3d image version to use"
+    default: "v1.30.4-k3s1"
+
+  - name: CUDA_IMAGE_VERSION
+    description: "CUDA image to use"
+    default: "12.1.0-base-ubuntu22.04"
+
+  - name: NUMBER_OF_GPUS
+    description: "Number of GPUs to passthrough to the K3D cluster"
+    default: "all"
 
   - name: K3D_EXTRA_ARGS
     description: "Optionally pass k3d arguments to the default"
@@ -37,6 +49,43 @@ components:
           - cmd: k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}
             description: "Destroy the cluster"
 
+  - name: set-k3d-image
+    required: true
+    description: "Set the K3s base image"
+    actions:
+      onDeploy:
+        before:
+          - cmd: |
+              echo "${ZARF_VAR_K3S_IMAGE_REPOSITORY}:${ZARF_VAR_K3S_IMAGE_VERSION}"
+            setVariables:
+              - name: K3D_IMAGE
+
+  - name: inject-cuda-image
+    required: true
+    only:
+      flavor: cuda
+    description: "Overwrites the K3s base image variable to be the CUDA K3s image"
+    actions:
+      onDeploy:
+        before:
+          - cmd: |
+              echo "ghcr.io/justinthelaw/uds-k3d/cuda-k3s:${ZARF_VAR_K3S_IMAGE_VERSION}-cuda-${ZARF_VAR_CUDA_IMAGE_VERSION}"
+            setVariables:
+              - name: K3D_IMAGE
+
+  - name: expose-gpus
+    required: true
+    only:
+      flavor: cuda
+    description: "Adds the extra K3d argument for exposing host GPUs to the cluster"
+    actions:
+      onDeploy:
+        before:
+          - cmd: |
+              echo "${ZARF_VAR_K3D_EXTRA_ARGS} --gpus=${ZARF_VAR_NUMBER_OF_GPUS}"
+            setVariables:
+              - name: K3D_EXTRA_ARGS
+
   - name: create-cluster
     required: true
     description: "Create the k3d cluster"
@@ -52,8 +101,9 @@ components:
               --k3s-arg "--disable=metrics-server@server:*" \
               --k3s-arg "--disable=servicelb@server:*" \
               --k3s-arg "--disable=local-storage@server:*" \
-              --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
-              ${ZARF_VAR_CLUSTER_NAME}
+              ${ZARF_VAR_K3D_EXTRA_ARGS} \
+              --image ${ZARF_VAR_K3D_IMAGE} \
+              "${ZARF_VAR_CLUSTER_NAME}"
             description: "Create the cluster"
         onSuccess:
           - cmd: |
@@ -73,12 +123,12 @@ components:
     actions:
       onDeploy:
         before:
-          - cmd: ./zarf tools kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}' | cut -d'.' -f1-3
-            description: "Load network ip base for MetalLB"
+          - cmd: uds zarf tools kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}' | cut -d'.' -f1-3
+            description: "Load network base IP for MetalLB"
             setVariables:
               - name: BASE_IP
         after:
-          - cmd: ./zarf tools kubectl rollout restart deployment coredns -n kube-system
+          - cmd: uds zarf tools kubectl rollout restart deployment coredns -n kube-system
             description: "Restart CoreDNS to pick up internal DNS override for uds.dev"
     charts:
       - name: metallb
@@ -89,7 +139,7 @@ components:
         namespace: uds-dev-stack
         localPath: chart
         # x-release-please-start-version
-        version: 0.9.0
+        version: 0.11.2
         # x-release-please-end
         valuesFiles:
           - "values/dev-stack-values.yaml"
@@ -104,3 +154,37 @@ components:
         url: https://charts.min.io/
         valuesFiles:
           - "values/minio-values.yaml"
+
+  - name: nvidia-gpu-operator
+    description: "Install the NVIDIA GPU Operator for CUDA-enabled clusters"
+    only:
+      flavor: cuda
+    required: true
+    charts:
+      - name: gpu-operator
+        url: https://helm.ngc.nvidia.com/nvidia
+        version: v24.3.0
+        namespace: kube-system
+        valuesFiles:
+          - "values/nvidia-gpu-operator-values.yaml"
+    actions:
+      onDeploy:
+        after:
+          - description: "Validate nvidia-device-plugin-daemonset is up"
+            wait:
+              cluster:
+                kind: Pod
+                name: app=nvidia-device-plugin-daemonset
+                namespace: kube-system
+                # Ensure the device plugin is healthy, which might take a while depending on the machine 
+                condition: "'{.status.conditions[2].status}'=True"
+            maxTotalSeconds: 600
+          - description: "Validate nvidia-operator-validator is completed"
+            wait:
+              cluster:
+                kind: Pod
+                name: app=nvidia-operator-validator
+                namespace: kube-system
+                # Ensure the NVIDIA host validator job succeeds
+                condition: "'{.status.conditions[2].status}'=True"
+            maxTotalSeconds: 300

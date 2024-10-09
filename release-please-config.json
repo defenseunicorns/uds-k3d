@@ -10,7 +10,12 @@
         { "type": "chore", "section": "Miscellaneous", "hidden": false }
       ],
       "versioning": "default",
-      "extra-files": ["README.md", "zarf.yaml", "chart/Chart.yaml"]
+      "extra-files": [
+        "README.md",
+        "zarf.yaml",
+        "chart/Chart.yaml",
+        "docs/GPU.md"
+      ]
     }
   }
 }

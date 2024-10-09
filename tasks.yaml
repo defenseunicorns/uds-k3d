@@ -1,38 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.16.0/tasks.schema.json
+
 variables:
-  - name: VERSION
-    default: "v1.30.4-k3s1"
-  - name: IMAGE_NAME
+  - name: K3S_IMAGE_REPOSITORY
     default: "rancher/k3s"
+  - name: K3S_IMAGE_VERSION
+    default: "v1.30.4-k3s1"
+  - name: CUDA_IMAGE_VERSION
+    default: "12.1.0-base-ubuntu22.04"
   - name: K3D_EXTRA_ARGS
     default: ""
   - name: NGINX_EXTRA_PORTS
     default: "[]"
+  - name: CUDA_TEST
+    default: "cuda-device-query"
 
 tasks:
   - name: default
     description: "Build and deploy uds-k3d"
     actions:
-      - description: "Build UDS K3d package"
-        cmd: "uds zarf package create --confirm --no-progress"
+      - description: "Build the uds-k3d package"
+        cmd: "rm -rf zarf-package-uds-k3d-*.tar.zst && uds zarf package create --confirm --no-progress"
 
-      - description: "Deploy UDS K3d package"
+      - description: "Deploy the uds-k3d package"
         cmd: |
           uds zarf package deploy zarf-package-uds-k3d-*.tar.zst \
-            --set K3D_IMAGE=${IMAGE_NAME}:${VERSION} \
+            --set K3S_IMAGE_REPOSITORY=${K3S_IMAGE_REPOSITORY} \
+            --set K3S_IMAGE_VERSION=${K3S_IMAGE_VERSION} \
+            --set K3D_EXTRA_ARGS="${K3D_EXTRA_ARGS}" \
+            --set NGINX_EXTRA_PORTS="${NGINX_EXTRA_PORTS}" \
+            --no-progress --confirm
+
+  - name: default-cuda
+    description: "Build and deploy uds-k3d with CUDA support"
+    actions:
+      - description: "Build the uds-k3d CUDA package"
+        cmd: "rm -rf zarf-package-uds-k3d-*.tar.zst && uds zarf package create --flavor cuda --confirm --no-progress"
+
+      - description: "Build the k3s-cuda image locally"
+        task: build-cuda-image
+
+      - description: "Deploy the uds-k3d CUDA package"
+        cmd: |
+          uds zarf package deploy zarf-package-uds-k3d-*.tar.zst \
+            --set K3S_IMAGE_VERSION=${K3S_IMAGE_VERSION} \
+            --set CUDA_IMAGE_VERSION=${CUDA_IMAGE_VERSION} \
             --set K3D_EXTRA_ARGS="${K3D_EXTRA_ARGS}" \
             --set NGINX_EXTRA_PORTS="${NGINX_EXTRA_PORTS}" \
             --no-progress --confirm
 
   - name: validate
     actions:
-      - description: Validate coredns is up
+      - description: "Validate CoreDNS is up"
         wait:
           cluster:
             kind: Pod
             name: "k8s-app=kube-dns"
             namespace: kube-system
             condition: Ready
-      - description: Validate coredns is resolving *.uds.dev internally
+      - description: "Validate CoreDNS is resolving *.uds.dev internally"
         cmd: |
           set -e
           FOO_IP=$(uds zarf tools kubectl run dig-test --image=arunvelsriram/utils -q --restart=Never --rm -i -- dig +short foo.uds.dev)
@@ -42,19 +67,45 @@ tasks:
             echo "CoreDNS patch failed, foo.uds.dev is resolving to 127.0.0.1"
             exit 1
           fi
-      - description: Validate zarf init
+      - description: "Validate zarf init"
         cmd: |
           set -e
           uds zarf tools download-init --no-progress
           # Test zarf init due to containerd issue - https://github.com/defenseunicorns/zarf/issues/592
           uds zarf init --confirm --no-progress
 
-  # - name: build-image
-  #   actions:
-  #     - description: Build the custom k3s image
-  #       cmd: docker build -t ${IMAGE_NAME}:${VERSION} --build-arg K3S_TAG=${VERSION} docker/
+  - name: validate-cuda
+    description: "Run a CUDA test workload in-cluster"
+    actions:
+      - description: "Deploy the device query test pod to the cluster"
+        cmd: |
+          uds zarf tools kubectl apply -f tests/${CUDA_TEST}.yaml
+      - description: "Await test completion and then display the test results"
+        cmd: |
+          uds zarf tools wait-for Pod cuda-test-pod '{.status.phase}'=Succeeded -n default --no-progress --timeout 120s
+          uds zarf tools kubectl logs -l app=cuda-test-pod -n default
+      - description: "Remove the completed test pod"
+        cmd: |
+          uds zarf tools kubectl delete Pod cuda-test-pod
 
-  # - name: publish-image
-  #   actions:
-  #     - description: Publish the custom k3s image
-  #       cmd: docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ${IMAGE_NAME}:${VERSION} docker
+  - name: build-cuda-image
+    actions:
+      - description: "Build the CUDA K3s image"
+        cmd: |
+          docker build -t ghcr.io/defenseunicorns/uds-k3d/cuda-k3s:${K3S_IMAGE_VERSION}-cuda-${CUDA_IMAGE_VERSION} \
+            --build-arg K3S_REPOSITORY=${K3S_IMAGE_REPOSITORY} \
+            --build-arg K3S_TAG=${K3S_IMAGE_VERSION} \
+            --build-arg CUDA_TAG=${CUDA_IMAGE_VERSION} \
+            -f docker/Dockerfile.gpu . -q
+
+  - name: publish-cuda-image
+    actions:
+      - description: "Publish the CUDA K3s image"
+        cmd: |
+          docker buildx build --push \
+            --platform linux/amd64 \
+            --build-arg K3S_REPOSITORY=${K3S_IMAGE_REPOSITORY} \
+            --build-arg K3S_TAG=${K3S_IMAGE_VERSION} \
+            --build-arg CUDA_TAG=${CUDA_IMAGE_VERSION} \
+            -t ghcr.io/defenseunicorns/uds-k3d/cuda-k3s:${K3S_IMAGE_VERSION}-cuda-${CUDA_IMAGE_VERSION} \
+            -f docker/Dockerfile.gpu . -q
