@@ -77,7 +77,7 @@ tasks:
   - name: validate-cuda
     description: "Run a CUDA test workload in-cluster"
     actions:
-      - description: "Deploy the device query test pod to the cluster"
+      - description: "Deploy the test pod to the cluster"
         cmd: |
           uds zarf tools kubectl apply -f tests/${CUDA_TEST}.yaml
       - description: "Await test completion and then display the test results"
