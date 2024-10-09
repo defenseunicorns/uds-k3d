@@ -90,7 +90,7 @@ tasks:
 
   - name: build-cuda-image
     actions:
-      - description: "Build the CUDA K3s image"
+      - description: "Build the k3s-cuda image"
         cmd: |
           docker build -t ghcr.io/defenseunicorns/uds-k3d/cuda-k3s:${K3S_IMAGE_VERSION}-cuda-${CUDA_IMAGE_VERSION} \
             --build-arg K3S_REPOSITORY=${K3S_IMAGE_REPOSITORY} \
@@ -100,7 +100,7 @@ tasks:
 
   - name: publish-cuda-image
     actions:
-      - description: "Publish the CUDA K3s image"
+      - description: "Publish the k3s-cuda image"
         cmd: |
           docker buildx build --push \
             --platform linux/amd64 \

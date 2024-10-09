@@ -4,7 +4,7 @@ kind: ZarfPackageConfig
 metadata:
   name: uds-k3d
   description: "UDS K3d Cluster Setup. WARNING: This will destroy the cluster if it already exists."
-  url: https://github.com/justinthelaw/uds-k3d
+  url: https://github.com/defenseunicorns/uds-k3d
   yolo: true
   # x-release-please-start-version
   version: "0.9.0"
@@ -69,7 +69,7 @@ components:
       onDeploy:
         before:
           - cmd: |
-              echo "ghcr.io/justinthelaw/uds-k3d/cuda-k3s:${ZARF_VAR_K3S_IMAGE_VERSION}-cuda-${ZARF_VAR_CUDA_IMAGE_VERSION}"
+              echo "ghcr.io/defenseunicorns/uds-k3d/cuda-k3s:${ZARF_VAR_K3S_IMAGE_VERSION}-cuda-${ZARF_VAR_CUDA_IMAGE_VERSION}"
             setVariables:
               - name: K3D_IMAGE
 
