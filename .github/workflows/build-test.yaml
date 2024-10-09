@@ -17,7 +17,8 @@ jobs:
 
     strategy:
       matrix:
-        version:
+        k3s_image_repository: ["rancher/k3s"]
+        k3s_image_version:
           ["v1.28.8-k3s1", "v1.29.8-k3s1", "v1.30.4-k3s1", "v1.31.0-k3s1"]
 
     steps:
@@ -31,7 +32,7 @@ jobs:
           ghToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create and deploy the uds-k3d package
-        run: uds run --set K3S_IMAGE_VERSION=${{matrix.version}} --no-progress
+        run: uds run --set K3S_IMAGE_VERSION=${{matrix.k3s_image_version}} K3S_IMAGE_REPOSITORY=${{matrix.k3s_image_repository}} --no-progress
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
