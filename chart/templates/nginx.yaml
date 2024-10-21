@@ -14,6 +14,9 @@ data:
             hostnames;  
             *.admin.uds.dev backend_admin;
             *.uds.dev backend_tenant;
+            {{- if .Values.customGateway | default false}}
+            *.{{ .Values.customGateway.domainName }} backend_custom_gateway;
+            {{- end }}
         }
 
         upstream backend_admin {
@@ -23,6 +26,12 @@ data:
         upstream backend_tenant {
             server ###ZARF_VAR_BASE_IP###.201:443; 
         }
+
+        {{- if .Values.customGateway | default false}}
+        upstream backend_custom_gateway {
+            server ###ZARF_VAR_BASE_IP###.202:443;
+        }
+        {{- end }}
 
         server {
             listen 443;
