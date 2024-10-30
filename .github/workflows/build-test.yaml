@@ -22,12 +22,14 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-      - name: Setup UDS
-        if: always()
-        uses: ./.github/actions/setup-environment
-        with:
-          username: ${{secrets.IRON_BANK_ROBOT_USERNAME}}
-          password: ${{secrets.IRON_BANK_ROBOT_PASSWORD}}
+      - name: Environment setup
+        run: |
+            uds run actions:setup-environment \
+            --set REGISTRY1_USERNAME="${{ secrets.IRON_BANK_ROBOT_USERNAME }}" \
+            --set REGISTRY1_PASSWORD="${{ secrets.IRON_BANK_ROBOT_PASSWORD }}" \
+            --set GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" \
+            --set CHAINGUARD_IDENTITY="${{ secrets.CHAINGUARD_IDENTITY }}"
+        shell: bash
 
       # Step is not currently being used, could be uncommented if custom image support is needed in the future
       # - name: Build the custom k3s image
