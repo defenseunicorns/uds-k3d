@@ -150,7 +150,7 @@ components:
             path: coreDnsOverrides
       - name: minio
         namespace: uds-dev-stack
-        version: 5.2.0
+        version: 5.3.0
         url: https://charts.min.io/
         valuesFiles:
           - "values/minio-values.yaml"
