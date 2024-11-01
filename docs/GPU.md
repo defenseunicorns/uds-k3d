@@ -2,16 +2,118 @@
 
 UDS K3d comes with optional base images that provide GPU scheduling in the cluster to allow for GPU-accelerated workloads (e.g., LLMs). Currently, UDS K3d only supports NVIDIA CUDA-capable GPUs, with considerations for supporting AMD and other workloads in the future.
 
-## NVIDIA
+## Usage
 
-### Pre-Requisites
+The following usage steps use the `cuda` flavor of the UDS K3d package as an example of how to enable GPU access in a K3d cluster.
 
-### NVIDIA Drivers
+For troubleshooting during UDS K3d deployments, please see each flavor's specific instructions:
+
+1. [`cuda` flavor troubleshooting](#nvidia)
+
+### Local Build and Deployment
+
+To use the NVIDIA CUDA K3s image when bootstrapping a UDS K3d cluster, execute the following:
+
+```bash
+uds run default-cuda
+```
+
+### Remote Package Deployment
+
+To use the NVIDIA CUDA K3s image when bootstrapping a UDS K3d cluster, execute the following:
+
+<!-- x-release-please-start-version -->
+
+```bash
+export PACKAGE_VERSION=0.9.0
+uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:${PACKAGE_VERSION}-cuda --confirm
+```
+
+<!-- x-release-please-end -->
+
+#### Additional Base Images
+
+This repository publishes several variations of the underlying K3d image and CUDA image so that it covers more compatibility cases (e.g., GPU driver versions, K3d versions, etc.). Please see the [published images](https://github.com/defenseunicorns/uds-k3d/pkgs/container/uds-k3d%2Fcuda-k3s) for all possible variations.
+
+Below are some examples of setting these variables to choose a different variation at deploy-time:
+
+```bash
+uds run default-cuda --set K3S_IMAGE_VERSION="v1.29.8-k3s1" --set CUDA_IMAGE_VERSION="12.1.0-base-ubuntu22.04"
+# OR
+uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:${PACKAGE_VERSION}-cuda --confirm --set K3S_IMAGE_VERSION="v1.31.0-k3s1" --set CUDA_IMAGE_VERSION="12.5.0-base-ubuntu22.04"
+# OR
+uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:${PACKAGE_VERSION}-cuda --confirm --set K3S_IMAGE_VERSION="v1.29.8-k3s1" --set CUDA_IMAGE_VERSION="11.8.0-base-ubuntu22.04"
+```
+
+### Tests
+
+This repository includes two CUDA workload tests that can be executed:
+
+```bash
+uds run validate-cuda # device info query
+uds run validate-cuda --set CUDA_TEST="cuda-vector-add" # vector addition
+```
+
+### UDS Core
+
+Deploying UDS Core with a UDS K3d cluster capable of GPU support without building your own UDS bundle, that includes UDS K3d's GPU flavors and UDS Core, requires some extra argument in the UDS CLI. Below are examples of deploying the [full UDS Core](#core) and the [developer version of UDS Core](#core-slim-dev).
+
+### Core
+
+To deploy the full set of UDS Core services on top of UDS K3d `cuda`, you can run the following commands:
+
+<!-- x-release-please-end -->
+
+```bash
+export PACKAGE_VERSION=0.9.0
+uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:${PACKAGE_VERSION}-cuda --confirm
+# fill-in with your desired UDS Core version and flavor
+uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds/core:${UDS_CORE_VERSION}-${UDS_CORE_FLAVOR} --confirm
+```
+
+<!-- x-release-please-end -->
+
+### Core Slim Dev
+
+Since the slim development version of UDS Core is only published as a bundle, the `cuda` version of the UDS K3d Zarf package cannot be used directly; therefore, the K3d arguments and NVIDIA GPU operator deployment that are normally handled automatically within this [Zarf package](../zarf.yaml) must be done manually.
+
+To allow GPU access in a UDS Core slim development cluster, the base k3s-cuda image published by this repository must be passed into the bundle deployment command and a separate deployment of one of the following options:
+
+1. [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin)
+2. [NVIDIA GPU Operator](https://github.com/NVIDIA/gpu-operator)
+
+To deploy the slim development set of UDS Core services on top of UDS K3d `cuda`, you can run the following commands:
+
+```bash
+# fill-in with your desired UDS Core version
+# fill-in with your desired k3s-CUDA image published by this repository
+uds deploy k3d-core-slim-dev:${UDS_CORE_SLIM_DEV_VERSION} --set K3D_EXTRA_ARGS="--gpus=all --image=${K3S_CUDA_IMAGE}" --confirm
+
+# OPTION #1: use the NVIDIA Device Plugin from upstream - fill-in the desired version
+uds zarf tools kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/${NVIDIA_DEVICE_PLUGIN_VERSION}/deployments/static/nvidia-device-plugin.yml
+
+# OPTION #2: use the NVIDIA GPU Operator's helm repository with this UDS K3d's NVIDIA GPU Operator values file
+#            this options requires helm to be locally installed and for the aforementioned values file to be available
+helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+helm repo update
+helm install --wait --generate-name \
+    -n kube-system \
+    --values values/nvidia-gpu-operator-values.yaml \
+    nvidia/gpu-operator
+```
+
+## Troubleshooting
+
+### NVIDIA
+
+#### NVIDIA Pre-Requisites
+
+##### NVIDIA Drivers
 
 - Ensure that the proper [NVIDIA drivers](https://www.nvidia.com/download/index.aspx) are installed (>=525.60).
 - Follow the [driver download](https://www.nvidia.com/download/index.aspx) by identifying your hardware from the provided list.
 
-### NVIDIA Container Toolkit
+##### NVIDIA Container Toolkit
 
 - [Read the pre-requisites for installation and follow the instructions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt) to download and install the NVIDIA container toolkit (>=1.14).
 - After the successful installation off the toolkit, follow the [toolkit instructions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#configuring-docker) to verify that your default Docker runtime is configured for NVIDIA:
@@ -40,54 +142,6 @@ UDS K3d comes with optional base images that provide GPU scheduling in the clust
   # the expected output should be similar to: `Default Runtime: nvidia`
   docker info | grep "Default Runtime"
   ```
-
-### Usage
-
-#### Local Build and Deployment
-
-To use the NVIDIA CUDA K3s image when bootstrapping a UDS K3d cluster, execute the following:
-
-```bash
-uds run default-cuda
-```
-
-#### Remote Package Deployment
-
-To use the NVIDIA CUDA K3s image when bootstrapping a UDS K3d cluster, execute the following:
-
-<!-- x-release-please-start-version -->
-
-```bash
-export PACKAGE_VERSION=0.9.0
-uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:${PACKAGE_VERSION}-cuda --confirm
-```
-
-<!-- x-release-please-end -->
-
-##### Additional Base Images
-
-This repository publishes several variations of the underlying K3d image and CUDA image so that it covers more compatibility cases (e.g., GPU driver versions, K3d versions, etc.). Please see the [published images](https://github.com/defenseunicorns/uds-k3d/pkgs/container/uds-k3d%2Fcuda-k3s) for all possible variations.
-
-Below are some examples of setting these variables to choose a different variation at deploy-time:
-
-```bash
-uds run default-cuda --set K3S_IMAGE_VERSION="v1.29.8-k3s1" --set CUDA_IMAGE_VERSION="12.1.0-base-ubuntu22.04"
-# OR
-uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:${PACKAGE_VERSION}-cuda --confirm --set K3S_IMAGE_VERSION="v1.31.0-k3s1" --set CUDA_IMAGE_VERSION="12.5.0-base-ubuntu22.04"
-# OR
-uds zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:${PACKAGE_VERSION}-cuda --confirm --set K3S_IMAGE_VERSION="v1.29.8-k3s1" --set CUDA_IMAGE_VERSION="11.8.0-base-ubuntu22.04"
-```
-
-#### Tests
-
-This repository includes two CUDA workload tests that can be executed:
-
-```bash
-uds run validate-cuda # device info query
-uds run validate-cuda --set CUDA_TEST="cuda-vector-add" # vector addition
-```
-
-### Troubleshooting
 
 #### NVML Errors or Missing CUDA Dependencies
 
