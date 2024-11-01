@@ -90,7 +90,7 @@ To deploy the slim development set of UDS Core services on top of UDS K3d `cuda`
 uds deploy k3d-core-slim-dev:${UDS_CORE_SLIM_DEV_VERSION} --set K3D_EXTRA_ARGS="--gpus=all --image=${K3S_CUDA_IMAGE}" --confirm
 
 # OPTION #1: use the NVIDIA Device Plugin from upstream - fill-in the desired version
-uds zarf tools kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/${NVIDIA_DEVICE_PLUGIN_VERSION}/deployments/static/nvidia-device-plugin.yml
+uds zarf tools kubectl create -f https://raw.githubusercontent.com/defenseunicorns/leapfrogai/refs/heads/main/packages/k3d-gpu/plugin/device-plugin-daemonset.yaml
 
 # OPTION #2: use the NVIDIA GPU Operator's helm repository with this UDS K3d's NVIDIA GPU Operator values file
 #            this options requires helm to be locally installed and for the aforementioned values file to be available
