@@ -1,3 +1,6 @@
+includes:
+  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.2.2/tasks/actions.yaml
+
 variables:
   - name: VERSION
     default: "v1.30.4-k3s1"
