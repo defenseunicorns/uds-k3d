@@ -16,8 +16,7 @@
     {
       "matchFileNames": [".github/workflows/**", ".github/actions/**"],
       "groupName": "githubactions",
-      "commitMessageTopic": "githubactions",
-      "pinDigests": true
+      "commitMessageTopic": "githubactions"
     }
   ]
 }
