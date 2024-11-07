@@ -8,13 +8,21 @@
   ],
   "packageRules": [
     {
-      "matchFileNames": ["chart/**", "zarf.yaml"],
-      "excludePackageNames": ["rancher/k3s"],
+      "matchFileNames": [
+        "chart/**",
+        "zarf.yaml"
+      ],
       "groupName": "dev-stack",
-      "commitMessageTopic": "dev-stack"
+      "commitMessageTopic": "dev-stack",
+      "matchPackageNames": [
+        "!rancher/k3s"
+      ]
     },
     {
-      "matchFileNames": [".github/workflows/**", ".github/actions/**"],
+      "matchFileNames": [
+        ".github/workflows/**",
+        ".github/actions/**"
+      ],
       "groupName": "githubactions",
       "commitMessageTopic": "githubactions"
     }
