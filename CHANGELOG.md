@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.9.0...v0.10.0) (2024-11-07)
+
+
+### Features
+
+* add ability to support additional gateway/domain ([#115](https://github.com/defenseunicorns/uds-k3d/issues/115)) ([4c62e6c](https://github.com/defenseunicorns/uds-k3d/commit/4c62e6ce11de8ad39e98e2cb7990fe56f17192da))
+* implement graceful, modifiable CoreDNS helm overrides ([#112](https://github.com/defenseunicorns/uds-k3d/issues/112)) ([7fe1876](https://github.com/defenseunicorns/uds-k3d/commit/7fe1876859af840e47ff1acc03b93733748cd4f9))
+
+
+### Bug Fixes
+
+* port uds-common/setup action ([#121](https://github.com/defenseunicorns/uds-k3d/issues/121)) ([b2ed83f](https://github.com/defenseunicorns/uds-k3d/commit/b2ed83f1fd6b5bb0fa759a39cb41cfef0b36be03))
+
+
+### Miscellaneous
+
+* allow volumeexpansion in localpath storageclass ([#111](https://github.com/defenseunicorns/uds-k3d/issues/111)) ([4d0fb5c](https://github.com/defenseunicorns/uds-k3d/commit/4d0fb5cae7c7ab0a0f971a4df07e5ab36ec90516))
+* **config:** migrate config renovate.json ([#123](https://github.com/defenseunicorns/uds-k3d/issues/123)) ([6b4d5a6](https://github.com/defenseunicorns/uds-k3d/commit/6b4d5a6651fcfa6ffeb8d99c76ee2e323382379e))
+* **deps:** update dev-stack ([#114](https://github.com/defenseunicorns/uds-k3d/issues/114)) ([5b4f5ec](https://github.com/defenseunicorns/uds-k3d/commit/5b4f5ec6bf5c98c52b8d3d000ab29ca2e56cc4de))
+* **deps:** update githubactions ([#110](https://github.com/defenseunicorns/uds-k3d/issues/110)) ([868ace5](https://github.com/defenseunicorns/uds-k3d/commit/868ace5468e7366f44720812cb1203b6d5a69f66))
+* **deps:** update githubactions ([#113](https://github.com/defenseunicorns/uds-k3d/issues/113)) ([0e9cde1](https://github.com/defenseunicorns/uds-k3d/commit/0e9cde12563fced4074157f52cf28e202f07341f))
+* **deps:** update githubactions to 11bd719 ([#119](https://github.com/defenseunicorns/uds-k3d/issues/119)) ([3dccbed](https://github.com/defenseunicorns/uds-k3d/commit/3dccbeda12d45eb3a43b0f850a5e98e116854909))
+* **deps:** update rancher/k3s docker tag to v1.31.2 ([#120](https://github.com/defenseunicorns/uds-k3d/issues/120)) ([49bb437](https://github.com/defenseunicorns/uds-k3d/commit/49bb4378a5c6c18339dc8e354d3eaf4b4108cd0d))
+* **deps:** update uds-common to v0.13.0 ([#107](https://github.com/defenseunicorns/uds-k3d/issues/107)) ([ac3f60d](https://github.com/defenseunicorns/uds-k3d/commit/ac3f60d611e2edf29ca09b404cf70630768fd385))
+* update sha/version reference for action/checkout ([#122](https://github.com/defenseunicorns/uds-k3d/issues/122)) ([3e826bf](https://github.com/defenseunicorns/uds-k3d/commit/3e826bfe7462cfe052d12cd0576ea9343f9d6b76))
+
 ## [0.9.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.8.0...v0.9.0) (2024-09-17)
 
 
