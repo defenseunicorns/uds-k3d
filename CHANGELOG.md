@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.10.0...v0.10.1) (2024-11-08)
+
+
+### Bug Fixes
+
+* workflow permissions for cgr login ([#124](https://github.com/defenseunicorns/uds-k3d/issues/124)) ([8baade6](https://github.com/defenseunicorns/uds-k3d/commit/8baade6b2634d5da9082963f61acf29c269aad49))
+
 ## [0.10.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.9.0...v0.10.0) (2024-11-07)
 
 
