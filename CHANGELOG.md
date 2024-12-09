@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.10.1...v0.10.2) (2024-12-09)
+
+
+### Miscellaneous
+
+* **deps:** update githubactions to v0.19.2 ([#126](https://github.com/defenseunicorns/uds-k3d/issues/126)) ([b2fc29d](https://github.com/defenseunicorns/uds-k3d/commit/b2fc29ddcb42afd79b06f6ba9d60bdda51977208))
+* **deps:** update rancher/k3s docker tag to v1.31.3 ([#127](https://github.com/defenseunicorns/uds-k3d/issues/127)) ([c368a2f](https://github.com/defenseunicorns/uds-k3d/commit/c368a2fc82ca1c0bbbf90ae91f229d1e6713eac6))
+
 ## [0.10.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.10.0...v0.10.1) (2024-11-08)
 
 
