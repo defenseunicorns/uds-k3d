@@ -1,5 +1,7 @@
 extraPorts: []
 
+domain: uds.dev
+
 coreDnsOverrides: |
   rewrite stop {
     name regex (.*\.admin\.uds\.dev) admin-ingressgateway.istio-admin-gateway.svc.cluster.local answer auto
