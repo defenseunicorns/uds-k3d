@@ -1,8 +1,5 @@
 extraPorts: []
 
-domain: "###ZARF_VAR_DOMAIN###"
-adminDomain: "###ZARF_VAR_ADMIN_DOMAIN###"
-
 coreDnsOverrides: |
   rewrite stop {
     name regex (.*\.admin\.uds\.dev) admin-ingressgateway.istio-admin-gateway.svc.cluster.local answer auto
