@@ -1,6 +1,7 @@
 extraPorts: []
 
-domain: uds.dev
+domain: "###ZARF_VAR_DOMAIN###"
+adminDomain: "###ZARF_VAR_ADMIN_DOMAIN###"
 
 coreDnsOverrides: |
   rewrite stop {

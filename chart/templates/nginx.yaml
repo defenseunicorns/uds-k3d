@@ -12,7 +12,7 @@ data:
     stream {
         map $ssl_preread_server_name $selected_upstream {
             hostnames;  
-            *.admin.{{ .Values.domain }} backend_admin;
+            *.{{ .Values.adminDomain }} backend_admin;
             *.{{ .Values.domain }} backend_tenant;
             {{- if .Values.customGateway | default false}}
             *.{{ .Values.customGateway.domainName }} backend_custom_gateway;
