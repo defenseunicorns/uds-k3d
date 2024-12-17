@@ -27,6 +27,13 @@ variables:
     description: "Optionally allow more ports through Nginx (combine with K3D_EXTRA_ARGS '-p <port>:<port>@server:*')"
     default: "[]"
 
+  - name: DOMAIN
+    description: "Cluster domain"
+    default: "uds.dev"
+
+  - name: ADMIN_DOMAIN
+    description: "Domain for admin services, defaults to `admin.DOMAIN`"
+
 components:
   - name: destroy-cluster
     required: true
