@@ -25,7 +25,7 @@ sudo ssh -N -L 80:localhost:80 -L 443:localhost:443 -L 6550:localhost:6550 <your
 
 <!-- x-release-please-start-version -->
 
-`uds zarf package deploy oci://defenseunicorns/uds-k3d:0.10.1`
+`uds zarf package deploy oci://defenseunicorns/uds-k3d:0.11.0`
 
 <!-- x-release-please-end -->
 

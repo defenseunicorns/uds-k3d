@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.11.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.10.1...v0.11.0) (2024-12-18)
+
+
+### Features
+
+* add ability to override nginx domain ([#129](https://github.com/defenseunicorns/uds-k3d/issues/129)) ([3c0a28c](https://github.com/defenseunicorns/uds-k3d/commit/3c0a28cf3cb02d937ba36d589c9dc40f4082561b))
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack to v0.14.9 ([#131](https://github.com/defenseunicorns/uds-k3d/issues/131)) ([c07a957](https://github.com/defenseunicorns/uds-k3d/commit/c07a957eb59bd4b304b775be2688ce082441b77d))
+* **deps:** update githubactions ([#130](https://github.com/defenseunicorns/uds-k3d/issues/130)) ([93be017](https://github.com/defenseunicorns/uds-k3d/commit/93be01765b7a4845358e524d62b647024f072438))
+* **deps:** update githubactions to v0.19.2 ([#126](https://github.com/defenseunicorns/uds-k3d/issues/126)) ([b2fc29d](https://github.com/defenseunicorns/uds-k3d/commit/b2fc29ddcb42afd79b06f6ba9d60bdda51977208))
+* **deps:** update githubactions to v1.0.1 ([#132](https://github.com/defenseunicorns/uds-k3d/issues/132)) ([ec8caf5](https://github.com/defenseunicorns/uds-k3d/commit/ec8caf50c53f288e3bbba6e24c1d202b99e1a5d8))
+* **deps:** update rancher/k3s docker tag to v1.31.3 ([#127](https://github.com/defenseunicorns/uds-k3d/issues/127)) ([c368a2f](https://github.com/defenseunicorns/uds-k3d/commit/c368a2fc82ca1c0bbbf90ae91f229d1e6713eac6))
+* **deps:** update rancher/k3s docker tag to v1.31.4 ([#133](https://github.com/defenseunicorns/uds-k3d/issues/133)) ([f019107](https://github.com/defenseunicorns/uds-k3d/commit/f0191077973bf39f957f18c78ca07a250211f521))
+
 ## [0.10.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.10.0...v0.10.1) (2024-11-08)
 
 
