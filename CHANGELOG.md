@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.11.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.11.0...v0.11.1) (2025-01-06)
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack to v5.4.0 ([#134](https://github.com/defenseunicorns/uds-k3d/issues/134)) ([58f5dc5](https://github.com/defenseunicorns/uds-k3d/commit/58f5dc55329a5246ee6beb86f1aa299118f072e0))
+
 ## [0.11.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.10.1...v0.11.0) (2024-12-18)
 
 
