@@ -63,6 +63,13 @@ components:
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
         onSuccess:
+          - wait:
+              cluster:
+                kind: deployment
+                condition: available
+                name: coredns
+                namespace: kube-system
+            description: "Wait for CoreDNS to be ready"
           - cmd: |
               echo "You can access this cluster over SSH (note http redirect will redirect to port 80 instead of 8080):"
               echo "ssh -N -L 8080:localhost:80 -L 8443:localhost:443 -L 6550:localhost:6550"
@@ -74,13 +81,6 @@ components:
               echo "k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}"
             description: "Print out information about how to access the cluster remotely"
           # Wait for CoreDNS to be available. This allows slow internet connections to complete before we move on and try to connect to a cluster that may or may not be ready to accept connections. CoreDNS is a deployment we can trust will always be there.
-          - wait:
-              cluster:
-                kind: deployment
-                condition: available
-                name: coredns
-                namespace: kube-system
-            description: "Wait for CoreDNS to be ready"
 
   - name: uds-dev-stack
     required: true
