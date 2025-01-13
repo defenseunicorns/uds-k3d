@@ -81,7 +81,6 @@ components:
                 name: coredns
                 namespace: kube-system
 
-
   - name: uds-dev-stack
     required: true
     description: "Install MetalLB, NGINX, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes"
