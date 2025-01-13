@@ -80,6 +80,7 @@ components:
                 condition: available
                 name: coredns
                 namespace: kube-system
+            description: "Wait for CoreDNS to be ready"
 
   - name: uds-dev-stack
     required: true
