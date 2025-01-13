@@ -65,9 +65,9 @@ components:
         onSuccess:
           - wait:
               cluster:
-                kind: deployment
-                condition: available
-                name: coredns
+                kind: Pod
+                condition: Ready
+                name: "k8s-app=kube-dns"
                 namespace: kube-system
             description: "Wait for CoreDNS to be ready"
           - cmd: |
