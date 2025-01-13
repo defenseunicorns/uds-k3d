@@ -63,6 +63,7 @@ components:
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
         onSuccess:
+          # Wait for CoreDNS to be available. This allows slow internet connections to complete before we move on and try to connect to a cluster that may or may not be ready to accept connections. CoreDNS is a deployment we can trust will always be there.
           - wait:
               cluster:
                 kind: Pod
@@ -80,7 +81,6 @@ components:
               echo "This cluster can be destroyed with:"
               echo "k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}"
             description: "Print out information about how to access the cluster remotely"
-          # Wait for CoreDNS to be available. This allows slow internet connections to complete before we move on and try to connect to a cluster that may or may not be ready to accept connections. CoreDNS is a deployment we can trust will always be there.
 
   - name: uds-dev-stack
     required: true
