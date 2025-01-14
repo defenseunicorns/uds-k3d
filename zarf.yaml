@@ -51,9 +51,9 @@ components:
       onDeploy:
         before:
           - cmd: |
-              k3d_version=$(k3d version | awk '/k3d version/ {print $3}' | sed 's/^v//')
+              k3d_version=$(k3d version | grep -E -o "([0-9]+\.?){3}$")
               required_version="5.7.1"
-              if [ "$(printf "%s\n%s" "$required_version" "$k3d_version" | sort -V | head -n 1)" != "$required_version" ]; then
+              if ! echo "$required_version\n$k3d_version" | sort -V -C; then
                 echo "This package requires a minimum k3d version of $required_version"
                 echo "Please upgrade k3d (https://k3d.io/stable/#install-current-latest-release) and try again"
                 exit 1
