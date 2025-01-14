@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.12.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.11.0...v0.12.0) (2025-01-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* This package will now strictly enforce a k3d version of 5.7.1 or higher during deployment. While this will cause failures where it wouldn't have before, this aligns with the minimum known working k3d version that is compatible with the package defaults.
+
+### Bug Fixes
+
+* Add a wait after deploying the k3d cluster so that slow internet connections don't get errors ([#138](https://github.com/defenseunicorns/uds-k3d/issues/138)) ([b07531f](https://github.com/defenseunicorns/uds-k3d/commit/b07531f10e534bab4ed35219d21a359b997cf4e2))
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack to v5.4.0 ([#134](https://github.com/defenseunicorns/uds-k3d/issues/134)) ([58f5dc5](https://github.com/defenseunicorns/uds-k3d/commit/58f5dc55329a5246ee6beb86f1aa299118f072e0))
+* **deps:** update rancher/k3s docker tag to v1.32.0 ([#136](https://github.com/defenseunicorns/uds-k3d/issues/136)) ([b358253](https://github.com/defenseunicorns/uds-k3d/commit/b358253ddba39bc5003a6d5f760aa81c8cfc6eb9))
+* upgrade k3s version, add k3d version check (https://github.com/defenseunicorns/uds-k3d/pull/140) ([855a99c](https://github.com/defenseunicorns/uds-k3d/commit/855a99c73479d7959774f1d3864a1c9d2236e849))
+
 ## [0.11.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.10.1...v0.11.0) (2024-12-18)
 
 
