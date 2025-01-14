@@ -17,7 +17,7 @@ variables:
 
   - name: K3D_IMAGE
     description: "K3d image to use"
-    default: "rancher/k3s:v1.30.4-k3s1"
+    default: "rancher/k3s:v1.31.4-k3s1"
 
   - name: K3D_EXTRA_ARGS
     description: "Optionally pass k3d arguments to the default"
@@ -50,6 +50,15 @@ components:
     actions:
       onDeploy:
         before:
+          - cmd: |
+              k3d_version=$(k3d version | grep -E -o "([0-9]+\.?){3}$")
+              required_version="5.7.1"
+              if ! echo "$required_version\n$k3d_version" | sort -V -C; then
+                echo "This package requires a minimum k3d version of $required_version"
+                echo "Please upgrade k3d (https://k3d.io/stable/#install-current-latest-release) and try again"
+                exit 1
+              fi
+            description: "Check k3d version compatibility"
           - cmd: |
               k3d cluster create \
               -p "80:80@server:*" \
