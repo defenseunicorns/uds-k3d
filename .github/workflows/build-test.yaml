@@ -47,3 +47,7 @@ jobs:
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
+
+      - name: Debug Output
+        if: ${{ always() }}
+        uses: ./.github/actions/debug-output
