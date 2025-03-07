@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         image: ["rancher/k3s"]
-        version: ["v1.30.8-k3s1", "v1.31.4-k3s1", "v1.32.0-k3s1"]
+        version: ["v1.30.10-k3s1", "v1.31.6-k3s1", "v1.32.2-k3s1"]
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -47,3 +47,7 @@ jobs:
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
+
+      - name: Debug Output
+        if: ${{ always() }}
+        uses: ./.github/actions/debug-output
