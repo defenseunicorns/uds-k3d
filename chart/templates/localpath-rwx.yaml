@@ -116,7 +116,5 @@ data:
     spec:
       containers:
       - name: helper-pod
-        image: busybox
+        image: cgr.dev/chainguard/busybox:latest
         imagePullPolicy: IfNotPresent
-
-
