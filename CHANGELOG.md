@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.12.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.0...v0.12.1) (2025-03-27)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.11.0 ([#152](https://github.com/defenseunicorns/uds-k3d/issues/152)) ([2114584](https://github.com/defenseunicorns/uds-k3d/commit/21145848327f51ca662a9e86a10b74742fd221fd))
+* **deps:** update dependency defenseunicorns/uds-common to v1.11.1 ([#154](https://github.com/defenseunicorns/uds-k3d/issues/154)) ([a14303d](https://github.com/defenseunicorns/uds-k3d/commit/a14303d059462435c84db6bfc4fb6fb566aa8ee8))
+* **deps:** update dev-stack to v0.0.31 ([#141](https://github.com/defenseunicorns/uds-k3d/issues/141)) ([c7939e4](https://github.com/defenseunicorns/uds-k3d/commit/c7939e4e1d2f62210ec82a81b497def9b123c661))
+* **deps:** update githubactions ([#145](https://github.com/defenseunicorns/uds-k3d/issues/145)) ([d6ae168](https://github.com/defenseunicorns/uds-k3d/commit/d6ae168a7d5fe9c593e3bd148437e6b0e4580feb))
+* **deps:** update githubactions ([#146](https://github.com/defenseunicorns/uds-k3d/issues/146)) ([28406dd](https://github.com/defenseunicorns/uds-k3d/commit/28406dd77fc0054ce39f113fb03d760abbd4de71))
+* **deps:** update githubactions ([#151](https://github.com/defenseunicorns/uds-k3d/issues/151)) ([bdb2827](https://github.com/defenseunicorns/uds-k3d/commit/bdb2827f8606393f990fb7625cc3916d9195075b))
+* **deps:** update githubactions to v4.1.4 ([#148](https://github.com/defenseunicorns/uds-k3d/issues/148)) ([c183858](https://github.com/defenseunicorns/uds-k3d/commit/c183858d42c25a7bbbd5d5d3b5750c620522627c))
+* **deps:** update githubactions to v4.1.5 ([#149](https://github.com/defenseunicorns/uds-k3d/issues/149)) ([28ef31e](https://github.com/defenseunicorns/uds-k3d/commit/28ef31e985d2461d8f7a226de50e7a5c470f23a2))
+* **deps:** update placeholder ([#143](https://github.com/defenseunicorns/uds-k3d/issues/143)) ([2c5bd26](https://github.com/defenseunicorns/uds-k3d/commit/2c5bd2634fcb237b86a90bc2d7594ddbe0b8c10b))
+* **deps:** update rancher/k3s docker tag to v1.32.2 ([#147](https://github.com/defenseunicorns/uds-k3d/issues/147)) ([f8ae305](https://github.com/defenseunicorns/uds-k3d/commit/f8ae3054a08377b10ea9c209d4222bccfd431256))
+* **deps:** update rancher/k3s docker tag to v1.32.3 ([#153](https://github.com/defenseunicorns/uds-k3d/issues/153)) ([11ff3a5](https://github.com/defenseunicorns/uds-k3d/commit/11ff3a5e042391241e902a0aac69a1e217c10694))
+* switch to cgr busybox ([#155](https://github.com/defenseunicorns/uds-k3d/issues/155)) ([378914a](https://github.com/defenseunicorns/uds-k3d/commit/378914aae77cd17affa9cab31c2c0220e516f624))
+* update to k3s 1.31.6 by default ([#150](https://github.com/defenseunicorns/uds-k3d/issues/150)) ([0038feb](https://github.com/defenseunicorns/uds-k3d/commit/0038febf2f9b9644799eec5004f83cd7dfe2e261))
+* use k3s 1.31.7 by default ([#156](https://github.com/defenseunicorns/uds-k3d/issues/156)) ([30a0b0f](https://github.com/defenseunicorns/uds-k3d/commit/30a0b0f98748b546df3f89c3f03558e541826d10))
+
 ## [0.12.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.11.0...v0.12.0) (2025-01-14)
 
 
