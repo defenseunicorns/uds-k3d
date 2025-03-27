@@ -118,3 +118,7 @@ data:
       - name: helper-pod
         image: cgr.dev/chainguard/busybox:latest
         imagePullPolicy: IfNotPresent
+        # This runs as root to have permissions on the host filesystem
+        securityContext:
+          runAsUser: 0
+          runAsGroup: 0
