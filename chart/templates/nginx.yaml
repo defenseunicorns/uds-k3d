@@ -5,11 +5,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   nginx.conf: |
-    # The stream module is dynamically loaded in the Chainguard nginx image.
-    # This directive is required to use the stream{} block for SNI-based routing without SSL termination.
-    # The module is installed via apk in the container startup command.
-    load_module /usr/lib/nginx/modules/ngx_stream_module.so;
-
     events {
         worker_connections  1024;
     }
@@ -69,6 +64,8 @@ data:
       }
     }
 
+    pid /tmp/nginx.pid;
+
     error_log /dev/stderr;
 
 ---
@@ -89,14 +86,9 @@ spec:
     spec:
       containers:
         - name: nginx
-          # This is Chainguard's latest-dev image, pinned as of 04/07/25 - nginx/1.27.4
-          image: cgr.dev/chainguard/nginx:latest-dev@sha256:de240fb7bf27fd62ddbe4f81c592bc1d385210a59f14e292548d3790038b7e6a
-          command:
-            - /bin/sh
-            - -c
-            - |
-              apk add nginx-mod-stream
-              nginx -g "daemon off;"
+          # This is pulled from quay.io to avoid rate limiting
+          image: quay.io/nginx/nginx-unprivileged:1.27.4-alpine3.21
+          command: ["nginx", "-g", "daemon off;"]
           ports:
             - containerPort: 80
               hostPort: 80
@@ -106,9 +98,6 @@ spec:
             - containerPort: {{ . }}
               hostPort: {{ . }}
           {{- end }}
-          securityContext:
-            # Required for `apk add` during startup, matches upstream image
-            runAsUser: 0
           volumeMounts:
             - name: config-volume
               mountPath: /etc/nginx/nginx.conf
