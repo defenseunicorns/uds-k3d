@@ -64,6 +64,7 @@ data:
       }
     }
 
+    # The unprivileged nginx image requires the PID to be in /tmp (https://github.com/nginx/docker-nginx-unprivileged)
     pid /tmp/nginx.pid;
 
     error_log /dev/stderr;
