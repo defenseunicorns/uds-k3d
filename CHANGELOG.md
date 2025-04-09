@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.12.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.1...v0.12.2) (2025-04-09)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.11.2 ([#157](https://github.com/defenseunicorns/uds-k3d/issues/157)) ([5fa71c2](https://github.com/defenseunicorns/uds-k3d/commit/5fa71c20643815bb088e8a78c0551eac2c0aa811))
+* **deps:** update dependency defenseunicorns/uds-common to v1.12.0 ([#159](https://github.com/defenseunicorns/uds-k3d/issues/159)) ([1467cca](https://github.com/defenseunicorns/uds-k3d/commit/1467ccad61c3c7a590d7eb4c039f4214836944ac))
+* **deps:** update dependency defenseunicorns/uds-common to v1.13.0 ([#161](https://github.com/defenseunicorns/uds-k3d/issues/161)) ([5659569](https://github.com/defenseunicorns/uds-k3d/commit/56595690eca6d2b2964b3df2f6f6f94ba8fc17a6))
+* **deps:** update githubactions to v0.26.1 ([#162](https://github.com/defenseunicorns/uds-k3d/issues/162)) ([2289530](https://github.com/defenseunicorns/uds-k3d/commit/228953032ccbf2f11af1628896c4a9409bcafebb))
+* update minio, switch to quay nginx ([#160](https://github.com/defenseunicorns/uds-k3d/issues/160)) ([1203d08](https://github.com/defenseunicorns/uds-k3d/commit/1203d08990bd4b0bd745d4aa4591b01ce69ea26c))
+
 ## [0.12.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.0...v0.12.1) (2025-03-27)
 
 
