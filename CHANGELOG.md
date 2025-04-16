@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.12.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.2...v0.12.3) (2025-04-16)
+
+
+### Bug Fixes
+
+* set temp paths to /tmp dir ([#166](https://github.com/defenseunicorns/uds-k3d/issues/166)) ([8b49db3](https://github.com/defenseunicorns/uds-k3d/commit/8b49db375e1f9d5f85a6a355fb12c279ee6ea345))
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.14.0 ([#163](https://github.com/defenseunicorns/uds-k3d/issues/163)) ([06741f3](https://github.com/defenseunicorns/uds-k3d/commit/06741f333e7b5df215b5617f79d7a5bacbf12fb5))
+* **deps:** update dependency defenseunicorns/uds-common to v1.14.1 ([#165](https://github.com/defenseunicorns/uds-k3d/issues/165)) ([f7bc8dd](https://github.com/defenseunicorns/uds-k3d/commit/f7bc8dd7c05c5fddfbda8deb237441085369951b))
+* **deps:** update githubactions to v0.26.2 ([#167](https://github.com/defenseunicorns/uds-k3d/issues/167)) ([f1172de](https://github.com/defenseunicorns/uds-k3d/commit/f1172deeda77f71253c51adc72d1e800b9c69c04))
+
 ## [0.12.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.1...v0.12.2) (2025-04-09)
 
 
