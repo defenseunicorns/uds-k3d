@@ -62,6 +62,13 @@ data:
           server_name _;
           return 301 https://$host$request_uri;
       }
+
+      # The unprivileged nginx image requires the tmp paths to be in /tmp (https://github.com/nginx/docker-nginx-unprivileged)
+      client_body_temp_path /tmp/client_temp;
+      proxy_temp_path       /tmp/proxy_temp_path;
+      fastcgi_temp_path     /tmp/fastcgi_temp;
+      uwsgi_temp_path       /tmp/uwsgi_temp;
+      scgi_temp_path        /tmp/scgi_temp;
     }
 
     # The unprivileged nginx image requires the PID to be in /tmp (https://github.com/nginx/docker-nginx-unprivileged)
