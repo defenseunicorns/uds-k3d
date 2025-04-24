@@ -1,5 +1,5 @@
 includes:
-  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.14.1/tasks/actions.yaml
+  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.14.2/tasks/actions.yaml
 
 variables:
   - name: VERSION
