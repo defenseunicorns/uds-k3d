@@ -33,6 +33,10 @@ variables:
 
   - name: ADMIN_DOMAIN
     description: "Domain for admin services, defaults to `admin.DOMAIN`"
+  
+  - name: AIRGAP_DEPLOY
+    description: "Deploy the bundle in airgap mode. NOT INTENDED FOR PRODUCTION"
+    default: "false"
 
 components:
   - name: destroy-cluster
@@ -60,6 +64,17 @@ components:
       onDeploy:
         before:
           - cmd: |
+              if [ "${ZARF_VAR_AIRGAP_DEPLOY}" = "true" ]; then
+                echo ""
+                echo "###################################################"
+                echo "#                                                 #"
+                echo "#      BUNDLE BEING DEPLOYED IN AIRGAP MODE       #"
+                echo "#    THIS IS NOT MEANT TO BE USED IN PRODUCTION   #"
+                echo "#                                                 #"
+                echo "###################################################"
+                echo ""
+              fi
+          - cmd: |
               k3d_version=$(k3d version | grep -E -o "([0-9]+\.?){3}$")
               required_version="5.7.1"
               if ! echo "$required_version\n$k3d_version" | sort -V -C; then
@@ -69,6 +84,11 @@ components:
               fi
             description: "Check k3d version compatibility"
           - cmd: |
+              VOLUME_MOUNT=""
+              if [ "${ZARF_VAR_AIRGAP_DEPLOY}" = "true" ]; then
+                export K3D_HELPER_IMAGE_TAG=5.8.3
+                VOLUME_MOUNT="--volume k3s-airgap-images:/var/lib/rancher/k3s/agent/images"
+              fi
               k3d cluster create \
               -p "80:80@server:*" \
               -p "443:443@server:*" \
@@ -78,7 +98,7 @@ components:
               --k3s-arg "--disable=servicelb@server:*" \
               --k3s-arg "--disable=local-storage@server:*" \
               --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
-              --volume k3s-airgap-images:/var/lib/rancher/k3s/agent/images \
+              ${VOLUME_MOUNT} \
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
         onSuccess:

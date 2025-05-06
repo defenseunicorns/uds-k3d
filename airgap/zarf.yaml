@@ -66,19 +66,24 @@ components:
             description: Download the airgap 'k3s' arm64 images
       onDeploy:
         after:
-            - cmd: docker image load -i k3s-"###ZARF_PKG_ARCH###".tar
-              description: Load the airgap 'k3s' image into Docker
-            - cmd: docker image load -i k3d-proxy-"###ZARF_PKG_ARCH###".tar
-              description: Load the airgap 'k3d-proxy' image into Docker
-            - cmd: docker image load -i k3d-tools-"###ZARF_PKG_ARCH###".tar
-              description: Load the airgap 'k3d-tools' image into Docker
-            - cmd: docker volume create k3s-airgap-images
-              description: Create the k3s-airgap-images volume
-            - cmd: docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v .:/src rancher/k3s:v1.31.7-k3s1 -c "cp /src/k3s-airgap-images-"###ZARF_PKG_ARCH###".tar.zst /dest"
-              description: Copy the airgap 'k3s' images into the volume
-            - cmd: rm k3s-"###ZARF_PKG_ARCH###".tar k3d-proxy-"###ZARF_PKG_ARCH###".tar k3d-tools-"###ZARF_PKG_ARCH###".tar
-              description: Cleanup the airgap image tars
-
+            - cmd: |
+                if [ "${ZARF_VAR_AIRGAP_DEPLOY}" = "true" ]; then
+                    echo ""
+                    echo "###################################################"
+                    echo "#                                                 #"
+                    echo "#      BUNDLE BEING DEPLOYED IN AIRGAP MODE       #"
+                    echo "#    THIS IS NOT MEANT TO BE USED IN PRODUCTION   #"
+                    echo "#                                                 #"
+                    echo "###################################################"
+                    echo ""
+                    docker image load -i k3s-"###ZARF_PKG_ARCH###".tar
+                    docker image load -i k3d-proxy-"###ZARF_PKG_ARCH###".tar
+                    docker image load -i k3d-tools-"###ZARF_PKG_ARCH###".tar
+                    docker volume create k3s-airgap-images
+                    docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v .:/src rancher/k3s:v1.31.7-k3s1 -c "cp /src/k3s-airgap-images-"###ZARF_PKG_ARCH###".tar.zst /dest"
+                    rm k3s-amd64.tar k3d-proxy-amd64.tar k3d-tools-amd64.tar k3s-arm64.tar k3d-proxy-arm64.tar k3d-tools-arm64.tar k3s-airgap-images-amd64.tar.zst k3s-airgap-images-arm64.tar.zst
+                fi
+              description: Load the airgap images for k3d into Docker
       onRemove:
         before:
           - cmd: docker image rm rancher/k3s:v1.31.7-k3s1 --force
@@ -195,28 +200,29 @@ components:
             description: Pull the 'minio-mc' amd64 image
           - cmd: ./zarf tools registry pull --platform linux/arm64 quay.io/minio/mc:RELEASE.2024-11-21T17-21-54Z minio-mc-arm64.tar
             description: Pull the 'minio-mc' arm64 image
-          
       onDeploy:
         after:
-          - cmd: k3d image load local-path-provisioner-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'local-path-provisioner' image into Docker
-          - cmd: k3d image load busybox-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'busybox' image into Docker
-          - cmd: k3d image load wolfi-base-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'wolfi-base' image into Docker
-          - cmd: k3d image load pause-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'pause' image into Docker
-          - cmd: k3d image load nginx-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'nginx' image into Docker
-          - cmd: k3d image load metallb-controller-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'metallb-controller' image into Docker
-          - cmd: k3d image load metallb-speaker-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'metallb-speaker' image into Docker
-          - cmd: k3d image load minio-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'minio' image into Docker
-          - cmd: k3d image load minio-mc-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'minio-mc' image into Docker
-          - cmd: k3d image load frr-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-            description: Load the airgap 'frr' image into Docker
+          - cmd: |
+              if [ "${ZARF_VAR_AIRGAP_DEPLOY}" = "true" ]; then
+                echo ""
+                echo "###################################################"
+                echo "#                                                 #"
+                echo "#      BUNDLE BEING DEPLOYED IN AIRGAP MODE       #"
+                echo "#    THIS IS NOT MEANT TO BE USED IN PRODUCTION   #"
+                echo "#                                                 #"
+                echo "###################################################"
+                echo ""
+                k3d image load local-path-provisioner-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load busybox-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load wolfi-base-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load pause-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load nginx-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load metallb-controller-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load metallb-speaker-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load minio-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load minio-mc-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load frr-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+              fi
+            description: Load the airgap images for uds-dev-stack into Docker
           - cmd: rm pause-amd64.tar pause-arm64.tar nginx-amd64.tar nginx-arm64.tar wolfi-base-amd64.tar wolfi-base-arm64.tar busybox-amd64.tar busybox-arm64.tar local-path-provisioner-amd64.tar local-path-provisioner-arm64.tar metallb-controller-amd64.tar metallb-controller-arm64.tar metallb-speaker-amd64.tar metallb-speaker-arm64.tar minio-amd64.tar minio-arm64.tar minio-mc-amd64.tar minio-mc-arm64.tar frr-amd64.tar frr-arm64.tar
             description: Cleanup the airgap image tars
