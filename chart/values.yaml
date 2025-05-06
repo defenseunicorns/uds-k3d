@@ -19,3 +19,22 @@ passthrough:
     # e.g.,
     # - mysubdomain
     # - myothersubdomain
+images:
+  nginx:
+    repository: quay.io/nginx/nginx-unprivileged
+    # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
+    tag: "1.28.0-alpine"
+  busybox:
+    repository: cgr.dev/chainguard/busybox
+    tag: "latest"
+  wolfiBase:
+    repository: cgr.dev/chainguard/wolfi-base
+    tag: "latest"
+  pause:
+    repository: registry.k8s.io/pause
+    # renovate: datasource=docker depName=registry.k8s.io/pause
+    tag: "3.10"
+  localPathProvisioner:
+    repository: rancher/local-path-provisioner
+    # renovate: datasource=docker depName=rancher/local-path-provisioner
+    tag:  "v0.0.31"

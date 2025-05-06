@@ -70,3 +70,7 @@ package:
 ### DNS Assumptions
 
 - [DNS Assumptions](docs/DNS.md)
+
+### Airgap Flavor
+
+- [Airgap](docs/AIRGAP.md)

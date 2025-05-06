@@ -6,8 +6,18 @@ on:
       - main
 
 jobs:
+  
+  # Run standard build tests first
+  run-build-test:
+    uses: ./.github/workflows/build-test.yaml
+
+  # Run airgap build tests
+  run-airgap-build-test:
+    uses: ./.github/workflows/airgap-build-test.yaml
+
+  # Only proceed to tag a new version if all tests pass
   tag-new-version:
-    permissions: write-all
+    needs: [run-build-test, run-airgap-build-test]
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release-flag.outputs.release_created }}
@@ -24,6 +34,11 @@ jobs:
     needs: tag-new-version
     if: ${{ needs.tag-new-version.outputs.release_created == 'true'}}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture:
+          - arm64
+          - amd64
 
     permissions:
       contents: read
@@ -50,5 +65,5 @@ jobs:
 
       - name: Publish the capability
         run: |
-          uds zarf package create --confirm -a arm64 -o oci://ghcr.io/defenseunicorns/packages
-          uds zarf package create --confirm -a amd64 -o oci://ghcr.io/defenseunicorns/packages
+          uds zarf package create --confirm -a ${{ matrix.architecture }} -o oci://ghcr.io/defenseunicorns/packages
+          uds zarf package create --confirm -a ${{ matrix.architecture }} --flavor airgap -o oci://ghcr.io/defenseunicorns/packages

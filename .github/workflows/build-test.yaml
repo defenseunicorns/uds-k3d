@@ -6,6 +6,7 @@ on:
       - "**.md"
       - "docs/**"
       - "CODEOWNERS"
+  workflow_call:
 
 permissions:
   id-token: write

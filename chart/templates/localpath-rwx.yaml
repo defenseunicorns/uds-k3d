@@ -56,7 +56,7 @@ spec:
       serviceAccountName: local-path-provisioner-service-account
       containers:
         - name: local-path-provisioner
-          image: rancher/local-path-provisioner:v0.0.31
+          image: {{.Values.images.localPathProvisioner.repository}}:{{.Values.images.localPathProvisioner.tag}}
           imagePullPolicy: IfNotPresent
           command:
             - local-path-provisioner
@@ -116,7 +116,7 @@ data:
     spec:
       containers:
       - name: helper-pod
-        image: cgr.dev/chainguard/busybox:latest
+        image: {{.Values.images.busybox.repository}}:{{.Values.images.busybox.tag}}
         imagePullPolicy: IfNotPresent
         # This runs as root to have permissions on the host filesystem
         securityContext:

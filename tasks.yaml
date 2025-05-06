@@ -28,6 +28,18 @@ tasks:
 
   - name: validate
     actions:
+      - task: validate-coredns
+      - cmd: uds zarf tools download-init --no-progress
+        description: "Download the zarf init package"
+      - task: validate-zarf-init
+
+  - name: validate-airgap
+    actions:
+      - task: validate-coredns
+      - task: validate-zarf-init
+
+  - name: validate-coredns
+    actions:
       - description: Validate coredns is up
         wait:
           cluster:
@@ -38,19 +50,46 @@ tasks:
       - description: Validate coredns is resolving *.uds.dev internally
         cmd: |
           set -e
-          FOO_IP=$(uds zarf tools kubectl run dig-test --image=arunvelsriram/utils -q --restart=Never --rm -i -- dig +short foo.uds.dev)
+          # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
+          FOO_IP=$(kubectl run test --image=quay.io/nginx/nginx-unprivileged:1.28.0-alpine -q --restart=Never --rm -i -- sh -c "getent hosts foo.uds.dev | awk '{print \$1}'")
           if [ "${FOO_IP}" != "127.0.0.1" ]; then
             echo "CoreDNS is resolving foo.uds.dev to host.k3d.internal"
           else
             echo "CoreDNS patch failed, foo.uds.dev is resolving to 127.0.0.1"
             exit 1
           fi
+
+  - name: validate-zarf-init
+    actions:
       - description: Validate zarf init
         cmd: |
           set -e
-          uds zarf tools download-init --no-progress
           # Test zarf init due to containerd issue - https://github.com/defenseunicorns/zarf/issues/592
           uds zarf init --confirm --no-progress
+
+  - name: build-airgap-package
+    actions:
+      - description: Build the airgap package
+        cmd: |
+          uds zarf package create --flavor airgap --confirm --no-progress \
+            --set K3S_VERSION="${VERSION}"
+
+      - description: Clean up airgap images
+        task: clean-airgap-images
+
+  - name: deploy-airgap-package
+    actions:
+      - description: Deploy the airgap package
+        cmd: |
+          uds zarf package deploy zarf-package-uds-k3d-${UDS_ARCH}-*.tar.zst --no-progress --confirm
+
+  - name: clean-airgap-images
+    actions:
+      - description: Remove airgap images
+        cmd: |
+          rm airgap/uds-dev-stack/*.tar
+          rm airgap/k3d/*.tar
+          rm airgap/k3d/*.tar.zst
 
   # - name: build-image
   #   actions:

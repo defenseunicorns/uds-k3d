@@ -1,0 +1,101 @@
+name: Test UDS Airgap Capability
+
+on:
+  pull_request:
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - "CODEOWNERS"
+  workflow_call:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-package:
+    name: Build Airgap Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Install UDS CLI
+        uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
+        with:
+          # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
+          version: v0.27.1
+
+      - name: Environment setup
+        run: |
+            uds run actions:setup-environment \
+            --set REGISTRY1_USERNAME="${{ secrets.IRON_BANK_ROBOT_USERNAME }}" \
+            --set REGISTRY1_PASSWORD="${{ secrets.IRON_BANK_ROBOT_PASSWORD }}" \
+            --set GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" \
+            --set CHAINGUARD_IDENTITY="${{ secrets.CHAINGUARD_IDENTITY }}"
+        shell: bash
+
+      - name: Create the airgap package
+        run: uds run build-airgap-package
+
+      - name: Upload Airgap Package Artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
+        with:
+          name: airgap-package
+          path: ./zarf-package-uds-k3d-*.tar.zst
+
+  deploy-airgap:
+    name: Deploy Airgap Package
+    runs-on: ubuntu-latest
+    needs: build-package # This job depends on the build-package job completing successfully
+
+    steps:
+      - name: Harden Runner - Block Egress
+        uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            github.com
+            objects.githubusercontent.com
+            api.github.com
+            raw.githubusercontent.com
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Download Airgap Package Artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: airgap-package
+          path: ./build
+
+      - name: Install UDS CLI
+        uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
+        with:
+          version: v0.27.1
+      
+      - name: Download Zarf Init Package
+        run: |
+          ZARF_VERSION=$(uds zarf version)
+          curl -L https://github.com/zarf-dev/zarf/releases/download/${ZARF_VERSION}/zarf-init-amd64-${ZARF_VERSION}.tar.zst -o zarf-init-amd64-${ZARF_VERSION}.tar.zst
+
+      - name: Install deps
+        run: |
+          uds run actions:install-deps
+        shell: bash
+
+
+      - name: Deploy the airgap package
+        run: |
+          # Navigate to where the artifact was downloaded
+          cd ./build
+          # Adjust the command to use the downloaded package path
+          uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm --no-progress
+        shell: bash
+      
+      - name: Validate uds-k3d package
+        run: |
+          uds run validate-airgap --no-progress
+        shell: bash
+
+      - name: Debug Output
+        if: ${{ always() }}
+        uses: ./.github/actions/debug-output
