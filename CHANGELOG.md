@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.12.4](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.3...v0.12.4) (2025-05-06)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.14.2 ([#171](https://github.com/defenseunicorns/uds-k3d/issues/171)) ([728ec18](https://github.com/defenseunicorns/uds-k3d/commit/728ec18aa0eeb496236c1809282eba2ff7115fc7))
+* **deps:** update dev-stack to v1.28.0 ([#172](https://github.com/defenseunicorns/uds-k3d/issues/172)) ([e62d52e](https://github.com/defenseunicorns/uds-k3d/commit/e62d52edbb07f9659c25b68b0b7b25e581f8057a))
+* **deps:** update githubactions to v0.27.0 ([#168](https://github.com/defenseunicorns/uds-k3d/issues/168)) ([68711c0](https://github.com/defenseunicorns/uds-k3d/commit/68711c0a298537c51ca02ee629688cb261757bfb))
+* **deps:** update githubactions to v0.27.1 ([#170](https://github.com/defenseunicorns/uds-k3d/issues/170)) ([0a37cc7](https://github.com/defenseunicorns/uds-k3d/commit/0a37cc735d80c96bad262c17de80877c7e9ae329))
+* **deps:** update uds-cli to v0.27.2 ([#175](https://github.com/defenseunicorns/uds-k3d/issues/175)) ([f923702](https://github.com/defenseunicorns/uds-k3d/commit/f923702a552d943a5b3c96636058f77633560a00))
+
 ## [0.12.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.2...v0.12.3) (2025-04-16)
 
 
