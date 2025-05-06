@@ -44,7 +44,16 @@ components:
           - cmd: k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}
             description: "Destroy the cluster"
 
-  - name: create-cluster
+  - name: k3d-airgap-images
+    required: true
+    only:
+      flavor: airgap
+    description: "Load the airgap images into Docker"
+    import:
+      path: airgap 
+      name: k3d-images
+
+  - name: create-cluster-airgap
     required: true
     description: "Create the k3d cluster"
     actions:
@@ -69,6 +78,7 @@ components:
               --k3s-arg "--disable=servicelb@server:*" \
               --k3s-arg "--disable=local-storage@server:*" \
               --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
+              --volume k3s-airgap-images:/var/lib/rancher/k3s/agent/images \
               ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
         onSuccess:
@@ -90,6 +100,15 @@ components:
               echo "This cluster can be destroyed with:"
               echo "k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}"
             description: "Print out information about how to access the cluster remotely"
+
+  - name: uds-dev-stack-airgap-images
+    required: true
+    only:
+      flavor: airgap
+    description: "Load the airgap images into Docker"
+    import:
+      path: airgap 
+      name: uds-dev-stack-images
 
   - name: uds-dev-stack
     required: true

@@ -1,0 +1,222 @@
+kind: ZarfPackageConfig
+metadata:
+  name: airgap
+  yolo: true
+  description: >
+    *** REQUIRES DOCKER ***
+    Loads the required images for K3d into Docker to be used offline.
+
+components:
+  - name: k3d-images
+    files:
+      # Transfer the K3d images for docker to use in the air gap
+      # k3s ARM and AMD
+      - source: k3s-amd64.tar
+        shasum: f289e8d327c5870bfbb50100f549ac55b886655fffc43072b0edd8a6e824bd2a
+        target: k3s-amd64.tar
+
+      - source: k3s-arm64.tar
+        shasum: 2f36e2fcd6314827eb1fca5d9564b204003a8aa4469a2cfae1f11dc6c6c252bd
+        target: k3s-arm64.tar
+
+      # k3d proxy ARM and AMD
+      - source: k3d-proxy-amd64.tar
+        shasum: e8d847902aa318fb6a3432150e58f55ed27076a7cf5511cc2cf7a4924708c074
+        target: k3d-proxy-amd64.tar
+
+      - source: k3d-proxy-arm64.tar
+        shasum: f8fc3a88fb4e7846fda42f647c2a9fa70ecae1fe7e8584d2d6be7749ac632af9
+        target: k3d-proxy-arm64.tar
+
+      # k3d tools ARM and AMD
+      - source: k3d-tools-amd64.tar
+        shasum: 51249a799534a762ec26f159fa4fa4a73e576e0626472dd44e4fe41e3004d9fd
+        target: k3d-tools-amd64.tar
+
+      - source: k3d-tools-arm64.tar
+        shasum: b290184eda65fa55d26e7a896190fb598e0b7fa11a15cf9e32ff917bc041c76c
+        target: k3d-tools-arm64.tar
+
+      # k3s airgap images ARM and AMD
+      - source: k3s-airgap-images-amd64.tar.zst
+        shasum: cc53c0b7edf3b22f7d9811f3773ef32ca70ad9cf798029851471c39c52c9d17b
+        target: k3s-airgap-images-amd64.tar.zst
+
+      - source: k3s-airgap-images-arm64.tar.zst
+        shasum: 9476f2addc604b0ab3f836a3771ddfcb51438533bd6a7d0538145f02d3bbddc2
+        target: k3s-airgap-images-arm64.tar.zst
+    actions:
+      onCreate:
+        before:
+          - cmd: ./zarf tools registry pull --platform linux/amd64 rancher/k3s:v1.31.7-k3s1 k3s-amd64.tar
+            description: Pull the airgap 'k3s' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 rancher/k3s:v1.31.7-k3s1 k3s-arm64.tar
+            description: Pull the airgap 'k3s' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 ghcr.io/k3d-io/k3d-proxy:5.8.3 k3d-proxy-amd64.tar
+            description: Pull the 'k3d-proxy' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 ghcr.io/k3d-io/k3d-proxy:5.8.3 k3d-proxy-arm64.tar
+            description: Pull the 'k3d-proxy' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 ghcr.io/k3d-io/k3d-tools:5.8.3 k3d-tools-amd64.tar
+            description: Pull the 'k3d-tools' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 ghcr.io/k3d-io/k3d-tools:5.8.3 k3d-tools-arm64.tar
+            description: Pull the 'k3d-tools' arm64 image
+          - cmd: curl -L https://github.com/k3s-io/k3s/releases/download/v1.31.7-rc3%2Bk3s1/k3s-airgap-images-amd64.tar.zst -o k3s-airgap-images-amd64.tar.zst
+            description: Download the airgap 'k3s' amd64 images
+          - cmd: curl -L https://github.com/k3s-io/k3s/releases/download/v1.31.7-rc3%2Bk3s1/k3s-airgap-images-arm64.tar.zst -o k3s-airgap-images-arm64.tar.zst
+            description: Download the airgap 'k3s' arm64 images
+      onDeploy:
+        after:
+            - cmd: docker image load -i k3s-"###ZARF_PKG_ARCH###".tar
+              description: Load the airgap 'k3s' image into Docker
+            - cmd: docker image load -i k3d-proxy-"###ZARF_PKG_ARCH###".tar
+              description: Load the airgap 'k3d-proxy' image into Docker
+            - cmd: docker image load -i k3d-tools-"###ZARF_PKG_ARCH###".tar
+              description: Load the airgap 'k3d-tools' image into Docker
+            - cmd: docker volume create k3s-airgap-images
+              description: Create the k3s-airgap-images volume
+            - cmd: docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v .:/src rancher/k3s:v1.31.7-k3s1 -c "cp /src/k3s-airgap-images-"###ZARF_PKG_ARCH###".tar.zst /dest"
+              description: Copy the airgap 'k3s' images into the volume
+            - cmd: rm k3s-"###ZARF_PKG_ARCH###".tar k3d-proxy-"###ZARF_PKG_ARCH###".tar k3d-tools-"###ZARF_PKG_ARCH###".tar
+              description: Cleanup the airgap image tars
+
+      onRemove:
+        before:
+          - cmd: docker image rm rancher/k3s:v1.31.7-k3s1 --force
+            description: Remove the airgap 'k3s' image from Docker
+          - cmd: docker image rm ghcr.io/k3d-io/k3d-proxy:5.8.3 --force
+            description: Remove the 'k3d-proxy' image from Docker
+          - cmd: docker image rm ghcr.io/k3d-io/k3d-tools:5.8.3 --force
+            description: Remove the 'k3d-tools' image from Docker
+          - cmd: rm k3s-airgap-images-"###ZARF_PKG_ARCH###".tar.zst
+            description: Cleanup the airgap k3s images
+
+  - name: uds-dev-stack-images
+    files:
+      - source: local-path-provisioner-amd64.tar
+        shasum: eabd44365bd589f730d0d0dbb3dc432e85098a6fd4c3ae920dbbe5c972ecd24d
+        target: local-path-provisioner-amd64.tar
+      - source: local-path-provisioner-arm64.tar
+        shasum: b85ddc81f868c86b179a58aa0adeff04c08a7087795565c171bf8d469a15708d
+        target: local-path-provisioner-arm64.tar
+      - source: busybox-amd64.tar
+        shasum: 25c682d08a7dadc1ea6cec1bedc68b9829e1a69b535b239542e2e51968f2d47d
+        target: busybox-amd64.tar
+      - source: busybox-arm64.tar
+        shasum: b7c2917a39fec4466f3751ca228e3d735b5e1889eb2fde2de671934800539025
+        target: busybox-arm64.tar
+      - source: wolfi-base-amd64.tar
+        shasum: 45669daf1fbb0a2c2af89638bb902ccbb6bd2488fd8ebd2b9ddea30e622b9e22
+        target: wolfi-base-amd64.tar
+      - source: wolfi-base-arm64.tar
+        shasum: 75d8e47293fc0d65037098bd4a5961f8d39a8c7daa877723bef7468951dab098
+        target: wolfi-base-arm64.tar
+      - source: pause-amd64.tar
+        shasum: 7840d59ba53a0c00b4848fa9e441459fbd5bf326f56eb3d1817e88ed6757064c
+        target: pause-amd64.tar
+      - source: pause-arm64.tar
+        shasum: d0d63426b103d69885cf8ae87f698ef182fb075dfd484734ffcdede0810c105f
+        target: pause-arm64.tar
+      - source: nginx-amd64.tar
+        shasum: 223d8a2232d0fb37ecb156955389801375f83ddccff34da5fdb8c232b5577b23
+        target: nginx-amd64.tar
+      - source: nginx-arm64.tar
+        shasum: 03148b2615ce5895c91e3132e97274e51ed2ddc450fd00ea3ce1cf2009385349
+        target: nginx-arm64.tar
+      - source: metallb-controller-amd64.tar
+        shasum: 74fec046af3c2eeca7fb2d5ce5c29bac86554d5f63caa7250350872dcea2dac1
+        target: metallb-controller-amd64.tar
+      - source: metallb-controller-arm64.tar
+        shasum: c5efdc8de9016d619b299429bc07b39837b869e07cb6fa0490dd3440ae49f880
+        target: metallb-controller-arm64.tar
+      - source: metallb-speaker-amd64.tar
+        shasum: 404048f95d27ddaf3f7dab4e32db1f40e91596f875f2b8841a0cb999e0374abf
+        target: metallb-speaker-amd64.tar
+      - source: metallb-speaker-arm64.tar
+        shasum: b36efd3d55dce65fa3baa6c7636aabdd1b15647a7dd082bd6e1d89317be44b73
+        target: metallb-speaker-arm64.tar
+      - source: frr-amd64.tar
+        shasum: 3c40b2480d9156ebba823a09d246777b6cb74677a043d1e49f587615aa3eace5
+        target: frr-amd64.tar
+      - source: frr-arm64.tar
+        shasum: 7a5db53857feb5d6cbcff6fda05d765ae12729c9179e26fdd3f88150364a16c0
+        target: frr-arm64.tar
+      - source: minio-amd64.tar
+        shasum: b75b506e5f4aa0a54587026b0a462c1bba3e1209e63e145ae46c5e96e1a49813
+        target: minio-amd64.tar
+      - source: minio-arm64.tar
+        shasum: 1c7207fec206d2e14d53d5835bc6528bd0a346cd69b0ef7f119fc0c94f8eae7f
+        target: minio-arm64.tar
+      - source: minio-mc-amd64.tar
+        shasum: 50b930a0fadcda32b48df91001831f194ba75c4d63fa8e1dc2eb4a23810d8dc1
+        target: minio-mc-amd64.tar
+      - source: minio-mc-arm64.tar
+        shasum: 47f380d6d80a8620e4231d9e81e8bf0f0fe83733feac4fd45024cb0ebbe2bcb4
+        target: minio-mc-arm64.tar
+    actions:
+      onCreate:
+        before:
+          - cmd: ./zarf tools registry pull --platform linux/amd64 rancher/local-path-provisioner:v0.0.31 local-path-provisioner-amd64.tar
+            description: Pull the 'local-path-provisioner' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 rancher/local-path-provisioner:v0.0.31 local-path-provisioner-arm64.tar
+            description: Pull the 'local-path-provisioner' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 cgr.dev/chainguard/busybox:latest busybox-amd64.tar
+            description: Pull the 'busybox' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 cgr.dev/chainguard/busybox:latest busybox-arm64.tar
+            description: Pull the 'busybox' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 cgr.dev/chainguard/wolfi-base:latest wolfi-base-amd64.tar
+            description: Pull the 'wolfi-base' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 cgr.dev/chainguard/wolfi-base:latest wolfi-base-arm64.tar
+            description: Pull the 'wolfi-base' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 registry.k8s.io/pause:3.10 pause-amd64.tar
+            description: Pull the 'pause' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 registry.k8s.io/pause:3.10 pause-arm64.tar
+            description: Pull the 'pause' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 quay.io/nginx/nginx-unprivileged:1.28.0-alpine3.21 nginx-amd64.tar
+            description: Pull the 'nginx' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 quay.io/nginx/nginx-unprivileged:1.28.0-alpine3.21 nginx-arm64.tar
+            description: Pull the 'nginx' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 quay.io/metallb/controller:v0.14.9 metallb-controller-amd64.tar
+            description: Pull the 'metallb-controller' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 quay.io/metallb/controller:v0.14.9 metallb-controller-arm64.tar
+            description: Pull the 'metallb-controller' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 quay.io/metallb/speaker:v0.14.9 metallb-speaker-amd64.tar
+            description: Pull the 'metallb-speaker' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 quay.io/metallb/speaker:v0.14.9 metallb-speaker-arm64.tar
+            description: Pull the 'metallb-speaker' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 quay.io/frrouting/frr:9.1.0 frr-amd64.tar
+            description: Pull the 'frr' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 quay.io/frrouting/frr:9.1.0 frr-arm64.tar
+            description: Pull the 'frr' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 quay.io/minio/minio:RELEASE.2025-04-03T14-56-28Z minio-amd64.tar
+            description: Pull the 'minio' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 quay.io/minio/minio:RELEASE.2025-04-03T14-56-28Z minio-arm64.tar
+            description: Pull the 'minio' arm64 image
+          - cmd: ./zarf tools registry pull --platform linux/amd64 quay.io/minio/mc:RELEASE.2024-11-21T17-21-54Z minio-mc-amd64.tar
+            description: Pull the 'minio-mc' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 quay.io/minio/mc:RELEASE.2024-11-21T17-21-54Z minio-mc-arm64.tar
+            description: Pull the 'minio-mc' arm64 image
+          
+      onDeploy:
+        after:
+          - cmd: k3d image load local-path-provisioner-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'local-path-provisioner' image into Docker
+          - cmd: k3d image load busybox-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'busybox' image into Docker
+          - cmd: k3d image load wolfi-base-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'wolfi-base' image into Docker
+          - cmd: k3d image load pause-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'pause' image into Docker
+          - cmd: k3d image load nginx-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'nginx' image into Docker
+          - cmd: k3d image load metallb-controller-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'metallb-controller' image into Docker
+          - cmd: k3d image load metallb-speaker-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'metallb-speaker' image into Docker
+          - cmd: k3d image load minio-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'minio' image into Docker
+          - cmd: k3d image load minio-mc-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'minio-mc' image into Docker
+          - cmd: k3d image load frr-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap 'frr' image into Docker
+          - cmd: rm pause-amd64.tar pause-arm64.tar nginx-amd64.tar nginx-arm64.tar wolfi-base-amd64.tar wolfi-base-arm64.tar busybox-amd64.tar busybox-arm64.tar local-path-provisioner-amd64.tar local-path-provisioner-arm64.tar metallb-controller-amd64.tar metallb-controller-arm64.tar metallb-speaker-amd64.tar metallb-speaker-arm64.tar minio-amd64.tar minio-arm64.tar minio-mc-amd64.tar minio-mc-arm64.tar frr-amd64.tar frr-arm64.tar
+            description: Cleanup the airgap image tars
