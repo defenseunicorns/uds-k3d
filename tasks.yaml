@@ -10,6 +10,8 @@ variables:
     default: ""
   - name: NGINX_EXTRA_PORTS
     default: "[]"
+  - name: ARCH
+    default: ${UDS_ARCH}
 
 tasks:
   - name: default
@@ -52,16 +54,27 @@ tasks:
           # Test zarf init due to containerd issue - https://github.com/defenseunicorns/zarf/issues/592
           uds zarf init --confirm --no-progress
 
-  - name: airgap
+  - name: build-airgap-package
     actions:
       - description: Build the airgap bundle
-        cmd: "uds zarf package create --flavor airgap --confirm --no-progress"
+        cmd: "uds zarf package create --flavor airgap --confirm --no-progress -a ${ARCH}"
+      - description: Clean up airgap images
+        task: clean-airgap-images
 
+  - name: deploy-airgap-package
+    actions:
       - description: Deploy the airgap bundle
         cmd: |
-          uds zarf package deploy zarf-package-uds-k3d-*.tar.zst \
-            --set AIRGAP_DEPLOY=true \
-            --no-progress --confirm
+          uds zarf package deploy zarf-package-uds-k3d-${ARCH}-*.tar.zst --no-progress --confirm
+
+  - name: clean-airgap-images
+    actions:
+      - description: Remove airgap images
+        cmd: |
+          rm airgap/uds-dev-stack/*.tar
+          rm airgap/k3d/*.tar
+          rm airgap/k3d/*.tar.zst
+
   # - name: build-image
   #   actions:
   #     - description: Build the custom k3s image

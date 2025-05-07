@@ -34,10 +34,6 @@ variables:
   - name: ADMIN_DOMAIN
     description: "Domain for admin services, defaults to `admin.DOMAIN`"
   
-  - name: AIRGAP_DEPLOY
-    description: "Deploy the bundle in airgap mode. NOT INTENDED FOR PRODUCTION"
-    default: "false"
-
 components:
   - name: destroy-cluster
     required: true
@@ -48,15 +44,6 @@ components:
           - cmd: k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}
             description: "Destroy the cluster"
 
-  - name: k3s-airgap-images
-    required: true
-    only:
-      flavor: airgap
-    description: "Load the airgap images for k3s into Docker"
-    import:
-      path: airgap/k3s
-      name: k3s-airgap-images
-
   - name: k3d-airgap-images
     required: true
     only:
@@ -66,24 +53,34 @@ components:
       path: airgap/k3d
       name: k3d-airgap-images
     
-
   - name: create-cluster-airgap
+    required: true
+    only:
+      flavor: airgap
+    actions:
+      onDeploy:
+        before:
+          - cmd: |
+              echo ""
+              echo "###################################################"
+              echo "#                                                 #"
+              echo "#      PACKAGE BEING DEPLOYED IN AIRGAP MODE      #"
+              echo "#    THIS IS NOT MEANT TO BE USED IN PRODUCTION   #"
+              echo "#                                                 #"
+              echo "###################################################"
+              echo ""
+          - cmd: echo "true"
+            description: "Set AIRGAP_MODE to true"
+            mute: true
+            setVariables:
+              - name: AIRGAP_MODE
+
+  - name: create-cluster-no-airgap
     required: true
     description: "Create the k3d cluster"
     actions:
       onDeploy:
         before:
-          - cmd: |
-              if [ "${ZARF_VAR_AIRGAP_DEPLOY}" = "true" ]; then
-                echo ""
-                echo "###################################################"
-                echo "#                                                 #"
-                echo "#      BUNDLE BEING DEPLOYED IN AIRGAP MODE       #"
-                echo "#    THIS IS NOT MEANT TO BE USED IN PRODUCTION   #"
-                echo "#                                                 #"
-                echo "###################################################"
-                echo ""
-              fi
           - cmd: |
               k3d_version=$(k3d version | grep -E -o "([0-9]+\.?){3}$")
               required_version="5.7.1"
@@ -95,7 +92,8 @@ components:
             description: "Check k3d version compatibility"
           - cmd: |
               VOLUME_MOUNT=""
-              if [ "${ZARF_VAR_AIRGAP_DEPLOY}" = "true" ]; then
+              if [ "${ZARF_VAR_AIRGAP_MODE}" = "true" ]; then
+                echo "AIRGAP_MODE"
                 export K3D_HELPER_IMAGE_TAG=5.8.3
                 VOLUME_MOUNT="--volume k3s-airgap-images:/var/lib/rancher/k3s/agent/images"
               fi
