@@ -48,14 +48,24 @@ components:
           - cmd: k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}
             description: "Destroy the cluster"
 
+  - name: k3s-airgap-images
+    required: true
+    only:
+      flavor: airgap
+    description: "Load the airgap images for k3s into Docker"
+    import:
+      path: airgap/k3s
+      name: k3s-airgap-images
+
   - name: k3d-airgap-images
     required: true
     only:
       flavor: airgap
-    description: "Load the airgap images into Docker"
+    description: "Load the airgap images for k3d into Docker"
     import:
-      path: airgap 
-      name: k3d-images
+      path: airgap/k3d
+      name: k3d-airgap-images
+    
 
   - name: create-cluster-airgap
     required: true
@@ -127,8 +137,8 @@ components:
       flavor: airgap
     description: "Load the airgap images for uds-dev-stack into Docker"
     import:
-      path: airgap 
-      name: uds-dev-stack-images
+      path: airgap/uds-dev-stack
+      name: uds-dev-stack-airgap-images
 
   - name: uds-dev-stack
     required: true

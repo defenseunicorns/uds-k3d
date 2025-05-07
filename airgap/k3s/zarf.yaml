@@ -1,0 +1,63 @@
+kind: ZarfPackageConfig
+metadata:
+  name: k3s-airgap-images
+  yolo: true
+  description: >
+    *** REQUIRES DOCKER ***
+    Loads the required images for K3s into Docker to be used offline.
+
+components:
+  - name: k3s-airgap-images
+    files:
+      # k3s ARM and AMD
+      - source: k3s-amd64.tar
+        shasum: f289e8d327c5870bfbb50100f549ac55b886655fffc43072b0edd8a6e824bd2a
+        target: k3s-amd64.tar
+
+      - source: k3s-arm64.tar
+        shasum: 2f36e2fcd6314827eb1fca5d9564b204003a8aa4469a2cfae1f11dc6c6c252bd
+        target: k3s-arm64.tar
+
+      # k3s airgap images ARM and AMD
+      - source: k3s-airgap-images-amd64.tar.zst
+        shasum: cc53c0b7edf3b22f7d9811f3773ef32ca70ad9cf798029851471c39c52c9d17b
+        target: k3s-airgap-images-amd64.tar.zst
+
+      - source: k3s-airgap-images-arm64.tar.zst
+        shasum: 9476f2addc604b0ab3f836a3771ddfcb51438533bd6a7d0538145f02d3bbddc2
+        target: k3s-airgap-images-arm64.tar.zst
+    actions:
+      onCreate:
+        before:
+          - cmd: ./zarf tools registry pull --platform linux/amd64 rancher/k3s:v1.31.7-k3s1 k3s-amd64.tar
+            description: Pull the airgap 'k3s' amd64 image
+          - cmd: ./zarf tools registry pull --platform linux/arm64 rancher/k3s:v1.31.7-k3s1 k3s-arm64.tar
+            description: Pull the airgap 'k3s' arm64 image
+          - cmd: curl -L https://github.com/k3s-io/k3s/releases/download/v1.31.7-rc3%2Bk3s1/k3s-airgap-images-amd64.tar.zst -o k3s-airgap-images-amd64.tar.zst
+            description: Download the airgap 'k3s' amd64 images
+          - cmd: curl -L https://github.com/k3s-io/k3s/releases/download/v1.31.7-rc3%2Bk3s1/k3s-airgap-images-arm64.tar.zst -o k3s-airgap-images-arm64.tar.zst
+            description: Download the airgap 'k3s' arm64 images
+      onDeploy:
+        after:
+            - cmd: |
+                if [ "${ZARF_VAR_AIRGAP_DEPLOY}" = "true" ]; then
+                    echo ""
+                    echo "###################################################"
+                    echo "#                                                 #"
+                    echo "#      BUNDLE BEING DEPLOYED IN AIRGAP MODE       #"
+                    echo "#    THIS IS NOT MEANT TO BE USED IN PRODUCTION   #"
+                    echo "#                                                 #"
+                    echo "###################################################"
+                    echo ""
+                    docker image load -i k3s-"###ZARF_PKG_ARCH###".tar
+                    docker volume create k3s-airgap-images
+                    docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v .:/src rancher/k3s:v1.31.7-k3s1 -c "cp /src/k3s-airgap-images-"###ZARF_PKG_ARCH###".tar.zst /dest"
+                    rm k3s-amd64.tar k3s-arm64.tar k3s-airgap-images-amd64.tar.zst k3s-airgap-images-arm64.tar.zst
+                fi
+              description: Load the airgap images for k3s into Docker
+      onRemove:
+        before:
+          - cmd: docker image rm rancher/k3s:v1.31.7-k3s1 --force
+            description: Remove the airgap 'k3s' image from Docker
+          - cmd: rm k3s-airgap-images-"###ZARF_PKG_ARCH###".tar.zst
+            description: Cleanup the airgap k3s images
