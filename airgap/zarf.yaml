@@ -212,16 +212,17 @@ components:
                 echo "#                                                 #"
                 echo "###################################################"
                 echo ""
-                k3d image load local-path-provisioner-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load busybox-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load wolfi-base-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load pause-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load nginx-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load metallb-controller-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load metallb-speaker-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load minio-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load minio-mc-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
-                k3d image load frr-"###ZARF_PKG_ARCH###".tar -c ${ZARF_VAR_CLUSTER_NAME}
+                k3d image load local-path-provisioner-"###ZARF_PKG_ARCH###".tar \
+                  busybox-"###ZARF_PKG_ARCH###".tar \
+                  wolfi-base-"###ZARF_PKG_ARCH###".tar \
+                  pause-"###ZARF_PKG_ARCH###".tar \
+                  nginx-"###ZARF_PKG_ARCH###".tar \
+                  metallb-controller-"###ZARF_PKG_ARCH###".tar \
+                  metallb-speaker-"###ZARF_PKG_ARCH###".tar \
+                  minio-"###ZARF_PKG_ARCH###".tar \
+                  minio-mc-"###ZARF_PKG_ARCH###".tar \
+                  frr-"###ZARF_PKG_ARCH###".tar \
+                  -c ${ZARF_VAR_CLUSTER_NAME}
               fi
             description: Load the airgap images for uds-dev-stack into Docker
           - cmd: rm pause-amd64.tar pause-arm64.tar nginx-amd64.tar nginx-arm64.tar wolfi-base-amd64.tar wolfi-base-arm64.tar busybox-amd64.tar busybox-arm64.tar local-path-provisioner-amd64.tar local-path-provisioner-arm64.tar metallb-controller-amd64.tar metallb-controller-arm64.tar metallb-speaker-amd64.tar metallb-speaker-arm64.tar minio-amd64.tar minio-arm64.tar minio-mc-amd64.tar minio-mc-arm64.tar frr-amd64.tar frr-arm64.tar

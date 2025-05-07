@@ -125,7 +125,7 @@ components:
     required: true
     only:
       flavor: airgap
-    description: "Load the airgap images into Docker"
+    description: "Load the airgap images for uds-dev-stack into Docker"
     import:
       path: airgap 
       name: uds-dev-stack-images
