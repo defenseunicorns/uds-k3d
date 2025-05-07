@@ -32,16 +32,26 @@ jobs:
             --set CHAINGUARD_IDENTITY="${{ secrets.CHAINGUARD_IDENTITY }}"
         shell: bash
 
+      - name: Harden Runner
+        uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+        with:
+          egress-policy: audit
+
       - name: Create the airgap package
         run: uds run build-airgap-package
 
       - name: Harden Runner
         uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
         with:
-          egress-policy: audit
+          egress-policy: block
 
       - name: Deploy the airgap package
         run: uds run deploy-airgap-package
+
+      - name: Harden Runner
+        uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+        with:
+          egress-policy: audit
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
