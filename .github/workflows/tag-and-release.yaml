@@ -52,3 +52,5 @@ jobs:
         run: |
           uds zarf package create --confirm -a arm64 -o oci://ghcr.io/defenseunicorns/packages
           uds zarf package create --confirm -a amd64 -o oci://ghcr.io/defenseunicorns/packages
+          uds zarf package create --confirm -a arm64 --flavor airgap -o oci://ghcr.io/defenseunicorns/packages
+          uds zarf package create --confirm -a amd64 --flavor airgap -o oci://ghcr.io/defenseunicorns/packages
