@@ -71,7 +71,8 @@ jobs:
         with:
           egress-policy: block
           allowed-endpoints: >
-            github.com            
+            github.com
+            objects.githubusercontent.com
 
       - name: Deploy the airgap package
         run: |
