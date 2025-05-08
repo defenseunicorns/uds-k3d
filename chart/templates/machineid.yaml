@@ -17,6 +17,7 @@ spec:
       initContainers:
         - name: generate-machine-id
           image: cgr.dev/chainguard/wolfi-base:latest
+          imagePullPolicy: IfNotPresent
           command: ["/bin/sh", "-c"]
           args:
             - echo "B0D07F1F43F246409516ADBDCCC86FCE" > /mnt/host/etc/machine-id;

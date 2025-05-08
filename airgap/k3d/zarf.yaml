@@ -1,0 +1,62 @@
+kind: ZarfPackageConfig
+metadata:
+  name: k3d-airgap-images
+  yolo: true
+  description: >
+    *** REQUIRES DOCKER ***
+    Loads the required images for K3d into Docker to be used offline.
+
+constants:
+  - name: K3D_HELPER_IMAGE_TAG
+    # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-proxy versioning=semver
+    value: "5.8.3"
+  - name: K3D_VERSION
+    value: "1.31.7-k3s1"
+  - name: K3S_AIRGAP_IMAGES
+    value: "v1.31.7%2Bk3s1"
+components:
+  - name: k3d-airgap-images
+    files:
+      # Transfer the K3d images for docker to use in the air gap
+      - source: k3d-proxy.tar
+        target: k3d-proxy.tar
+      - source: k3d-tools.tar
+        target: k3d-tools.tar
+      - source: k3d-image.tar
+        target: k3d-image.tar
+      - source: k3s-airgap-images.tar.zst
+        target: k3s-airgap-images.tar.zst
+
+    actions:
+      onCreate:
+        before:
+          # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-proxy versioning=semver
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3d-io/k3d-proxy:${K3D_HELPER_IMAGE_TAG} k3d-proxy.tar
+            description: Pull the 'k3d-proxy' image
+          # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-tools versioning=semver
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3d-io/k3d-tools:${K3D_HELPER_IMAGE_TAG} k3d-tools.tar
+            description: Pull the 'k3d-tools' image
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" rancher/k3s:${K3D_IMAGE_VERSION} k3d-image.tar
+            description: Pull the airgap 'k3s' image
+          - cmd: curl -L https://github.com/k3s-io/k3s/releases/download/${K3S_AIRGAP_IMAGES}/k3s-airgap-images-"###ZARF_PKG_ARCH###".tar.zst -o k3s-airgap-images.tar.zst
+            description: Download the airgap 'k3s' images
+      onDeploy:
+        after:
+            - cmd: |
+                  docker image load -i k3d-proxy.tar
+                  docker image load -i k3d-tools.tar
+                  docker image load -i k3d-image.tar
+                  docker volume create k3s-airgap-images
+                  docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v .:/src rancher/k3s:${K3D_VERSION} -c "cp /src/k3s-airgap-images.tar.zst /dest"
+                  rm k3d-proxy.tar k3d-tools.tar k3d-image.tar k3s-airgap-images.tar.zst
+              description: Load the airgap images for k3d into Docker
+      onRemove:
+        before:
+          - cmd: docker image rm ghcr.io/k3d-io/k3d-proxy:${K3D_HELPER_IMAGE_TAG} --force
+            description: Remove the 'k3d-proxy' image from Docker
+          - cmd: docker image rm ghcr.io/k3d-io/k3d-tools:${K3D_HELPER_IMAGE_TAG} --force
+            description: Remove the 'k3d-tools' image from Docker
+          - cmd: docker image rm rancher/k3s:${K3D_VERSION} --force
+            description: Remove the airgap 'k3s' image from Docker
+          - cmd: rm k3s-airgap-images.tar.zst
+            description: Cleanup the airgap k3s images
