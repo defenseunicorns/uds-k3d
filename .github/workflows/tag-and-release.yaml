@@ -10,10 +10,16 @@ jobs:
   # Run standard build tests first
   run-build-test:
     uses: ./.github/workflows/build-test.yaml
+    permissions:
+      id-token: write
+      contents: read
 
   # Run airgap build tests
   run-airgap-build-test:
     uses: ./.github/workflows/airgap-build-test.yaml
+    permissions:
+      id-token: write
+      contents: read
 
   # Only proceed to tag a new version if all tests pass
   tag-new-version:
