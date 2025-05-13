@@ -23,7 +23,7 @@ data:
             {{- end }}
             {{- if .Values.passthrough.enabled | default false}}
             {{- range .Values.passthrough.upstreams }}
-            {{ . }}.{{ $.Values.domain }} backend_{{ . }};
+            {{ . }}.{{ $.Values.domain }} backend_passthrough;
             {{- end }}
             {{- end }}
         }
