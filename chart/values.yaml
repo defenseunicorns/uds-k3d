@@ -17,5 +17,5 @@ passthrough:
   subdomains: []
     # Add any passthrough subdomains here; items should be unique
     # e.g.,
-    # - mysubdomin
+    # - mysubdomain
     # - myothersubdomain
