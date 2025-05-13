@@ -53,7 +53,7 @@ To enable passthrough gateway support, you will need to modify two values fields
     rewrite stop {
       name regex (.*\.uds\.dev) tenant-ingressgateway.istio-tenant-gateway.svc.cluster.local answer auto
     }
-    rewrite stop name mysubdomin.uds.dev passthrough-ingressgateway.istio-passthrough-gateway.svc.cluster.local
+    rewrite stop name mysubdomain.uds.dev passthrough-ingressgateway.istio-passthrough-gateway.svc.cluster.local
   ```
   
 * `passthrough` - Enable passthrough gateway support by setting the `enabled` field to `true` and add `subdomains` need, this is the unique list of subdomains accessed through the passthrough; e.g.,
