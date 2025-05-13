@@ -21,6 +21,11 @@ data:
             {{- if .Values.customGateway | default false}}
             *.{{ .Values.customGateway.domainName }} backend_custom_gateway;
             {{- end }}
+            {{- if .Values.passthrough.enabled | default false}}
+            {{- range .Values.passthrough.upstreams }}
+            {{ .name }}.{{ $.Values.domain }} backend_{{ .name }};
+            {{- end }}
+            {{- end }}
         }
 
         upstream backend_admin {
@@ -35,6 +40,14 @@ data:
         upstream backend_custom_gateway {
             server ###ZARF_VAR_BASE_IP###.202:443;
         }
+        {{- end }}
+
+        {{- if .Values.passthrough.enabled | default false}}
+        {{- range .Values.passthrough.upstreams }}
+        upstream backend_{{ .name }} {
+            server ###ZARF_VAR_BASE_IP###.{{ .hostId }}:443;
+        }
+        {{- end }}
         {{- end }}
 
         server {

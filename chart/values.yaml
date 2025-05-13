@@ -1,5 +1,7 @@
 extraPorts: []
 
+# If you want to include a passthrough, you must add something like the following to the coreDnsOverrides:
+# rewrite stop name mysubdomin.uds.dev passthrough-ingressgateway.istio-passthrough-gateway.svc.cluster.local
 coreDnsOverrides: |
   rewrite stop {
     name regex (.*\.admin\.uds\.dev) admin-ingressgateway.istio-admin-gateway.svc.cluster.local answer auto
@@ -11,3 +13,13 @@ coreDnsOverrides: |
 # Enable the following to use a custom gateway
 # customGateway:
 #   domainName: uds2.dev
+
+passthrough:
+  enabled: false
+  upstreams: []
+    # Add any passthrough upstreams here
+    # name is the subdomain, it must be unique
+    # hostId is the host identifier portion of the cluster IP (e.g., xxx.xxx.xxx.202)
+    # e.g.,
+    # - name: mysubdomin
+    #   hostId: 202
