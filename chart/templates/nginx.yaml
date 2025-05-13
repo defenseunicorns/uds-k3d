@@ -47,11 +47,9 @@ data:
         {{- end }}
 
         {{- if .Values.passthrough.enabled | default false}}
-        {{- range .Values.passthrough.upstreams }}
-        upstream backend_{{ . }} {
+        upstream backend_passthrough {
             server ###ZARF_VAR_BASE_IP###.202:443;
         }
-        {{- end }}
         {{- end }}
 
         server {
