@@ -39,3 +39,29 @@ For example, to add a custom gateway with the domain `uds2.dev` you would add th
 customGateway:
   domainName: uds2.dev
 ```
+
+## Passthrough Gateway Support
+
+To enable passthrough gateway support, you will need to modify two values fields in the `uds-dev-stack` chart:
+
+* `coreDnsOverrides` - Add support to re-write the desired domain to the passthrough-ingressgateway; e.g.,
+  ```yaml
+  coreDnsOverrides: |
+    rewrite stop {
+      name regex (.*\.admin\.uds\.dev) admin-ingressgateway.istio-admin-gateway.svc.cluster.local answer auto
+    }
+    rewrite stop {
+      name regex (.*\.uds\.dev) tenant-ingressgateway.istio-tenant-gateway.svc.cluster.local answer auto
+    }
+    rewrite stop name mysubdomin.uds.dev passthrough-ingressgateway.istio-passthrough-gateway.svc.cluster.local
+  ```
+* `passthrough` - Enable passthrough gateway support by setting the `enabled` field to `true`. Add `upstreams` required; e.g.,
+  ```yaml
+  passthrough:
+    enabled: true
+    upstreams:
+      - name: mysubdomain
+        hostId: 202
+  ```
+  * name is the subdomain, it must be unique
+  * hostId is the host identifier portion of the cluster IP (e.g., xxx.xxx.xxx.202)
