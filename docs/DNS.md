@@ -56,10 +56,10 @@ To enable passthrough gateway support, you will need to modify two values fields
     rewrite stop name mysubdomin.uds.dev passthrough-ingressgateway.istio-passthrough-gateway.svc.cluster.local
   ```
   
-* `passthrough` - Enable passthrough gateway support by setting the `enabled` field to `true` and add `upstreams` need, this is the unique list of subdomains accessed through the passthrough; e.g.,
+* `passthrough` - Enable passthrough gateway support by setting the `enabled` field to `true` and add `subdomains` need, this is the unique list of subdomains accessed through the passthrough; e.g.,
   ```yaml
   passthrough:
     enabled: true
-    upstreams:
+    subdomains:
       - mysubdomain
   ```

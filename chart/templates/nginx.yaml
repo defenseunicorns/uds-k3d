@@ -22,7 +22,7 @@ data:
             *.{{ .Values.customGateway.domainName }} backend_custom_gateway;
             {{- end }}
             {{- if .Values.passthrough.enabled | default false}}
-            {{- range .Values.passthrough.upstreams }}
+            {{- range .Values.passthrough.subdomains }}
             {{ . }}.{{ $.Values.domain }} backend_passthrough;
             {{- end }}
             {{- end }}

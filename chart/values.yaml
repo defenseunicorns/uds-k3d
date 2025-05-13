@@ -14,9 +14,8 @@ coreDnsOverrides: |
 
 passthrough:
   enabled: false
-  upstreams: []
-    # Add any passthrough upstreams here
-    # items are the subdomain names, they should be unique
+  subdomains: []
+    # Add any passthrough subdomains here; items should be unique
     # e.g.,
     # - mysubdomin
     # - myothersubdomain
