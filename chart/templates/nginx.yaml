@@ -23,7 +23,7 @@ data:
             {{- end }}
             {{- if .Values.passthrough.enabled | default false}}
             {{- range .Values.passthrough.upstreams }}
-            {{ .name }}.{{ $.Values.domain }} backend_{{ .name }};
+            {{ . }}.{{ $.Values.domain }} backend_{{ . }};
             {{- end }}
             {{- end }}
         }
@@ -38,14 +38,18 @@ data:
 
         {{- if .Values.customGateway | default false}}
         upstream backend_custom_gateway {
+            {{- if .Values.passthrough.enabled | default false}}
+            server ###ZARF_VAR_BASE_IP###.203:443;
+            {{- else }}
             server ###ZARF_VAR_BASE_IP###.202:443;
+            {{- end }}
         }
         {{- end }}
 
         {{- if .Values.passthrough.enabled | default false}}
         {{- range .Values.passthrough.upstreams }}
-        upstream backend_{{ .name }} {
-            server ###ZARF_VAR_BASE_IP###.{{ .hostId }}:443;
+        upstream backend_{{ . }} {
+            server ###ZARF_VAR_BASE_IP###.202:443;
         }
         {{- end }}
         {{- end }}

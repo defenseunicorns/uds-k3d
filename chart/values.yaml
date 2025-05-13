@@ -16,8 +16,7 @@ passthrough:
   enabled: false
   upstreams: []
     # Add any passthrough upstreams here
-    # name is the subdomain, it must be unique
-    # hostId is the host identifier portion of the cluster IP (e.g., xxx.xxx.xxx.202)
+    # items are the subdomain names, they should be unique
     # e.g.,
-    # - name: mysubdomin
-    #   hostId: 202
+    # - mysubdomin
+    # - myothersubdomain
