@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.13.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.3...v0.13.0) (2025-05-14)
+
+
+### Features
+
+* support for passthrough ([#180](https://github.com/defenseunicorns/uds-k3d/issues/180)) ([f95abb5](https://github.com/defenseunicorns/uds-k3d/commit/f95abb54bf85bcd80f587a8bffdd683b1fc7db30))
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.14.2 ([#171](https://github.com/defenseunicorns/uds-k3d/issues/171)) ([728ec18](https://github.com/defenseunicorns/uds-k3d/commit/728ec18aa0eeb496236c1809282eba2ff7115fc7))
+* **deps:** update dependency defenseunicorns/uds-common to v1.14.3 ([#181](https://github.com/defenseunicorns/uds-k3d/issues/181)) ([abd8af4](https://github.com/defenseunicorns/uds-k3d/commit/abd8af4ebb7488055f57fa531390d3a4b4682a01))
+* **deps:** update dev-stack to v1.28.0 ([#172](https://github.com/defenseunicorns/uds-k3d/issues/172)) ([e62d52e](https://github.com/defenseunicorns/uds-k3d/commit/e62d52edbb07f9659c25b68b0b7b25e581f8057a))
+* **deps:** update githubactions to v0.27.0 ([#168](https://github.com/defenseunicorns/uds-k3d/issues/168)) ([68711c0](https://github.com/defenseunicorns/uds-k3d/commit/68711c0a298537c51ca02ee629688cb261757bfb))
+* **deps:** update githubactions to v0.27.1 ([#170](https://github.com/defenseunicorns/uds-k3d/issues/170)) ([0a37cc7](https://github.com/defenseunicorns/uds-k3d/commit/0a37cc735d80c96bad262c17de80877c7e9ae329))
+* **deps:** update quay.io/minio/minio docker tag to release.2025-04-22t22-12-26z ([#179](https://github.com/defenseunicorns/uds-k3d/issues/179)) ([5082a6d](https://github.com/defenseunicorns/uds-k3d/commit/5082a6d3779c64aad6e436cf988363a6316c5d0b))
+* **deps:** update uds-cli to v0.27.2 ([#175](https://github.com/defenseunicorns/uds-k3d/issues/175)) ([f923702](https://github.com/defenseunicorns/uds-k3d/commit/f923702a552d943a5b3c96636058f77633560a00))
+* update k3s to 1.32.4 by default ([#178](https://github.com/defenseunicorns/uds-k3d/issues/178)) ([1e5855b](https://github.com/defenseunicorns/uds-k3d/commit/1e5855b59209d66daab56afcd435516516481219))
+
 ## [0.12.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.2...v0.12.3) (2025-04-16)
 
 
