@@ -77,7 +77,7 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: package-${{ matrix.architecture }}
-          path: ./build
+          path: .
 
       # Step is not currently being used, could be uncommented if custom image support is needed in the future
       # - name: Build the custom k3s image
@@ -85,7 +85,9 @@ jobs:
       #   run: uds run build-image --set VERSION=${{matrix.version}} --no-progress
 
       - name: Create and deploy the uds-k3d package
-        run: uds run deploy --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}} --no-progress
+        run: |
+          cd build
+          uds run deploy --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}} --no-progress
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
