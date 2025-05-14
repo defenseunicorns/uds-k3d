@@ -85,9 +85,7 @@ jobs:
       #   run: uds run build-image --set VERSION=${{matrix.version}} --no-progress
 
       - name: Create and deploy the uds-k3d package
-        run: |
-          cd build
-          uds run deploy --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}} --no-progress
+        run: uds run deploy --set IMAGE_NAME=${{matrix.image}} --set VERSION=${{matrix.version}} --no-progress
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
