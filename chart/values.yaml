@@ -11,3 +11,11 @@ coreDnsOverrides: |
 # Enable the following to use a custom gateway
 # customGateway:
 #   domainName: uds2.dev
+
+passthrough:
+  enabled: false
+  subdomains: []
+    # Add any passthrough subdomains here; items should be unique
+    # e.g.,
+    # - mysubdomain
+    # - myothersubdomain
