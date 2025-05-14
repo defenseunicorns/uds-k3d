@@ -72,7 +72,7 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: airgap-package-${{ matrix.architecture }}
-          path: ./build
+          path: .
 
       - name: Install UDS CLI
         uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
@@ -91,11 +91,7 @@ jobs:
 
 
       - name: Deploy the airgap package
-        run: |
-          # Navigate to where the artifact was downloaded
-          cd ./build
-          # Adjust the command to use the downloaded package path
-          uds zarf package deploy zarf-package-uds-k3d-*.tar.zst --confirm --no-progress
+        run: uds run deploy-airgap-package --no-progress
         shell: bash
       
       - name: Validate uds-k3d package
