@@ -3,8 +3,8 @@ metadata:
   name: uds-dev-stack-airgap-images
   yolo: true
   description: >
-    *** REQUIRES DOCKER ***
-    Loads the required images for UDS Dev Stack into Docker to be used offline.
+    *** REQUIRES DOCKER AND K3D CLUSTER ***
+    Loads the required images for UDS Dev Stack into k3d to be used offline.
 
 components:
   - name: uds-dev-stack-airgap-images

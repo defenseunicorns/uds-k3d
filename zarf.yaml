@@ -75,7 +75,7 @@ components:
             setVariables:
               - name: AIRGAP_MODE
 
-  - name: create-cluster-no-airgap
+  - name: create-cluster
     required: true
     description: "Create the k3d cluster"
     actions:
@@ -93,7 +93,7 @@ components:
           - cmd: |
               VOLUME_MOUNT=""
               if [ "${ZARF_VAR_AIRGAP_MODE}" = "true" ]; then
-                echo "AIRGAP_MODE"
+                # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-tools
                 export K3D_HELPER_IMAGE_TAG=5.8.3
                 VOLUME_MOUNT="--volume k3s-airgap-images:/var/lib/rancher/k3s/agent/images"
               fi

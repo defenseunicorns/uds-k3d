@@ -10,17 +10,22 @@ variables:
     default: ""
   - name: NGINX_EXTRA_PORTS
     default: "[]"
+  - name: ARCH
+    default: "${UDS_ARCH}"
 
 tasks:
-  - name: default
-    description: "Build and deploy uds-k3d"
+  - name: build
+    description: "Build uds-k3d"
     actions:
       - description: "Build UDS K3d package"
-        cmd: "uds zarf package create --confirm --no-progress"
+        cmd: "uds zarf package create -a ${ARCH} --confirm --no-progress"
 
+  - name: deploy
+    description: "Deploy uds-k3d package"
+    actions:
       - description: "Deploy UDS K3d package"
         cmd: |
-          uds zarf package deploy zarf-package-uds-k3d-*.tar.zst \
+          uds zarf package deploy zarf-package-uds-k3d-${ARCH}-*.tar.zst \
             --set K3D_IMAGE=${IMAGE_NAME}:${VERSION} \
             --set K3D_EXTRA_ARGS="${K3D_EXTRA_ARGS}" \
             --set NGINX_EXTRA_PORTS="${NGINX_EXTRA_PORTS}" \
@@ -71,7 +76,7 @@ tasks:
     actions:
       - description: Build the airgap package
         cmd: |
-          uds zarf package create --flavor airgap --confirm --no-progress \
+          uds zarf package create -a ${ARCH} --flavor airgap --confirm --no-progress \
             --set K3S_VERSION="${VERSION}"
 
       - description: Clean up airgap images
@@ -81,7 +86,7 @@ tasks:
     actions:
       - description: Deploy the airgap package
         cmd: |
-          uds zarf package deploy zarf-package-uds-k3d-${UDS_ARCH}-*.tar.zst --no-progress --confirm
+          uds zarf package deploy zarf-package-uds-k3d-${ARCH}-*.tar.zst --no-progress --confirm
 
   - name: clean-airgap-images
     actions:

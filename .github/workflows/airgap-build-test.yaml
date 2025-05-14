@@ -16,6 +16,9 @@ jobs:
   build-package:
     name: Build Airgap Package
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture: [amd64, arm64]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
@@ -35,18 +38,22 @@ jobs:
         shell: bash
 
       - name: Create the airgap package
-        run: uds run build-airgap-package
+        run: uds run build-airgap-package --set ARCH=${{ matrix.architecture }}
 
       - name: Upload Airgap Package Artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
         with:
-          name: airgap-package
+          name: airgap-package-${{ matrix.architecture }}
           path: ./zarf-package-uds-k3d-*.tar.zst
+          retention-days: 1
 
   deploy-airgap:
     name: Deploy Airgap Package
     runs-on: ubuntu-latest
     needs: build-package # This job depends on the build-package job completing successfully
+    strategy:
+      matrix:
+        architecture: [amd64] # Only test with amd64 for deployment
 
     steps:
       - name: Harden Runner - Block Egress
@@ -64,7 +71,7 @@ jobs:
       - name: Download Airgap Package Artifact
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: airgap-package
+          name: airgap-package-${{ matrix.architecture }}
           path: ./build
 
       - name: Install UDS CLI
