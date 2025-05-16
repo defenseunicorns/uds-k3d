@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.14.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.13.0...v0.14.0) (2025-05-16)
+
+
+### Features
+
+* `uds-k3d` airgap package flavor ([#176](https://github.com/defenseunicorns/uds-k3d/issues/176)) ([64a0c76](https://github.com/defenseunicorns/uds-k3d/commit/64a0c767f181b2c7442eaadea2bd4955df2d719f))
+
+
+### Miscellaneous
+
+* **deps:** update githubactions ([#182](https://github.com/defenseunicorns/uds-k3d/issues/182)) ([0f6c488](https://github.com/defenseunicorns/uds-k3d/commit/0f6c488b1aeb8a1f137671c74f2f606532bb133d))
+* **deps:** update quay.io/frrouting/frr docker tag to v9.1.3 ([#183](https://github.com/defenseunicorns/uds-k3d/issues/183)) ([e164ea4](https://github.com/defenseunicorns/uds-k3d/commit/e164ea4ebf9b3f8640a38263536efaef3196d052))
+* **deps:** update quay.io/minio/mc docker tag to v2025 ([#186](https://github.com/defenseunicorns/uds-k3d/issues/186)) ([1969b77](https://github.com/defenseunicorns/uds-k3d/commit/1969b77e834016ac9874913e52f612d1303d0021))
+
 ## [0.13.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.12.3...v0.13.0) (2025-05-14)
 
 
