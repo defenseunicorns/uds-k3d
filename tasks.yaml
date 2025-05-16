@@ -18,7 +18,7 @@ tasks:
     description: "Build uds-k3d"
     actions:
       - description: "Build UDS K3d package"
-        cmd: "uds zarf package create -a ${ARCH} --confirm --no-progress"
+        cmd: "uds zarf package create -a ${ARCH} --confirm --no-progress --skip-sbom"
 
   - name: deploy
     description: "Deploy uds-k3d package"
@@ -77,7 +77,7 @@ tasks:
       - description: Build the airgap package
         cmd: |
           uds zarf package create -a ${ARCH} --flavor airgap --confirm --no-progress \
-            --set K3S_VERSION="${VERSION}"
+            --set K3S_VERSION="${VERSION}" --skip-sbom
 
       - description: Clean up airgap images
         task: clean-airgap-images

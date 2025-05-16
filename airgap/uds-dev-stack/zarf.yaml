@@ -34,23 +34,32 @@ components:
         before:
           # renovate: datasource=docker depName=rancher/local-path-provisioner
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" rancher/local-path-provisioner:v0.0.31 local-path-provisioner.tar
+            description: Pull the local-path-provisioner image
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" cgr.dev/chainguard/busybox:latest busybox.tar
+            description: Pull the busybox image
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" cgr.dev/chainguard/wolfi-base:latest wolfi-base.tar
+            description: Pull the wolfi-base image
           # renovate: datasource=docker depName=registry.k8s.io/pause
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" registry.k8s.io/pause:3.10 pause.tar
+            description: Pull the pause image
           # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/nginx/nginx-unprivileged:1.28.0-alpine nginx.tar
+            description: Pull the nginx image
           # renovate: datasource=docker depName=quay.io/metallb/controller
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/metallb/controller:v0.14.9 metallb-controller.tar
+            description: Pull the metallb-controller image
           # renovate: datasource=docker depName=quay.io/metallb/speaker
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/metallb/speaker:v0.14.9 metallb-speaker.tar
+            description: Pull the metallb-speaker image
           # renovate: datasource=docker depName=quay.io/frrouting/frr
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/frrouting/frr:9.1.0 frr.tar
+            description: Pull the frr image
           # renovate: datasource=docker depName=quay.io/minio/minio versioning=regex:^RELEASE\.(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-(?<revision>\d+)-\d+Z$
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/minio/minio:RELEASE.2025-04-22T22-12-26Z minio.tar
+            description: Pull the minio image
           # renovate: datasource=docker depName=quay.io/minio/mc versioning=regex:^RELEASE\.(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-(?<revision>\d+)-\d+Z$
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/minio/mc:RELEASE.2024-11-21T17-21-54Z minio-mc.tar
-            description: Pull the airgap images for uds-dev-stack
+            description: Pull the minio-mc image
       onDeploy:
         after:
           - cmd: |

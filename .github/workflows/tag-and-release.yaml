@@ -23,6 +23,7 @@ jobs:
 
   # Only proceed to tag a new version if all tests pass
   tag-new-version:
+    permissions: write-all
     needs: [run-build-test, run-airgap-build-test]
     runs-on: ubuntu-latest
     outputs:
