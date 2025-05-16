@@ -83,5 +83,5 @@ jobs:
 
       - name: Publish the packages
         run: |
-          uds zarf package publish ./airgap-package/zarf-package-uds-k3d-${{ matrix.architecture }}.tar.zst -o oci://ghcr.io/defenseunicorns/packages
-          uds zarf package publish ./standard-package/zarf-package-uds-k3d-${{ matrix.architecture }}.tar.zst -o oci://ghcr.io/defenseunicorns/packages
+          uds zarf package publish ./airgap-package/zarf-package-uds-k3d-${{ matrix.architecture }}.tar.zst oci://ghcr.io/defenseunicorns/packages
+          uds zarf package publish ./standard-package/zarf-package-uds-k3d-${{ matrix.architecture }}.tar.zst oci://ghcr.io/defenseunicorns/packages
