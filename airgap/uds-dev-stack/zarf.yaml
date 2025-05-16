@@ -1,0 +1,79 @@
+kind: ZarfPackageConfig
+metadata:
+  name: uds-dev-stack-airgap-images
+  yolo: true
+  description: >
+    *** REQUIRES DOCKER AND K3D CLUSTER ***
+    Loads the required images for UDS Dev Stack into k3d to be used offline.
+
+components:
+  - name: uds-dev-stack-airgap-images
+    files:
+      - source: local-path-provisioner.tar
+        target: local-path-provisioner.tar
+      - source: busybox.tar
+        target: busybox.tar
+      - source: wolfi-base.tar
+        target: wolfi-base.tar
+      - source: pause.tar
+        target: pause.tar
+      - source: nginx.tar
+        target: nginx.tar
+      - source: metallb-controller.tar
+        target: metallb-controller.tar
+      - source: metallb-speaker.tar
+        target: metallb-speaker.tar
+      - source: frr.tar
+        target: frr.tar
+      - source: minio.tar
+        target: minio.tar
+      - source: minio-mc.tar
+        target: minio-mc.tar
+    actions:
+      onCreate:
+        before:
+          # renovate: datasource=docker depName=rancher/local-path-provisioner
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" rancher/local-path-provisioner:v0.0.31 local-path-provisioner.tar
+            description: Pull the local-path-provisioner image
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" cgr.dev/chainguard/busybox:latest busybox.tar
+            description: Pull the busybox image
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" cgr.dev/chainguard/wolfi-base:latest wolfi-base.tar
+            description: Pull the wolfi-base image
+          # renovate: datasource=docker depName=registry.k8s.io/pause
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" registry.k8s.io/pause:3.10 pause.tar
+            description: Pull the pause image
+          # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/nginx/nginx-unprivileged:1.28.0-alpine nginx.tar
+            description: Pull the nginx image
+          # renovate: datasource=docker depName=quay.io/metallb/controller
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/metallb/controller:v0.14.9 metallb-controller.tar
+            description: Pull the metallb-controller image
+          # renovate: datasource=docker depName=quay.io/metallb/speaker
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/metallb/speaker:v0.14.9 metallb-speaker.tar
+            description: Pull the metallb-speaker image
+          # renovate: datasource=docker depName=quay.io/frrouting/frr
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/frrouting/frr:9.1.0 frr.tar
+            description: Pull the frr image
+          # renovate: datasource=docker depName=quay.io/minio/minio versioning=regex:^RELEASE\.(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-(?<revision>\d+)-\d+Z$
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/minio/minio:RELEASE.2025-04-22T22-12-26Z minio.tar
+            description: Pull the minio image
+          # renovate: datasource=docker depName=quay.io/minio/mc versioning=regex:^RELEASE\.(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-(?<revision>\d+)-\d+Z$
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/minio/mc:RELEASE.2024-11-21T17-21-54Z minio-mc.tar
+            description: Pull the minio-mc image
+      onDeploy:
+        after:
+          - cmd: |
+              k3d image load local-path-provisioner.tar \
+                busybox.tar \
+                wolfi-base.tar \
+                pause.tar \
+                nginx.tar \
+                metallb-controller.tar \
+                metallb-speaker.tar \
+                minio.tar \
+                minio-mc.tar \
+                frr.tar \
+                -c ${ZARF_VAR_CLUSTER_NAME}
+            description: Load the airgap images for uds-dev-stack into Docker
+          - cmd: rm pause.tar nginx.tar wolfi-base.tar busybox.tar local-path-provisioner.tar metallb-controller.tar metallb-speaker.tar minio.tar minio-mc.tar frr.tar
+            description: Cleanup the airgap image tars

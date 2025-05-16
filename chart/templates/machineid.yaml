@@ -16,7 +16,8 @@ spec:
     spec:
       initContainers:
         - name: generate-machine-id
-          image: cgr.dev/chainguard/wolfi-base:latest
+          image: {{.Values.images.wolfiBase.repository}}:{{.Values.images.wolfiBase.tag}}
+          imagePullPolicy: IfNotPresent
           command: ["/bin/sh", "-c"]
           args:
             - echo "B0D07F1F43F246409516ADBDCCC86FCE" > /mnt/host/etc/machine-id;
@@ -29,7 +30,7 @@ spec:
             runAsUser: 0
       containers:
         - name: pause
-          image: registry.k8s.io/pause:3.10
+          image: {{.Values.images.pause.repository}}:{{.Values.images.pause.tag}}
           resources:
             limits:
               cpu: "0.1"
