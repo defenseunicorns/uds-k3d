@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.14.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.0...v0.14.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* tag-release workflow publish fix ([#187](https://github.com/defenseunicorns/uds-k3d/issues/187)) ([569e787](https://github.com/defenseunicorns/uds-k3d/commit/569e787061fda54152f3366e8583e5b2bad88f02))
+
 ## [0.14.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.13.0...v0.14.0) (2025-05-16)
 
 
