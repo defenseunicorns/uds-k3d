@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.14.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.0...v0.14.1) (2025-05-25)
+
+
+### Bug Fixes
+
+* action tags in workflow comments ([#193](https://github.com/defenseunicorns/uds-k3d/issues/193)) ([3425b8b](https://github.com/defenseunicorns/uds-k3d/commit/3425b8b39e0c95349f1b2bf7fd66407f3920a08e))
+* **ci:** add maru auth for remote tasks ([#197](https://github.com/defenseunicorns/uds-k3d/issues/197)) ([1248f9d](https://github.com/defenseunicorns/uds-k3d/commit/1248f9ddfc54e8c697d3f6bb44ae912353b17cf9))
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.14.4 ([#195](https://github.com/defenseunicorns/uds-k3d/issues/195)) ([6edd3cf](https://github.com/defenseunicorns/uds-k3d/commit/6edd3cfe79bf6787bc91b310c808138d863cbd8f))
+* **deps:** update dependency defenseunicorns/uds-common to v1.14.5 ([#196](https://github.com/defenseunicorns/uds-k3d/issues/196)) ([5243fce](https://github.com/defenseunicorns/uds-k3d/commit/5243fce1b746ca3de1c3764715ec100176eb1849))
+* **deps:** update githubactions to v0.27.4 ([#198](https://github.com/defenseunicorns/uds-k3d/issues/198)) ([a6e9532](https://github.com/defenseunicorns/uds-k3d/commit/a6e9532fc8e9aae75f9f125cfca6d350dc713839))
+* **deps:** update quay.io/minio/minio docker tag to release.2025-05-24t17-08-30z ([#201](https://github.com/defenseunicorns/uds-k3d/issues/201)) ([fc1b5a4](https://github.com/defenseunicorns/uds-k3d/commit/fc1b5a4b83f31bb66e786a423c40e81a263e995e))
+
 ## [0.14.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.13.0...v0.14.0) (2025-05-16)
 
 
