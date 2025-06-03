@@ -155,7 +155,7 @@ components:
       - name: metallb
         namespace: uds-dev-stack
         url: https://metallb.github.io/metallb
-        version: 0.14.9
+        version: 0.15.0
         valuesFiles:
           - "values/metallb-values.yaml"
       - name: uds-dev-stack
