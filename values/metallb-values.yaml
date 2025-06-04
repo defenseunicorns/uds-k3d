@@ -7,7 +7,7 @@ speaker:
   image:
     repository: quay.io/metallb/speaker
     # renovate: datasource=docker depName=quay.io/metallb/speaker
-    tag: "v0.15.0"
+    tag: "v0.15.2"
   frr:
     image:
       repository: quay.io/frrouting/frr
