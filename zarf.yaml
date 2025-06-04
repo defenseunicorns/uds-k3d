@@ -17,7 +17,7 @@ variables:
 
   - name: K3D_IMAGE
     description: "K3d image to use"
-    default: "rancher/k3s:v1.32.4-k3s1"
+    default: "rancher/k3s:v1.32.5-k3s1"
 
   - name: K3D_EXTRA_ARGS
     description: "Optionally pass k3d arguments to the default"

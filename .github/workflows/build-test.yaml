@@ -53,7 +53,7 @@ jobs:
     strategy:
       matrix:
         image: ["rancher/k3s"]
-        version: ["v1.31.8-k3s1", "v1.32.4-k3s1", "v1.33.0-k3s1"]
+        version: ["v1.31.9-k3s1", "v1.32.5-k3s1", "v1.33.1-k3s1"]
         architecture: ["amd64"]
 
     steps:
