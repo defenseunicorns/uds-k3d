@@ -10,7 +10,8 @@
     {
       "matchFileNames": [
         "chart/**",
-        "zarf.yaml"
+        "**/zarf.yaml",
+        "values/*.yaml"
       ],
       "groupName": "dev-stack",
       "commitMessageTopic": "dev-stack",
