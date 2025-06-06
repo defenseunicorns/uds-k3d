@@ -33,7 +33,7 @@ variables:
 
   - name: ADMIN_DOMAIN
     description: "Domain for admin services, defaults to `admin.DOMAIN`"
-  
+
 components:
   - name: destroy-cluster
     required: true
@@ -52,7 +52,7 @@ components:
     import:
       path: airgap/k3d
       name: k3d-airgap-images
-    
+
   - name: create-cluster-airgap
     required: true
     only:
@@ -84,7 +84,7 @@ components:
           - cmd: |
               k3d_version=$(k3d version | grep -E -o "([0-9]+\.?){3}$")
               required_version="5.7.1"
-              if ! echo "$required_version\n$k3d_version" | sort -V -C; then
+              if ! printf "$required_version\n$k3d_version" | sort -V -c 2>/dev/null; then
                 echo "This package requires a minimum k3d version of $required_version"
                 echo "Please upgrade k3d (https://k3d.io/stable/#install-current-latest-release) and try again"
                 exit 1
