@@ -57,6 +57,16 @@ jobs:
         architecture: [amd64] # Only test with amd64 for deployment
 
     steps:
+      - name: Harden Runner - Block Egress
+        uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            github.com
+            objects.githubusercontent.com
+            release-assets.github.com
+            raw.githubusercontent.com
+
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Download Airgap Package Artifact
@@ -79,16 +89,6 @@ jobs:
         run: |
           uds run actions:install-deps
         shell: bash
-
-      - name: Harden Runner - Block Egress
-        uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            github.com
-            objects.githubusercontent.com
-            api.github.com
-            raw.githubusercontent.com
 
       - name: Deploy the airgap package
         run: uds run deploy-airgap-package --no-progress
