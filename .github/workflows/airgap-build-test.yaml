@@ -64,6 +64,7 @@ jobs:
           allowed-endpoints: >
             github.com
             objects.githubusercontent.com
+            api.github.com
             release-assets.github.com
             raw.githubusercontent.com
 
