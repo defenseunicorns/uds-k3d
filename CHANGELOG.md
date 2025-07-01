@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.14.4](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.3...v0.14.4) (2025-07-01)
+
+
+### Miscellaneous
+
+* **deps:** update uds-cli to v0.27.8 ([#231](https://github.com/defenseunicorns/uds-k3d/issues/231)) ([ac3d6b5](https://github.com/defenseunicorns/uds-k3d/commit/ac3d6b5f6f463ede7f7b2be8bd959dc9d532a0d2))
+
 ## [0.14.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.2...v0.14.3) (2025-06-30)
 
 
