@@ -40,7 +40,7 @@ components:
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" cgr.dev/chainguard/wolfi-base:latest wolfi-base.tar
             description: Pull the wolfi-base image
           # renovate: datasource=docker depName=registry.k8s.io/pause
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" registry.k8s.io/pause:3.10 pause.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" registry.k8s.io/pause:3.10.1 pause.tar
             description: Pull the pause image
           # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/nginx/nginx-unprivileged:1.29.0-alpine nginx.tar

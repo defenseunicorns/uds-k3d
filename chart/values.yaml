@@ -33,7 +33,7 @@ images:
   pause:
     repository: registry.k8s.io/pause
     # renovate: datasource=docker depName=registry.k8s.io/pause
-    tag: "3.10"
+    tag: "3.10.1"
   localPathProvisioner:
     repository: rancher/local-path-provisioner
     # renovate: datasource=docker depName=rancher/local-path-provisioner
