@@ -4,11 +4,11 @@ mode: standalone
 image:
   repository: quay.io/minio/minio
   # renovate: datasource=docker depName=quay.io/minio/minio versioning=regex:^RELEASE\.(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-(?<revision>\d+)-\d+Z$
-  tag: RELEASE.2025-07-18T21-56-31Z
+  tag: RELEASE.2025-07-23T15-54-02Z
 mcImage:
   repository: quay.io/minio/mc
   # renovate: datasource=docker depName=quay.io/minio/mc versioning=regex:^RELEASE\.(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-(?<revision>\d+)-\d+Z$
-  tag: "RELEASE.2025-07-16T15-35-03Z"
+  tag: "RELEASE.2025-07-21T05-28-08Z"
 # Some reasonable requests instead of the bonkers defaults
 resources:
   requests:
