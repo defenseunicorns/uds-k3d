@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.14.4](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.3...v0.14.4) (2025-07-24)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.16.4 ([#233](https://github.com/defenseunicorns/uds-k3d/issues/233)) ([5271890](https://github.com/defenseunicorns/uds-k3d/commit/5271890e02e87810b49a8d06ba34e1be6106d54e))
+* **deps:** update dev-stack ([#237](https://github.com/defenseunicorns/uds-k3d/issues/237)) ([8aff8f8](https://github.com/defenseunicorns/uds-k3d/commit/8aff8f8645bac0827f39882d7b0100825a24fed5))
+* **deps:** update dev-stack ([#239](https://github.com/defenseunicorns/uds-k3d/issues/239)) ([859c685](https://github.com/defenseunicorns/uds-k3d/commit/859c685bf227b381193f1f92be129bdb0fc8dbc2))
+* **deps:** update githubactions to v0.27.9 ([#235](https://github.com/defenseunicorns/uds-k3d/issues/235)) ([50f681f](https://github.com/defenseunicorns/uds-k3d/commit/50f681f873757b0d3caeabe87dc46930c009ec81))
+* **deps:** update harden-runner to v2.13.0 ([#236](https://github.com/defenseunicorns/uds-k3d/issues/236)) ([a2c439e](https://github.com/defenseunicorns/uds-k3d/commit/a2c439e1e66b5cc9db99959edc2f427e6a030f63))
+* **deps:** update k8s-pause to v3.10.1 ([#234](https://github.com/defenseunicorns/uds-k3d/issues/234)) ([3c1d1be](https://github.com/defenseunicorns/uds-k3d/commit/3c1d1be4774296159463c555d248e5950f0157ee))
+* **deps:** update uds-cli to v0.27.8 ([#231](https://github.com/defenseunicorns/uds-k3d/issues/231)) ([ac3d6b5](https://github.com/defenseunicorns/uds-k3d/commit/ac3d6b5f6f463ede7f7b2be8bd959dc9d532a0d2))
+* update to latest k3s patch versions ([#238](https://github.com/defenseunicorns/uds-k3d/issues/238)) ([10f53a2](https://github.com/defenseunicorns/uds-k3d/commit/10f53a2d92584015e3c68277408f7198f365bfe2))
+
 ## [0.14.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.2...v0.14.3) (2025-06-30)
 
 
