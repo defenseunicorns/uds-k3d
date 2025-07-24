@@ -14,12 +14,16 @@ data:
             hostnames;
             {{- if .Values.adminDomain }}
             *.{{ .Values.adminDomain }} backend_admin;
+            {{ .Values.adminDomain }} backend_admin;
             {{- else }}
             *.admin.{{ .Values.domain }} backend_admin;
+            admin.{{ .Values.domain }} backend_admin;
             {{- end }}
             *.{{ .Values.domain }} backend_tenant;
+            {{ .Values.domain }} backend_tenant;
             {{- if .Values.customGateway | default false}}
             *.{{ .Values.customGateway.domainName }} backend_custom_gateway;
+            {{ .Values.customGateway.domainName }} backend_custom_gateway;
             {{- end }}
             {{- if .Values.passthrough.enabled | default false}}
             {{- range .Values.passthrough.subdomains }}
