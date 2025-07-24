@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.15.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.4...v0.15.0) (2025-07-24)
+
+
+### Features
+
+* add root domain to nginx config ([#240](https://github.com/defenseunicorns/uds-k3d/issues/240)) ([e84f6c1](https://github.com/defenseunicorns/uds-k3d/commit/e84f6c1f04ef067b06daeb4e28a8bc549514b1dd))
+
 ## [0.14.4](https://github.com/defenseunicorns/uds-k3d/compare/v0.14.3...v0.14.4) (2025-07-24)
 
 
