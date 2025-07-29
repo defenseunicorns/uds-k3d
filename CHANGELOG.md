@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.15.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.15.1...v0.15.2) (2025-07-29)
+
+
+### Bug Fixes
+
+* docker volume reference /Users/steven.gettys/go/src/github.com/defenseunicorns/uds-k3d instead of . ([#248](https://github.com/defenseunicorns/uds-k3d/issues/248)) ([c5dfa5b](https://github.com/defenseunicorns/uds-k3d/commit/c5dfa5b559c193ca463fe1df040c3dc21723b367))
+
+
+### Miscellaneous
+
+* **deps:** update githubactions to v0.27.10 ([#244](https://github.com/defenseunicorns/uds-k3d/issues/244)) ([2ef4564](https://github.com/defenseunicorns/uds-k3d/commit/2ef45643a0ffffb271bfe08b93d6bfc985b548cf))
+
 ## [0.15.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.15.0...v0.15.1) (2025-07-25)
 
 
