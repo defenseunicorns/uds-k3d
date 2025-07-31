@@ -37,4 +37,4 @@ images:
   localPathProvisioner:
     repository: rancher/local-path-provisioner
     # renovate: datasource=docker depName=rancher/local-path-provisioner
-    tag:  "v0.0.31"
+    tag:  "v0.0.32"
