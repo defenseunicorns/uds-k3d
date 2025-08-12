@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.16.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.15.2...v0.16.0) (2025-08-12)
+
+
+### Features
+
+* add default ulimit nofile for k3d ([#253](https://github.com/defenseunicorns/uds-k3d/issues/253)) ([914d1a1](https://github.com/defenseunicorns/uds-k3d/commit/914d1a1881e626d9c681b966d336d2bee45561d4))
+
+
+### Miscellaneous
+
+* **deps:** update checkout and download-artifact to v5 ([#251](https://github.com/defenseunicorns/uds-k3d/issues/251)) ([939046b](https://github.com/defenseunicorns/uds-k3d/commit/939046b58772aa96c06a67e3f84e5341d78f8d39))
+* **deps:** update dev-stack to v0.0.32 ([#249](https://github.com/defenseunicorns/uds-k3d/issues/249)) ([b36f337](https://github.com/defenseunicorns/uds-k3d/commit/b36f3377036183e8c5fab3ff1581f2ed4b0396fb))
+* **deps:** update uds-cli to v0.27.11 ([#252](https://github.com/defenseunicorns/uds-k3d/issues/252)) ([8df2306](https://github.com/defenseunicorns/uds-k3d/commit/8df2306d9b5ecb485deeb5a4f4502b535aa4b7f8))
+
 ## [0.15.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.15.1...v0.15.2) (2025-07-29)
 
 
