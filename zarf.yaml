@@ -19,6 +19,10 @@ variables:
     description: "K3d image to use"
     default: "rancher/k3s:v1.32.5-k3s1"
 
+  - name: K3D_ULIMIT_NOFILE
+    description: "Set ulimit for the number of files (nofile) to container runtime (Format: SOFT:HARD)"
+    default: "1048576:1048576"
+
   - name: K3D_EXTRA_ARGS
     description: "Optionally pass k3d arguments to the default"
     default: ""
@@ -101,6 +105,7 @@ components:
               -p "80:80@server:*" \
               -p "443:443@server:*" \
               --api-port 6550 \
+              --runtime-ulimit nofile="${ZARF_VAR_K3D_ULIMIT_NOFILE}" \
               --k3s-arg "--disable=traefik@server:*" \
               --k3s-arg "--disable=metrics-server@server:*" \
               --k3s-arg "--disable=servicelb@server:*" \
