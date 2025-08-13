@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.16.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.16.0...v0.16.1) (2025-08-13)
+
+
+### Miscellaneous
+
+* **deps:** update dependency defenseunicorns/uds-common to v1.17.1 ([#254](https://github.com/defenseunicorns/uds-k3d/issues/254)) ([aa82d29](https://github.com/defenseunicorns/uds-k3d/commit/aa82d297a594f89b979c822562a9f7bd95fb9bfd))
+
 ## [0.16.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.15.2...v0.16.0) (2025-08-12)
 
 
