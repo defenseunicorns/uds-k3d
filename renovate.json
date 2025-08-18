@@ -6,26 +6,32 @@
     "replacements:all",
     "workarounds:all"
   ],
+  "branchConcurrentLimit": 0,
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
   "packageRules": [
+    {
+      "matchFileNames": [
+        ".github/workflows/**",
+        ".github/actions/**",
+        "tasks.yaml"
+      ],
+      "groupName": "support-deps",
+      "commitMessageTopic": "support-deps"
+    },
     {
       "matchFileNames": [
         "chart/**",
         "**/zarf.yaml",
-        "values/*.yaml"
+        "values/*.yaml",
+        "tasks.yaml"
       ],
       "groupName": "dev-stack",
       "commitMessageTopic": "dev-stack",
       "matchPackageNames": [
-        "!rancher/k3s"
+        "!rancher/k3s",
+        "!defenseunicorns/uds-common"
       ]
-    },
-    {
-      "matchFileNames": [
-        ".github/workflows/**",
-        ".github/actions/**"
-      ],
-      "groupName": "githubactions",
-      "commitMessageTopic": "githubactions"
     }
   ]
 }
