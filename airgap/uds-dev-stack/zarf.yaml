@@ -43,7 +43,7 @@ components:
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" registry.k8s.io/pause:3.10.1 pause.tar
             description: Pull the pause image
           # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/nginx/nginx-unprivileged:1.29.0-alpine nginx.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/nginx/nginx-unprivileged:1.29.1-alpine nginx.tar
             description: Pull the nginx image
           # renovate: datasource=docker depName=quay.io/metallb/controller
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/metallb/controller:v0.15.2 metallb-controller.tar
