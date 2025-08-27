@@ -117,9 +117,9 @@ spec:
           command: ["nginx", "-g", "daemon off;"]
           ports:
             - containerPort: 80
-              hostPort: 80
+              hostPort: {{ .Values.nginx.httpPort | default 80 }}
             - containerPort: 443
-              hostPort: 443
+              hostPort: {{ .Values.nginx.httpsPort | default 443 }}
           {{- range .Values.extraPorts }}
             - containerPort: {{ . }}
               hostPort: {{ . }}
