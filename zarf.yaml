@@ -27,6 +27,10 @@ variables:
     description: "Optionally pass k3d arguments to the default"
     default: ""
 
+  - name: K3D_DEBUG
+    description: "Enable debug mode for k3d"
+    default: "false"
+
   - name: NGINX_EXTRA_PORTS
     description: "Optionally allow more ports through Nginx (combine with K3D_EXTRA_ARGS '-p <port>:<port>@server:*')"
     default: "[]"
@@ -113,18 +117,22 @@ components:
                 export K3D_HELPER_IMAGE_TAG=5.8.3
                 VOLUME_MOUNT="--volume k3s-airgap-images:/var/lib/rancher/k3s/agent/images"
               fi
+              DEBUG_FLAGS=""
+              if [ "${ZARF_VAR_K3D_DEBUG}" = "true" ]; then
+                DEBUG_FLAGS="--verbose --k3s-arg --kubelet-arg=container-log-max-files=10@server:* --k3s-arg --kubelet-arg=container-log-max-size=100Mi@server:* --k3s-arg --debug@server:*"
+              fi
               k3d cluster create \
-              -p "${ZARF_VAR_K3D_HTTP_PORT}:80@server:*" \
-              -p "${ZARF_VAR_K3D_HTTPS_PORT}:443@server:*" \
-              --api-port ${ZARF_VAR_K3D_API_PORT} \
-              --runtime-ulimit nofile="${ZARF_VAR_K3D_ULIMIT_NOFILE}" \
-              --k3s-arg "--disable=traefik@server:*" \
-              --k3s-arg "--disable=metrics-server@server:*" \
-              --k3s-arg "--disable=servicelb@server:*" \
-              --k3s-arg "--disable=local-storage@server:*" \
-              --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
-              ${VOLUME_MOUNT} \
-              ${ZARF_VAR_CLUSTER_NAME}
+                -p "${ZARF_VAR_K3D_HTTP_PORT}:80@server:*" \
+                -p "${ZARF_VAR_K3D_HTTPS_PORT}:443@server:*" \
+                --api-port ${ZARF_VAR_K3D_API_PORT} \
+                --runtime-ulimit nofile="${ZARF_VAR_K3D_ULIMIT_NOFILE}" \
+                --k3s-arg "--disable=traefik@server:*" \
+                --k3s-arg "--disable=metrics-server@server:*" \
+                --k3s-arg "--disable=servicelb@server:*" \
+                --k3s-arg "--disable=local-storage@server:*" \
+                --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
+                ${DEBUG_FLAGS} ${VOLUME_MOUNT} \
+                ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
         onSuccess:
           # Wait for CoreDNS to be available. This allows slow internet connections to complete before we move on and try to connect to a cluster that may or may not be ready to accept connections. CoreDNS is a deployment we can trust will always be there.
