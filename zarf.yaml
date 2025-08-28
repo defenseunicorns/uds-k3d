@@ -38,15 +38,15 @@ variables:
   - name: ADMIN_DOMAIN
     description: "Domain for admin services, defaults to `admin.DOMAIN`"
 
-  - name: API_PORT
+  - name: K3D_API_PORT
     description: "Kubernetes API server port for the cluster"
     default: "6550"
 
-  - name: HTTP_PORT
+  - name: K3D_HTTP_PORT
     description: "HTTP port mapping for the cluster"
     default: "80"
 
-  - name: HTTPS_PORT
+  - name: K3D_HTTPS_PORT
     description: "HTTPS port mapping for the cluster"
     default: "443"
 
@@ -114,9 +114,9 @@ components:
                 VOLUME_MOUNT="--volume k3s-airgap-images:/var/lib/rancher/k3s/agent/images"
               fi
               k3d cluster create \
-              -p "${ZARF_VAR_HTTP_PORT}:80@server:*" \
-              -p "${ZARF_VAR_HTTPS_PORT}:443@server:*" \
-              --api-port ${ZARF_VAR_API_PORT} \
+              -p "${ZARF_VAR_K3D_HTTP_PORT}:80@server:*" \
+              -p "${ZARF_VAR_K3D_HTTPS_PORT}:443@server:*" \
+              --api-port ${ZARF_VAR_K3D_API_PORT} \
               --runtime-ulimit nofile="${ZARF_VAR_K3D_ULIMIT_NOFILE}" \
               --k3s-arg "--disable=traefik@server:*" \
               --k3s-arg "--disable=metrics-server@server:*" \
@@ -137,7 +137,7 @@ components:
             description: "Wait for CoreDNS to be ready"
           - cmd: |
               echo "You can access this cluster over SSH:"
-              echo "ssh -N -L ${ZARF_VAR_HTTP_PORT}:localhost:${ZARF_VAR_HTTP_PORT} -L ${ZARF_VAR_HTTPS_PORT}:localhost:${ZARF_VAR_HTTPS_PORT} -L ${ZARF_VAR_API_PORT}:localhost:${ZARF_VAR_API_PORT} user@remote-host"
+              echo "ssh -N -L ${ZARF_VAR_K3D_HTTP_PORT}:localhost:${ZARF_VAR_K3D_HTTP_PORT} -L ${ZARF_VAR_K3D_HTTPS_PORT}:localhost:${ZARF_VAR_K3D_HTTPS_PORT} -L ${ZARF_VAR_K3D_API_PORT}:localhost:${ZARF_VAR_K3D_API_PORT} user@remote-host"
               echo
               echo "To get the kubeconfig:"
               echo "k3d kubeconfig get ${ZARF_VAR_CLUSTER_NAME}"
