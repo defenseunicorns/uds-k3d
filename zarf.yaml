@@ -137,7 +137,7 @@ components:
             description: "Wait for CoreDNS to be ready"
           - cmd: |
               echo "You can access this cluster over SSH:"
-              echo "ssh -N -L ${ZARF_VAR_HTTP_PORT}:localhost:80 -L ${ZARF_VAR_HTTPS_PORT}:localhost:443 -L ${ZARF_VAR_API_PORT}:localhost:6550"
+              echo "ssh -N -L ${ZARF_VAR_HTTP_PORT}:localhost:${ZARF_VAR_HTTP_PORT} -L ${ZARF_VAR_HTTPS_PORT}:localhost:${ZARF_VAR_HTTPS_PORT} -L ${ZARF_VAR_API_PORT}:localhost:${ZARF_VAR_API_PORT} user@remote-host"
               echo
               echo "To get the kubeconfig:"
               echo "k3d kubeconfig get ${ZARF_VAR_CLUSTER_NAME}"
@@ -188,12 +188,6 @@ components:
             # Defaults contain rewrites of `*.uds.dev` to the UDS core Istio tenant and admin gateways
             description: "CoreDNS overrides"
             path: coreDnsOverrides
-          - name: HTTP_PORT
-            description: "HTTP port mapping for the cluster"
-            path: nginx.httpPort
-          - name: HTTPS_PORT
-            description: "HTTPS port mapping for the cluster"
-            path: nginx.httpsPort
       - name: minio
         namespace: uds-dev-stack
         version: 5.4.0

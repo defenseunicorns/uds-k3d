@@ -1,9 +1,5 @@
 extraPorts: []
 
-nginx:
-  httpPort: 80
-  httpsPort: 443
-
 coreDnsOverrides: |
   rewrite stop {
     name regex (.*\.admin\.uds\.dev) admin-ingressgateway.istio-admin-gateway.svc.cluster.local answer auto
