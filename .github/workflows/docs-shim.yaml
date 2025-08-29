@@ -1,0 +1,37 @@
+name: CI Docs
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    # milestoned is added here as a workaround for release-please not triggering PR workflows (PRs should be added to a milestone to trigger the workflow).
+    types: [milestoned, opened, reopened, synchronize]
+    paths:
+      - "**.md"
+      - "**.jpg"
+      - "**.png"
+      - "**.gif"
+      - "**.svg"
+      - docs/**
+      - .vscode/**
+      - .gitignore
+      - renovate.json
+      - .codespellrc
+      - .release-please-config.json
+      - release-please-config.json
+      - CODEOWNERS
+      - LICENSE
+
+jobs:
+  deploy-airgap:
+    name: Deploy Airgap Package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture: [amd64] # Only test with amd64 for deployment
+
+    steps:
+      - name: Skipped
+        run: |
+          echo skipped
