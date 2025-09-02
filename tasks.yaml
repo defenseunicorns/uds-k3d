@@ -18,7 +18,7 @@ tasks:
     description: "Build uds-k3d"
     actions:
       - description: "Build UDS K3d package"
-        cmd: "uds zarf package create -a ${ARCH} --confirm --no-progress --skip-sbom"
+        cmd: "uds zarf package create -a ${ARCH} --confirm --skip-sbom"
 
   - name: deploy
     description: "Deploy uds-k3d package"
@@ -29,12 +29,12 @@ tasks:
             --set K3D_IMAGE=${IMAGE_NAME}:${VERSION} \
             --set K3D_EXTRA_ARGS="${K3D_EXTRA_ARGS}" \
             --set NGINX_EXTRA_PORTS="${NGINX_EXTRA_PORTS}" \
-            --no-progress --confirm
+            --confirm
 
   - name: validate
     actions:
       - task: validate-coredns
-      - cmd: uds zarf tools download-init --no-progress
+      - cmd: uds zarf tools download-init
         description: "Download the zarf init package"
       - task: validate-zarf-init
 
@@ -70,13 +70,13 @@ tasks:
         cmd: |
           set -e
           # Test zarf init due to containerd issue - https://github.com/defenseunicorns/zarf/issues/592
-          uds zarf init --confirm --no-progress
+          uds zarf init --confirm
 
   - name: build-airgap-package
     actions:
       - description: Build the airgap package
         cmd: |
-          uds zarf package create -a ${ARCH} --flavor airgap --confirm --no-progress \
+          uds zarf package create -a ${ARCH} --flavor airgap --confirm \
             --set K3S_VERSION="${VERSION}" --skip-sbom
 
       - description: Clean up airgap images
@@ -86,7 +86,7 @@ tasks:
     actions:
       - description: Deploy the airgap package
         cmd: |
-          uds zarf package deploy zarf-package-uds-k3d-${ARCH}-*.tar.zst --no-progress --confirm
+          uds zarf package deploy zarf-package-uds-k3d-${ARCH}-*.tar.zst --confirm
 
   - name: clean-airgap-images
     actions:
