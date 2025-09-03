@@ -3,7 +3,7 @@ includes:
 
 variables:
   - name: VERSION
-    default: "v1.32.5-k3s1"
+    default: "v1.33.4-k3s1"
   - name: IMAGE_NAME
     default: "rancher/k3s"
   - name: K3D_EXTRA_ARGS
