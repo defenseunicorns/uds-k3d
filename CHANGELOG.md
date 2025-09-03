@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.17.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.16.0...v0.17.0) (2025-09-03)
+
+
+### Features
+
+* add debug mode var ([#264](https://github.com/defenseunicorns/uds-k3d/issues/264)) ([476c7e7](https://github.com/defenseunicorns/uds-k3d/commit/476c7e7b4d90435c6bda355d5008bc23d22194b7))
+* make ports configurable ([#263](https://github.com/defenseunicorns/uds-k3d/issues/263)) ([c06e215](https://github.com/defenseunicorns/uds-k3d/commit/c06e215cb81ff9d64b048bd0df6cec3b29ef57f1))
+
+
+### Miscellaneous
+
+* add milestone trigger, docs-shim ([#265](https://github.com/defenseunicorns/uds-k3d/issues/265)) ([372bad2](https://github.com/defenseunicorns/uds-k3d/commit/372bad2d74024cb7a186415b9f86e9a46bb9ccd5))
+* **deps:** update dependency defenseunicorns/uds-common to v1.17.1 ([#254](https://github.com/defenseunicorns/uds-k3d/issues/254)) ([aa82d29](https://github.com/defenseunicorns/uds-k3d/commit/aa82d297a594f89b979c822562a9f7bd95fb9bfd))
+* **deps:** update nginx to v1.29.1 ([#256](https://github.com/defenseunicorns/uds-k3d/issues/256)) ([366a588](https://github.com/defenseunicorns/uds-k3d/commit/366a588c54c3811d0eec213aed910e0937fdb034))
+* **deps:** update release-please action to v4.3.0 ([#259](https://github.com/defenseunicorns/uds-k3d/issues/259)) ([1e3ca0f](https://github.com/defenseunicorns/uds-k3d/commit/1e3ca0fd39c4f75bc071c55234a4135ef5ab1f88))
+* **deps:** update support-deps to v1.18.0 ([#260](https://github.com/defenseunicorns/uds-k3d/issues/260)) ([787181a](https://github.com/defenseunicorns/uds-k3d/commit/787181a8d9b44113810f2c8dfeaab33126d26e6a))
+* drop deprecated zarf --no-progress flag ([#266](https://github.com/defenseunicorns/uds-k3d/issues/266)) ([815f30a](https://github.com/defenseunicorns/uds-k3d/commit/815f30a4af94a5340b6d651050aa12a2ec76bb74))
+* update k3s to 1.33.4 ([#267](https://github.com/defenseunicorns/uds-k3d/issues/267)) ([3ba4303](https://github.com/defenseunicorns/uds-k3d/commit/3ba4303f133ddbb946270ce52b722fcdf917ba42))
+* update renovate grouping and rate limits ([#258](https://github.com/defenseunicorns/uds-k3d/issues/258)) ([671090b](https://github.com/defenseunicorns/uds-k3d/commit/671090b71d8243e28aff7b17ef9e4e06441d903a))
+
 ## [0.16.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.15.2...v0.16.0) (2025-08-12)
 
 
