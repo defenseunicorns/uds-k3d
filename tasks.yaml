@@ -5,7 +5,7 @@ variables:
   - name: VERSION
     default: "v1.33.1-k3s1"
   - name: IMAGE_NAME
-    default: "ghcr.io/k3s-io/k3s"
+    default: "rancher/k3s"
   - name: K3D_EXTRA_ARGS
     default: ""
   - name: NGINX_EXTRA_PORTS

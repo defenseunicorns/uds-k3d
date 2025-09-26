@@ -31,7 +31,7 @@ components:
           # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-tools
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3d-io/k3d-tools:5.8.3 k3d-tools.tar
             description: Pull the 'k3d-tools' image
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3s-io/k3s:"###ZARF_PKG_TMPL_K3S_VERSION###" k3d-image.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" rancher/k3s:"###ZARF_PKG_TMPL_K3S_VERSION###" k3d-image.tar
             description: Pull the airgap 'k3s' image
           - cmd: |
               K3S_AIRGAP_IMAGES=$(echo "###ZARF_PKG_TMPL_K3S_VERSION###" | sed 's/-k3s/%2Bk3s/g')
@@ -44,6 +44,6 @@ components:
                   docker image load -i k3d-tools.tar
                   docker image load -i k3d-image.tar
                   docker volume create k3s-airgap-images
-                  docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v $PWD:/src ghcr.io/k3s-io/k3s:${ZARF_CONST_K3S_VERSION} -c "cp /src/k3s-airgap-images.tar.zst /dest"
+                  docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v $PWD:/src rancher/k3s:${ZARF_CONST_K3S_VERSION} -c "cp /src/k3s-airgap-images.tar.zst /dest"
                   rm k3d-proxy.tar k3d-tools.tar k3d-image.tar k3s-airgap-images.tar.zst
               description: Load the airgap images for k3d into Docker

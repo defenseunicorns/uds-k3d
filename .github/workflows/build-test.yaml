@@ -62,7 +62,7 @@ jobs:
     needs: build-package
     strategy:
       matrix:
-        image: ["ghcr.io/k3s-io/k3s"]
+        image: ["rancher/k3s"]
         version: ["v1.31.9-k3s1", "v1.32.5-k3s1", "v1.33.1-k3s1"]
         architecture: ["amd64"]
 
@@ -89,7 +89,7 @@ jobs:
 
       # Step is not currently being used, could be uncommented if custom image support is needed in the future
       # - name: Build the custom k3s image
-      #   if: ${{matrix.image}} != "ghcr.io/k3s-io/k3s"
+      #   if: ${{matrix.image}} != "rancher/k3s"
       #   run: uds run build-image --set VERSION=${{matrix.version}} --no-progress
 
       - name: Create and deploy the uds-k3d package
