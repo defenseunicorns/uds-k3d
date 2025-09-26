@@ -17,7 +17,7 @@ variables:
 
   - name: K3D_IMAGE
     description: "K3d image to use"
-    default: "rancher/k3s:v1.33.4-k3s1"
+    default: "ghcr.io/k3s-io/k3s:v1.33.1-k3s1"
 
   - name: K3D_ULIMIT_NOFILE
     description: "Set ulimit for the number of files (nofile) to container runtime (Format: SOFT:HARD)"

@@ -29,7 +29,7 @@
       "groupName": "dev-stack",
       "commitMessageTopic": "dev-stack",
       "matchPackageNames": [
-        "!rancher/k3s",
+        "!ghcr.io/k3s-io/k3s",
         "!defenseunicorns/uds-common"
       ]
     }
