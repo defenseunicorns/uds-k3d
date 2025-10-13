@@ -47,3 +47,10 @@ components:
                   docker run --rm --entrypoint /bin/sh -v k3s-airgap-images:/dest -v $PWD:/src rancher/k3s:${ZARF_CONST_K3S_VERSION} -c "cp /src/k3s-airgap-images.tar.zst /dest"
                   rm k3d-proxy.tar k3d-tools.tar k3d-image.tar k3s-airgap-images.tar.zst
               description: Load the airgap images for k3d into Docker
+      onRemove:
+        after:
+          - cmd: |
+              # Check and remove k3s-airgap-images volume if it exists
+              if [ -n "$(docker volume ls -q --filter name=^k3s-airgap-images$)" ]; then
+                docker volume rm "k3s-airgap-images"
+              fi
