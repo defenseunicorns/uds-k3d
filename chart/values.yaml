@@ -37,4 +37,10 @@ images:
   localPathProvisioner:
     repository: rancher/local-path-provisioner
     # renovate: datasource=docker depName=rancher/local-path-provisioner
-    tag:  "v0.0.32"
+    tag: "v0.0.32"
+
+metallb:
+  IPAddressPool: "###ZARF_VAR_BASE_IP###.200-###ZARF_VAR_BASE_IP###.215"
+
+nginx:
+  enabled: true

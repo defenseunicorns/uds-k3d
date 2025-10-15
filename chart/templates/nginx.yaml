@@ -1,3 +1,4 @@
+{{- if .Values.nginx.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -94,8 +95,9 @@ data:
     pid /tmp/nginx.pid;
 
     error_log /dev/stderr;
-
+{{- end }}
 ---
+{{- if .Values.nginx.enabled }}
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -132,3 +134,4 @@ spec:
         - name: config-volume
           configMap:
             name: nginx-config
+{{- end }}
