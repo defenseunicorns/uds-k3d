@@ -23,7 +23,7 @@ images:
   nginx:
     repository: quay.io/nginx/nginx-unprivileged
     # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
-    tag: "1.29.1-alpine"
+    tag: "1.29.2-alpine"
   busybox:
     repository: cgr.dev/chainguard/busybox
     tag: "latest"
