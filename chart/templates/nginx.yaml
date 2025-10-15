@@ -95,9 +95,8 @@ data:
     pid /tmp/nginx.pid;
 
     error_log /dev/stderr;
-{{- end }}
+    
 ---
-{{- if .Values.nginx.enabled }}
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
