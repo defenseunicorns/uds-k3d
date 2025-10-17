@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.18.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.17.1...v0.18.0) (2025-10-17)
+
+
+### Features
+
+* support variable overrides for multicluster ([#281](https://github.com/defenseunicorns/uds-k3d/issues/281)) ([ecac0dd](https://github.com/defenseunicorns/uds-k3d/commit/ecac0ddd95659267f4aab8a0bd2735b63588afa4))
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack to v1.29.2 ([#279](https://github.com/defenseunicorns/uds-k3d/issues/279)) ([83bea45](https://github.com/defenseunicorns/uds-k3d/commit/83bea45b337a3cdff504d69c03933aa5746b1068))
+* **deps:** update support-deps to v0.27.15 ([#276](https://github.com/defenseunicorns/uds-k3d/issues/276)) ([2587ec9](https://github.com/defenseunicorns/uds-k3d/commit/2587ec948d14f815eea63aea3ec1b22bdf5f8289))
+* **deps:** update uds-common to v1.20.4 ([#278](https://github.com/defenseunicorns/uds-k3d/issues/278)) ([1969ab2](https://github.com/defenseunicorns/uds-k3d/commit/1969ab2646aba50cef160281245ead62f974bd22))
+* **deps:** update uds-common to v1.20.5 ([#282](https://github.com/defenseunicorns/uds-k3d/issues/282)) ([e82c896](https://github.com/defenseunicorns/uds-k3d/commit/e82c8966a2bea1c5bb3a57d5aaa0a810837e6c3d))
+
 ## [0.17.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.17.0...v0.17.1) (2025-10-01)
 
 
