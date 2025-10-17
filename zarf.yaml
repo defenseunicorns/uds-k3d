@@ -131,7 +131,7 @@ components:
               fi
               HTTPS_PORT=""
               if [ -n "${ZARF_VAR_K3D_HTTPS_PORT}" ]; then
-                HTTP_PORT="-p ${ZARF_VAR_K3D_HTTPS_PORT}:443@server:*"
+                HTTPS_PORT="-p ${ZARF_VAR_K3D_HTTPS_PORT}:443@server:*"
               fi
               NETWORK=""
               if [ -n "${ZARF_VAR_K3D_NETWORK}" ]; then
