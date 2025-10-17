@@ -40,7 +40,7 @@ images:
     tag: "v0.0.32"
 
 metallb:
-  IPAddressPool: "###ZARF_VAR_BASE_IP###.200-###ZARF_VAR_BASE_IP###.215"
+  ipAddressPool: "###ZARF_VAR_BASE_IP###.200-###ZARF_VAR_BASE_IP###.215"
 
 nginx:
   enabled: true
