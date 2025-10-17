@@ -54,6 +54,10 @@ variables:
     description: "HTTPS port mapping for the cluster"
     default: "443"
 
+  - name: K3D_NETWORK
+    description: "Network to join k3d cluster to"
+    default: ""
+
 components:
   - name: destroy-cluster
     required: true
@@ -121,17 +125,32 @@ components:
               if [ "${ZARF_VAR_K3D_DEBUG}" = "true" ]; then
                 DEBUG_FLAGS="--verbose --k3s-arg --kubelet-arg=container-log-max-files=10@server:* --k3s-arg --kubelet-arg=container-log-max-size=100Mi@server:* --k3s-arg --debug@server:*"
               fi
+              HTTP_PORT=""
+              if [ -n "${ZARF_VAR_K3D_HTTP_PORT}" ]; then
+                HTTP_PORT="-p ${ZARF_VAR_K3D_HTTP_PORT}:80@server:*"
+              fi
+              HTTPS_PORT=""
+              if [ -n "${ZARF_VAR_K3D_HTTPS_PORT}" ]; then
+                HTTPS_PORT="-p ${ZARF_VAR_K3D_HTTPS_PORT}:443@server:*"
+              fi
+              NETWORK=""
+              if [ -n "${ZARF_VAR_K3D_NETWORK}" ]; then
+                NETWORK="--network ${ZARF_VAR_K3D_NETWORK}"
+              fi
               k3d cluster create \
-                -p "${ZARF_VAR_K3D_HTTP_PORT}:80@server:*" \
-                -p "${ZARF_VAR_K3D_HTTPS_PORT}:443@server:*" \
+                ${HTTP_PORT} \
+                ${HTTPS_PORT} \
                 --api-port ${ZARF_VAR_K3D_API_PORT} \
                 --runtime-ulimit nofile="${ZARF_VAR_K3D_ULIMIT_NOFILE}" \
                 --k3s-arg "--disable=traefik@server:*" \
                 --k3s-arg "--disable=metrics-server@server:*" \
                 --k3s-arg "--disable=servicelb@server:*" \
                 --k3s-arg "--disable=local-storage@server:*" \
-                --image ${ZARF_VAR_K3D_IMAGE} ${ZARF_VAR_K3D_EXTRA_ARGS} \
-                ${DEBUG_FLAGS} ${VOLUME_MOUNT} \
+                --image ${ZARF_VAR_K3D_IMAGE} \
+                ${ZARF_VAR_K3D_EXTRA_ARGS} \
+                ${NETWORK} \
+                ${DEBUG_FLAGS} \
+                ${VOLUME_MOUNT} \
                 ${ZARF_VAR_CLUSTER_NAME}
             description: "Create the cluster"
         onSuccess:
