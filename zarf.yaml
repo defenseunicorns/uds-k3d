@@ -197,13 +197,13 @@ components:
             description: "Restart CoreDNS to pick up internal DNS override for uds.dev"
     charts:
       - name: metallb
-        namespace: uds-dev-stack
+        namespace: kube-system
         url: https://metallb.github.io/metallb
         version: 0.15.2
         valuesFiles:
           - "values/metallb-values.yaml"
       - name: uds-dev-stack
-        namespace: uds-dev-stack
+        namespace: kube-system
         localPath: chart
         # x-release-please-start-version
         version: 0.19.0
