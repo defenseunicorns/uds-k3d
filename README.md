@@ -83,14 +83,6 @@ package:
       k3d_extra_args: "--k3s-arg --gpus=1 --k3s-arg --<arg2>=<value>"
 ```
 
-Or via the CLI:
-
-<!-- x-release-please-start-version -->
-
-`uds zarf package deploy oci://defenseunicorns/uds-k3d:0.19.0 --set K3D_EXTRA_ARGS="--k3s-arg --gpus=1 --k3s-arg --<arg2>=<value>"`
-
-<!-- x-release-please-end -->
-
 ### Additional Details and Documentation
 
 - [UDS Dev Stack](docs/DEV-STACK.md)
