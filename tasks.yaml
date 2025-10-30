@@ -14,6 +14,20 @@ variables:
     default: "${UDS_ARCH}"
 
 tasks:
+  - name: default
+    description: "Runs a full build, deploy, and test of the package"
+    actions:
+      - task: build
+      - task: deploy
+      - task: validate
+
+  - name: default-airgap
+    description: "Runs a full build, deploy, and test of the airgap package"
+    actions:
+      - task: build-airgap-package
+      - task: deploy-airgap-package
+      - task: validate # Note: for local usage this pulls zarf init
+
   - name: build
     description: "Build uds-k3d"
     actions:
@@ -86,7 +100,7 @@ tasks:
     actions:
       - description: Deploy the airgap package
         cmd: |
-          uds zarf package deploy zarf-package-uds-k3d-${ARCH}-*.tar.zst --confirm
+          uds zarf package deploy zarf-package-uds-k3d-${ARCH}-*-airgap.tar.zst --confirm
 
   - name: clean-airgap-images
     actions:
@@ -95,13 +109,3 @@ tasks:
           rm airgap/uds-dev-stack/*.tar
           rm airgap/k3d/*.tar
           rm airgap/k3d/*.tar.zst
-
-  # - name: build-image
-  #   actions:
-  #     - description: Build the custom k3s image
-  #       cmd: docker build -t ${IMAGE_NAME}:${VERSION} --build-arg K3S_TAG=${VERSION} docker/
-
-  # - name: publish-image
-  #   actions:
-  #     - description: Publish the custom k3s image
-  #       cmd: docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ${IMAGE_NAME}:${VERSION} docker

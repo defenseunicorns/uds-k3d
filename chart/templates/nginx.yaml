@@ -101,7 +101,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: nginx
-  namespace: uds-dev-stack
+  namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
