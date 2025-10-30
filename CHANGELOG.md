@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.19.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.1...v0.19.2) (2025-10-30)
+
+
+### Documentation
+
+* handle airgap version ([#292](https://github.com/defenseunicorns/uds-k3d/issues/292)) ([dc423f6](https://github.com/defenseunicorns/uds-k3d/commit/dc423f68c170045771be8e030c3d2ff5fbd03cf7))
+
 ## [0.19.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.0...v0.19.1) (2025-10-30)
 
 
