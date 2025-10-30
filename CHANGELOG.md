@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.19.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.0...v0.19.1) (2025-10-30)
+
+
+### Miscellaneous
+
+* **deps:** update support-deps to v1.21.1 ([#289](https://github.com/defenseunicorns/uds-k3d/issues/289)) ([e5eca19](https://github.com/defenseunicorns/uds-k3d/commit/e5eca199401815c2a5d8660f55908c4178c22e69))
+* move uds-dev-stack to kube-system, cleanup docs ([#291](https://github.com/defenseunicorns/uds-k3d/issues/291)) ([fbb0c1f](https://github.com/defenseunicorns/uds-k3d/commit/fbb0c1fd686b8009a9620a3d3221487837fe05e3))
+
 ## [0.19.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.18.0...v0.19.0) (2025-10-27)
 
 
