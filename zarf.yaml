@@ -172,6 +172,10 @@ components:
               echo "This cluster can be destroyed with:"
               echo "k3d cluster delete ${ZARF_VAR_CLUSTER_NAME}"
             description: "Print out information about how to access the cluster remotely"
+      onRemove:
+        after:
+          - cmd: k3d cluster delete uds
+            description: "Destroy the cluster"
 
   - name: uds-dev-stack-airgap-images
     required: true
