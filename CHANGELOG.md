@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.19.4](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.3...v0.19.4) (2026-01-05)
+
+
+### Miscellaneous
+
+* **deps:** update local-path-provisioner to v0.0.33 ([#306](https://github.com/defenseunicorns/uds-k3d/issues/306)) ([089b2eb](https://github.com/defenseunicorns/uds-k3d/commit/089b2ebf3a9f4e82a15b88a89e4534a07d9823f2))
+* **deps:** update support-deps ([#304](https://github.com/defenseunicorns/uds-k3d/issues/304)) ([41ef7b2](https://github.com/defenseunicorns/uds-k3d/commit/41ef7b2e4cd844768e7e5a55e1a61d1aeee4c074))
+* **deps:** update support-deps ([#305](https://github.com/defenseunicorns/uds-k3d/issues/305)) ([8fee79d](https://github.com/defenseunicorns/uds-k3d/commit/8fee79d8a70b9bb84dba4bd9f9b1248c2eb66fc1))
+* update to k3s 1.34.3 by default ([#308](https://github.com/defenseunicorns/uds-k3d/issues/308)) ([371356f](https://github.com/defenseunicorns/uds-k3d/commit/371356fd04921df37294717a4a14c3ba4902b080))
+
 ## [0.19.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.2...v0.19.3) (2025-12-10)
 
 
