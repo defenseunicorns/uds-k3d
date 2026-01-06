@@ -33,7 +33,7 @@ components:
       onCreate:
         before:
           # renovate: datasource=docker depName=rancher/local-path-provisioner
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" rancher/local-path-provisioner:v0.0.33 local-path-provisioner.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" rancher/local-path-provisioner:v0.0.34 local-path-provisioner.tar
             description: Pull the local-path-provisioner image
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" cgr.dev/chainguard/busybox:latest busybox.tar
             description: Pull the busybox image
