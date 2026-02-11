@@ -70,7 +70,7 @@ tasks:
         cmd: |
           set -e
           # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
-          FOO_IP=$(kubectl run test --image=quay.io/nginx/nginx-unprivileged:1.29.3-alpine -q --restart=Never --rm -i -- sh -c "getent hosts foo.uds.dev | awk '{print \$1}'")
+          FOO_IP=$(kubectl run test --image=quay.io/nginx/nginx-unprivileged:1.29.5-alpine -q --restart=Never --rm -i -- sh -c "getent hosts foo.uds.dev | awk '{print \$1}'")
           if [ "${FOO_IP}" != "127.0.0.1" ]; then
             echo "CoreDNS is resolving foo.uds.dev to host.k3d.internal"
           else
