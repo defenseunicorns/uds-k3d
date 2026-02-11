@@ -39,7 +39,7 @@ jobs:
         uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: v0.27.21
+          version: v0.28.1
 
       - name: Environment setup
         run: |
@@ -68,7 +68,7 @@ jobs:
 
     steps:
       - name: Harden Runner - Block Egress
-        uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
+        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
         with:
           egress-policy: block
           allowed-endpoints: >
