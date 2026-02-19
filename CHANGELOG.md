@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.19.5](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.4...v0.19.5) (2026-02-19)
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack to v0.0.34 ([#310](https://github.com/defenseunicorns/uds-k3d/issues/310)) ([2e6745a](https://github.com/defenseunicorns/uds-k3d/commit/2e6745adf18b1b81c5a2079dae82f60cd9e061a5))
+* **deps:** update nginx to v1.29.5 ([#313](https://github.com/defenseunicorns/uds-k3d/issues/313)) ([e958284](https://github.com/defenseunicorns/uds-k3d/commit/e958284abe1dee727fa3fc489db4c475359044a7))
+* **deps:** update support-deps ([#309](https://github.com/defenseunicorns/uds-k3d/issues/309)) ([f1c5bb0](https://github.com/defenseunicorns/uds-k3d/commit/f1c5bb0172ed7dee5b703a5a5cc11211aa76c6e2))
+* **deps:** update support-deps ([#312](https://github.com/defenseunicorns/uds-k3d/issues/312)) ([c3c27d3](https://github.com/defenseunicorns/uds-k3d/commit/c3c27d3f16494c0cc1bc46d8c010328b61deb45f))
+* **deps:** update support-deps ([#314](https://github.com/defenseunicorns/uds-k3d/issues/314)) ([674ed19](https://github.com/defenseunicorns/uds-k3d/commit/674ed191d61db0545807599666e30c47169cf5a1))
+* **deps:** update support-deps to v0.28.2 ([#315](https://github.com/defenseunicorns/uds-k3d/issues/315)) ([9694b7f](https://github.com/defenseunicorns/uds-k3d/commit/9694b7f57ef072132c156ffac93b0a8b01338415))
+* update to k3s 1.34.4 by default ([#316](https://github.com/defenseunicorns/uds-k3d/issues/316)) ([9cd8eed](https://github.com/defenseunicorns/uds-k3d/commit/9cd8eed7f623117233324297a9593c543ccd265d))
+
 ## [0.19.4](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.3...v0.19.4) (2026-01-05)
 
 
