@@ -48,6 +48,18 @@ jobs:
             --set GH_TOKEN="${{ secrets.GITHUB_TOKEN }}"
         shell: bash
 
+      - uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
+
+      - name: Build k3s image for airgap packaging
+        run: |
+          K3S_VERSION=$(grep -A1 'datasource=docker depName=ghcr.io/defenseunicorns/uds-k3d/k3s' tasks.yaml | grep 'default:' | sed 's/.*"\(.*\)".*/\1/')
+          docker buildx build \
+            --platform linux/${{ matrix.architecture }} \
+            --build-arg K3S_TAG="${K3S_VERSION}" \
+            --output "type=docker,dest=airgap/k3d/k3d-image.tar" \
+            --tag "ghcr.io/defenseunicorns/uds-k3d/k3s:${K3S_VERSION}" \
+            docker/
+
       - name: Create the airgap package
         run: uds run build-airgap-package --set ARCH=${{ matrix.architecture }}
 
