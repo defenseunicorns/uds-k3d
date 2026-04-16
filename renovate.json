@@ -14,7 +14,8 @@
       "matchFileNames": [
         ".github/workflows/**",
         ".github/actions/**",
-        "tasks.yaml"
+        "tasks.yaml",
+        "docker/Dockerfile"
       ],
       "groupName": "support-deps",
       "commitMessageTopic": "support-deps"

@@ -46,6 +46,6 @@ uds run publish-image --set VERSION=<k3s-version>
 k3s version bumps require two separate Renovate PRs in sequence:
 
 1. **`k3s-image` group PR** — updates the k3s version in `publish-image.yaml` and `build-test.yaml`. When merged, CI rebuilds and publishes the new image to GHCR.
-2. **`dev-stack` group PR** — updates `zarf.yaml` and `airgap/k3d/zarf.yaml` to reference the newly published image.
+2. **Second `k3s-image` group PR** — updates `zarf.yaml`, `airgap/k3d/zarf.yaml`, and `tasks.yaml` to reference the newly published image.
 
 The `tasks.yaml` `VERSION` variable carries a `datasource=docker depName=ghcr.io/defenseunicorns/uds-k3d/k3s` Renovate annotation so Renovate updates it only after the new image is available in GHCR.
