@@ -52,7 +52,7 @@ jobs:
 
       - name: Build k3s image for airgap packaging
         run: |
-          K3S_VERSION=$(grep -A1 'datasource=docker depName=ghcr.io/defenseunicorns/uds-k3d/k3s' tasks.yaml | grep 'default:' | sed 's/.*"\(.*\)".*/\1/')
+          K3S_VERSION=$(grep -A1 'datasource=github-releases depName=k3s-io/k3s' tasks.yaml | grep 'default:' | sed 's/.*"\(.*\)".*/\1/')
           docker buildx build \
             --platform linux/${{ matrix.architecture }} \
             --build-arg K3S_TAG="${K3S_VERSION}" \
