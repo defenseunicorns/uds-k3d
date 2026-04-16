@@ -3,9 +3,10 @@ includes:
 
 variables:
   - name: VERSION
+    # renovate: datasource=docker depName=ghcr.io/defenseunicorns/uds-k3d/k3s versioning=docker
     default: "v1.34.4-k3s1"
   - name: IMAGE_NAME
-    default: "rancher/k3s"
+    default: "ghcr.io/defenseunicorns/uds-k3d/k3s"
   - name: K3D_EXTRA_ARGS
     default: ""
   - name: NGINX_EXTRA_PORTS
@@ -27,6 +28,27 @@ tasks:
       - task: build-airgap-package
       - task: deploy-airgap-package
       - task: validate # Note: for local usage this pulls zarf init
+
+  - name: build-image
+    description: "Build the custom k3s image with glibc support for FIPS CNI compatibility"
+    actions:
+      - description: "Build custom k3s image"
+        cmd: |
+          docker build \
+            --build-arg K3S_TAG=${VERSION} \
+            --tag ${IMAGE_NAME}:${VERSION} \
+            docker/
+
+  - name: publish-image
+    description: "Publish the custom k3s image (multi-platform) to the registry"
+    actions:
+      - description: "Publish custom k3s image"
+        cmd: |
+          docker buildx build --push \
+            --platform linux/amd64,linux/arm64 \
+            --build-arg K3S_TAG=${VERSION} \
+            --tag ${IMAGE_NAME}:${VERSION} \
+            docker/
 
   - name: build
     description: "Build uds-k3d"

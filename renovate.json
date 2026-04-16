@@ -29,9 +29,17 @@
       "groupName": "dev-stack",
       "commitMessageTopic": "dev-stack",
       "matchPackageNames": [
-        "!rancher/k3s",
+        "!ghcr.io/defenseunicorns/uds-k3d/k3s",
         "!defenseunicorns/uds-common"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "k3s-io/k3s",
+        "ghcr.io/defenseunicorns/uds-k3d/k3s"
+      ],
+      "groupName": "k3s-image",
+      "commitMessageTopic": "k3s-image"
     }
   ]
 }
