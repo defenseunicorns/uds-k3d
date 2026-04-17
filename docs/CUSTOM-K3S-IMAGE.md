@@ -48,4 +48,4 @@ k3s version bumps use a two-PR flow:
 1. **`k3s-image` group PR**: updates `publish-image.yaml`, `build-test.yaml`, and `tasks.yaml` together (all use `datasource=github-releases depName=k3s-io/k3s`). CI builds the image locally so the PR passes without GHCR. When merged, `publish-image.yaml` triggers and publishes the new image to GHCR.
 2. **Second `k3s-image` group PR**: updates `zarf.yaml`'s `K3D_IMAGE` default once the new Docker image is available in GHCR. This is cosmetic; it only affects users deploying directly from the OCI package without overriding `K3D_IMAGE`.
 
-`airgap/k3d/zarf.yaml` has no separate version annotation; it receives the version at package create time via `--set K3S_VERSION` from `tasks.yaml`.
+The airgap package (`airgap/k3d/zarf.yaml`) has no separate version annotation. It builds the custom k3s image locally during `zarf package create` using the version passed via `--set K3S_VERSION` from `tasks.yaml`, so it picks up Phase 1 version bumps immediately without a GHCR dependency.
