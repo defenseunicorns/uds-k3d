@@ -14,8 +14,7 @@
       "matchFileNames": [
         ".github/workflows/**",
         ".github/actions/**",
-        "tasks.yaml",
-        "docker/Dockerfile"
+        "tasks.yaml"
       ],
       "groupName": "support-deps",
       "commitMessageTopic": "support-deps"
@@ -30,23 +29,17 @@
       "groupName": "dev-stack",
       "commitMessageTopic": "dev-stack",
       "matchPackageNames": [
-        "!ghcr.io/defenseunicorns/uds-k3d/k3s",
+        "!k3s-io/k3s",
         "!defenseunicorns/uds-common"
       ]
     },
     {
       "matchPackageNames": [
-        "k3s-io/k3s"
+        "k3s-io/k3s",
+        "cgr.dev/chainguard/wolfi-base"
       ],
-      "groupName": "k3s-upstream",
-      "commitMessageTopic": "k3s-upstream"
-    },
-    {
-      "matchPackageNames": [
-        "ghcr.io/defenseunicorns/uds-k3d/k3s"
-      ],
-      "groupName": "k3s-image",
-      "commitMessageTopic": "k3s-image"
+      "groupName": "k3s",
+      "commitMessageTopic": "k3s"
     }
   ]
 }
