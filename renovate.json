@@ -36,7 +36,13 @@
     },
     {
       "matchPackageNames": [
-        "k3s-io/k3s",
+        "k3s-io/k3s"
+      ],
+      "groupName": "k3s-upstream",
+      "commitMessageTopic": "k3s-upstream"
+    },
+    {
+      "matchPackageNames": [
         "ghcr.io/defenseunicorns/uds-k3d/k3s"
       ],
       "groupName": "k3s-image",

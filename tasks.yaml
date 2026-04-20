@@ -35,6 +35,7 @@ tasks:
       - description: "Build custom k3s image"
         cmd: |
           docker build \
+            --platform linux/${ARCH} \
             --build-arg K3S_TAG=${VERSION} \
             --tag ${IMAGE_NAME}:${VERSION} \
             docker/
