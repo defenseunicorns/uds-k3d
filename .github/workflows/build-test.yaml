@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        architecture: [amd64]
+        architecture: [amd64, arm64]
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -58,13 +58,13 @@ jobs:
           retention-days: 1
 
   test-clean-install:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.architecture == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     needs: build-package
     strategy:
       matrix:
         # renovate: datasource=github-releases depName=k3s-io/k3s versioning=semver
         version: ["v1.34.4-k3s1"]
-        architecture: ["amd64"]
+        architecture: ["amd64", "arm64"]
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -88,10 +88,10 @@ jobs:
           path: .
 
       - name: Build the custom k3s image
-        run: uds run build-image --set VERSION=${{ matrix.version }} --no-progress
+        run: uds run build-image --set VERSION=${{ matrix.version }} --set ARCH=${{ matrix.architecture }} --no-progress
 
       - name: Create and deploy the uds-k3d package
-        run: uds run deploy --set VERSION=${{ matrix.version }} --no-progress
+        run: uds run deploy --set VERSION=${{ matrix.version }} --set ARCH=${{ matrix.architecture }} --no-progress
 
       - name: Validate uds-k3d package
         run: uds run validate --no-progress
