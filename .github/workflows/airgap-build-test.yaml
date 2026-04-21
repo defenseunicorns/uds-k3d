@@ -94,7 +94,7 @@ jobs:
         uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: v0.27.1
+          version: v0.30.2
 
       - name: Download Zarf Init Package
         run: |
@@ -109,7 +109,7 @@ jobs:
       - name: Deploy the airgap package
         run: uds run deploy-airgap-package --no-progress
         shell: bash
-      
+
       - name: Validate uds-k3d package
         run: |
           uds run validate-airgap --no-progress

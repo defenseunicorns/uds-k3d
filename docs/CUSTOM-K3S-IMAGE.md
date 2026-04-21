@@ -43,9 +43,10 @@ uds run publish-image --set VERSION=<k3s-version>
 
 ## Renovate Updates
 
-k3s version bumps use a two-PR flow:
+This repo intentionally stays n-1 on k3s (one minor version behind latest). The `allowedVersions: "<1.35"` constraint in `renovate.json` enforces this; update it manually when adopting a new minor version.
 
-1. **`k3s-image` group PR**: updates `publish-image.yaml`, `build-test.yaml`, and `tasks.yaml` together (all use `datasource=github-releases depName=k3s-io/k3s`). CI builds the image locally so the PR passes without GHCR. When merged, `publish-image.yaml` triggers and publishes the new image to GHCR.
-2. **Second `k3s-image` group PR**: updates `zarf.yaml`'s `K3D_IMAGE` default once the new Docker image is available in GHCR. This is cosmetic; it only affects users deploying directly from the OCI package without overriding `K3D_IMAGE`.
+All k3s references track the upstream `k3s-io/k3s` GitHub releases directly, so version bumps come in a **single PR** that updates `tasks.yaml`, `build-test.yaml`, and `zarf.yaml`'s `K3D_IMAGE` default together. CI passes because both the connected and airgap builds construct the custom image locally, with no GHCR pull during CI. After the PR merges, `publish-image.yaml` triggers and publishes the new image to GHCR.
 
-The airgap package (`airgap/k3d/zarf.yaml`) has no separate version annotation. It builds the custom k3s image locally during `zarf package create` using the version passed via `--set K3S_VERSION` from `tasks.yaml`, so it picks up Phase 1 version bumps immediately without a GHCR dependency.
+The airgap package builds the custom k3s image locally during `zarf package create` using the version from `tasks.yaml`, so it has no GHCR dependency at package creation time.
+
+`cgr.dev/chainguard/wolfi-base` (the glibc source) is grouped with k3s in Renovate since it directly affects the published image artifact.
