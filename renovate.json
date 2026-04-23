@@ -19,7 +19,7 @@
       "groupName": "support-deps",
       "commitMessageTopic": "support-deps",
       "matchPackageNames": [
-        "!k3s-io/k3s"
+        "!rancher/k3s"
       ]
     },
     {
@@ -32,33 +32,22 @@
       "groupName": "dev-stack",
       "commitMessageTopic": "dev-stack",
       "matchPackageNames": [
-        "!k3s-io/k3s",
+        "!rancher/k3s",
         "!defenseunicorns/uds-common"
       ]
     },
     {
       "matchPackageNames": [
-        "k3s-io/k3s",
+        "rancher/k3s",
         "cgr.dev/chainguard/wolfi-base"
       ],
       "groupName": "k3s",
       "commitMessageTopic": "k3s"
     },
     {
-      "matchPackageNames": ["k3s-io/k3s"],
+      "matchPackageNames": ["rancher/k3s"],
       "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)[+-]k3s(?<build>\\d+)$",
       "allowedVersions": "<1.36"
-    }
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["(^|/)zarf\\.yaml$"],
-      "matchStrings": [
-        "# renovate-tag: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\n(?<indent>\\s+)default: \"(?<prefix>[^:]+):(?<currentValue>[^\"]+)\""
-      ],
-      "versioningTemplate": "{{{versioning}}}",
-      "autoReplaceStringTemplate": "# renovate-tag: datasource={{{datasource}}} depName={{{depName}}} versioning={{{versioning}}}\n{{{indent}}}default: \"{{{prefix}}}:{{{replace '\\+k3s' '-k3s' newValue}}}\""
     }
   ]
 }
