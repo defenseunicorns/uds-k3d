@@ -47,7 +47,7 @@
     {
       "matchPackageNames": ["k3s-io/k3s"],
       "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)[+-]k3s(?<build>\\d+)$",
-      "allowedVersions": "<1.35"
+      "allowedVersions": "<1.36"
     }
   ],
   "customManagers": [
