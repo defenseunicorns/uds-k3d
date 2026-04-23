@@ -3,7 +3,7 @@ includes:
 
 variables:
   - name: VERSION
-    # renovate: datasource=github-releases depName=k3s-io/k3s versioning=semver
+    # renovate: datasource=docker depName=rancher/k3s versioning=semver
     default: "v1.34.4-k3s1"
   - name: IMAGE_NAME
     default: "ghcr.io/defenseunicorns/uds-k3d/k3s"

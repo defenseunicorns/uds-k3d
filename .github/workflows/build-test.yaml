@@ -62,7 +62,7 @@ jobs:
     needs: build-package
     strategy:
       matrix:
-        # renovate: datasource=github-releases depName=k3s-io/k3s versioning=semver
+        # renovate: datasource=docker depName=rancher/k3s versioning=semver
         version: ["v1.34.4-k3s1"]
         architecture: ["amd64", "arm64"]
 
