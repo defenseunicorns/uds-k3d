@@ -47,7 +47,7 @@
     {
       "matchPackageNames": ["rancher/k3s"],
       "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)[+-]k3s(?<build>\\d+)$",
-      "allowedVersions": "<1.36"
+      "allowedVersions": "/^v1\\.3[0-5]\\.[0-9]/"
     }
   ],
   "customManagers": [
@@ -55,10 +55,9 @@
       "customType": "regex",
       "managerFilePatterns": ["/\\.github/workflows/.*\\.yaml$/"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\n(?<indent>\\s+)version: \\[\"(?<currentValue>[^\"]+)\"\\]"
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\n\\s+version: \\[\"(?<currentValue>[^\"]+)\"\\]"
       ],
-      "versioningTemplate": "{{{versioning}}}",
-      "autoReplaceStringTemplate": "# renovate: datasource={{{datasource}}} depName={{{depName}}} versioning={{{versioning}}}\n{{{indent}}}version: [\"{{{newValue}}}\"]"
+      "versioningTemplate": "{{{versioning}}}"
     }
   ]
 }
