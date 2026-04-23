@@ -80,6 +80,7 @@ package:
 ### Additional Details and Documentation
 
 - [UDS Dev Stack](docs/DEV-STACK.md)
+- [Custom k3s Image](docs/CUSTOM-K3S-IMAGE.md)
 - [Configuring Minio](docs/MINIO.md)
 - [DNS Assumptions](docs/DNS.md)
 - [Airgap](docs/AIRGAP.md)
