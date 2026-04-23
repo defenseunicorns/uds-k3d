@@ -39,7 +39,7 @@ jobs:
         uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: v0.30.2
+          version: v0.30.3
 
       - name: Environment setup
         run: |
@@ -72,7 +72,7 @@ jobs:
 
     steps:
       - name: Harden Runner - Block Egress
-        uses: step-security/harden-runner@f808768d1510423e83855289c910610ca9b43176 # v2.17.0
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
         with:
           egress-policy: block
           allowed-endpoints: >
@@ -94,7 +94,7 @@ jobs:
         uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: v0.30.2
+          version: v0.30.3
 
       - name: Download Zarf Init Package
         run: |
