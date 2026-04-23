@@ -17,7 +17,7 @@ variables:
 
   - name: K3D_IMAGE
     description: "K3d image to use"
-    # renovate-tag: datasource=docker depName=rancher/k3s versioning=semver
+    # renovate: datasource=docker depName=rancher/k3s versioning=semver
     default: "ghcr.io/defenseunicorns/uds-k3d/k3s:v1.34.4-k3s1"
 
   - name: K3D_ULIMIT_NOFILE
