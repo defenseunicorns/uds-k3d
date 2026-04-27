@@ -4,7 +4,7 @@
 # K3S_TAG has no default; callers must pass --build-arg K3S_TAG=<version>.
 ARG K3S_TAG
 # Digest-pinned for reproducible builds; managed by Renovate's Docker manager.
-ARG WOLFI_IMAGE="cgr.dev/chainguard/wolfi-base:latest@sha256:70750dfde91b4c5804b4df269121253fbdff73a9122925c7acc067aa33f9f55e"
+ARG WOLFI_IMAGE="cgr.dev/chainguard/wolfi-base:latest@sha256:d6e31fc9dad5fd76d7160ba833502865e17c226ab261cb6893a0624b68198d7b"
 
 FROM ${WOLFI_IMAGE} AS wolfi
 FROM rancher/k3s:${K3S_TAG}
