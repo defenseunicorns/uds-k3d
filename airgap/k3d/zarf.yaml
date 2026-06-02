@@ -26,10 +26,10 @@ components:
       onCreate:
         before:
           # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-proxy
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3d-io/k3d-proxy:5.8.3 k3d-proxy.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3d-io/k3d-proxy:5.9.0 k3d-proxy.tar
             description: Pull the 'k3d-proxy' image
           # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-tools
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3d-io/k3d-tools:5.8.3 k3d-tools.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/k3d-io/k3d-tools:5.9.0 k3d-tools.tar
             description: Pull the 'k3d-tools' image
           - cmd: |
               docker buildx build \
