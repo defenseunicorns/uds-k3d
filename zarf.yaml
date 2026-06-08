@@ -147,6 +147,8 @@ components:
                 --k3s-arg "--disable=metrics-server@server:*" \
                 --k3s-arg "--disable=servicelb@server:*" \
                 --k3s-arg "--disable=local-storage@server:*" \
+                --k3s-arg "--kube-cloud-controller-manager-arg=requestheader-client-ca-file=/var/lib/rancher/k3s/server/tls/request-header-ca.crt@server:*" \
+                --k3s-arg "--kube-cloud-controller-manager-arg=client-ca-file=/var/lib/rancher/k3s/server/tls/client-ca.crt@server:*" \
                 --image ${ZARF_VAR_K3D_IMAGE} \
                 ${ZARF_VAR_K3D_EXTRA_ARGS} \
                 ${NETWORK} \
