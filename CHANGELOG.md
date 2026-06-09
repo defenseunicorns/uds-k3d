@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.20.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.0...v0.20.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* avoid k3s ccm bootstrap configmap race ([#350](https://github.com/defenseunicorns/uds-k3d/issues/350)) ([00b2e00](https://github.com/defenseunicorns/uds-k3d/commit/00b2e00f6a7ab8290a922c81c409c352113afe04))
+* update codeowners ([#343](https://github.com/defenseunicorns/uds-k3d/issues/343)) ([1556a04](https://github.com/defenseunicorns/uds-k3d/commit/1556a04e20353d7d285fac0b64b79b99dfec12a0))
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack ([#349](https://github.com/defenseunicorns/uds-k3d/issues/349)) ([15174ed](https://github.com/defenseunicorns/uds-k3d/commit/15174edeb65f5130d9f73cd8e974a21cee4a241b))
+* **deps:** update dev-stack to v0.0.36 ([#346](https://github.com/defenseunicorns/uds-k3d/issues/346)) ([5f3e799](https://github.com/defenseunicorns/uds-k3d/commit/5f3e7990ec28be75c3a9ce1e0318423e12cf8d1b))
+* **deps:** update k3s ([#341](https://github.com/defenseunicorns/uds-k3d/issues/341)) ([bdc0a60](https://github.com/defenseunicorns/uds-k3d/commit/bdc0a60eed740f77085d24fe21e84ec12b689688))
+* **deps:** update k3s ([#348](https://github.com/defenseunicorns/uds-k3d/issues/348)) ([431140b](https://github.com/defenseunicorns/uds-k3d/commit/431140bea1e8f8385276ff78ddce4049516fc055))
+* **deps:** update k3s to 4ac37af ([#345](https://github.com/defenseunicorns/uds-k3d/issues/345)) ([792ee3e](https://github.com/defenseunicorns/uds-k3d/commit/792ee3ee9a102d93017323bfae1b09c2a5f0eb3b))
+* **deps:** update support-deps ([#344](https://github.com/defenseunicorns/uds-k3d/issues/344)) ([bc5deac](https://github.com/defenseunicorns/uds-k3d/commit/bc5deaca4ceb5c8fdf050521af07e2836da79f5c))
+* **deps:** update support-deps ([#347](https://github.com/defenseunicorns/uds-k3d/issues/347)) ([0cb8a07](https://github.com/defenseunicorns/uds-k3d/commit/0cb8a071f9dc4ed119fb118b45b9933e1494df95))
+* **deps:** update support-deps to v5 ([#340](https://github.com/defenseunicorns/uds-k3d/issues/340)) ([40fb50d](https://github.com/defenseunicorns/uds-k3d/commit/40fb50d3ac60204f97a656fd9581f3a390983f25))
+
 ## [0.20.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.19.5...v0.20.0) (2026-04-23)
 
 
