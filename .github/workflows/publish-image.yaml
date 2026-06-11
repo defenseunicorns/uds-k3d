@@ -1,3 +1,6 @@
+# Copyright 2026 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
 name: Publish k3s image
 
 on:
@@ -15,7 +18,7 @@ jobs:
     strategy:
       matrix:
         # renovate: datasource=docker depName=rancher/k3s versioning=semver
-        version: ["v1.35.5-k3s1"]
+        version: [v1.35.5-k3s1]
 
     permissions:
       contents: read

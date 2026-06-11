@@ -1,3 +1,6 @@
+# Copyright 2026 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
 extraPorts: []
 
 coreDnsOverrides: |
@@ -23,21 +26,21 @@ images:
   nginx:
     repository: quay.io/nginx/nginx-unprivileged
     # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
-    tag: "1.31.1-alpine"
+    tag: 1.31.1-alpine
   busybox:
     repository: cgr.dev/chainguard/busybox
-    tag: "latest"
+    tag: latest
   wolfiBase:
     repository: cgr.dev/chainguard/wolfi-base
-    tag: "latest"
+    tag: latest
   pause:
     repository: registry.k8s.io/pause
     # renovate: datasource=docker depName=registry.k8s.io/pause
-    tag: "3.10.2"
+    tag: 3.10.2
   localPathProvisioner:
     repository: rancher/local-path-provisioner
     # renovate: datasource=docker depName=rancher/local-path-provisioner
-    tag: "v0.0.36"
+    tag: v0.0.36
 
 metallb:
   ipAddressPool: "###ZARF_VAR_BASE_IP###.200-###ZARF_VAR_BASE_IP###.215"

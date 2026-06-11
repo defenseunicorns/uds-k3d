@@ -1,0 +1,19 @@
+# Copyright 2026 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
+name: Lint
+
+on:
+  # This workflow is triggered on pull requests to the main branch.
+  pull_request:
+    # milestoned is added here as a way to retrigger workflows that are stuck or otherwise didn't run correctly
+    types: [milestoned, opened, reopened, synchronize]
+
+# Permissions for the GITHUB_TOKEN used by the workflow.
+permissions:
+  contents: read # Allows reading the content of the repository.
+
+jobs:
+  validate:
+    uses: defenseunicorns/uds-common/.github/workflows/callable-lint.yaml@5deb43c3f0d2c7f36d51567151688cf66868af47 # v1.24.13
+    secrets: inherit
