@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.20.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.1...v0.20.2) (2026-06-11)
+
+
+### Miscellaneous
+
+* update license and improve linting ([#352](https://github.com/defenseunicorns/uds-k3d/issues/352)) ([3bdb6fd](https://github.com/defenseunicorns/uds-k3d/commit/3bdb6fde24514bfa38f8bfa33b107bac293424d3))
+
 ## [0.20.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.0...v0.20.1) (2026-06-09)
 
 
