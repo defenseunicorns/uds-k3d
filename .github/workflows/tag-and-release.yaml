@@ -1,3 +1,6 @@
+# Copyright 2026 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
 name: Publish UDS Capability
 
 on:
@@ -6,7 +9,7 @@ on:
       - main
 
 jobs:
-  
+
   # Run standard build tests first
   run-build-test:
     uses: ./.github/workflows/build-test.yaml

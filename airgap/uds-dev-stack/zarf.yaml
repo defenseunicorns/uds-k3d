@@ -1,3 +1,6 @@
+# Copyright 2026 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
 kind: ZarfPackageConfig
 metadata:
   name: uds-dev-stack-airgap-images
@@ -73,7 +76,7 @@ components:
                 minio.tar \
                 minio-mc.tar \
                 frr.tar \
-                -c ${ZARF_VAR_CLUSTER_NAME}
+                -c "${ZARF_VAR_CLUSTER_NAME}"
             description: Load the airgap images for uds-dev-stack into Docker
           - cmd: rm pause.tar nginx.tar wolfi-base.tar busybox.tar local-path-provisioner.tar metallb-controller.tar metallb-speaker.tar minio.tar minio-mc.tar frr.tar
             description: Cleanup the airgap image tars

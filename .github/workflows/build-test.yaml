@@ -1,3 +1,6 @@
+# Copyright 2026 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
 name: Test UDS Capability
 
 on:
@@ -63,8 +66,8 @@ jobs:
     strategy:
       matrix:
         # renovate: datasource=docker depName=rancher/k3s versioning=semver
-        version: ["v1.35.5-k3s1"]
-        architecture: ["amd64", "arm64"]
+        version: [v1.35.5-k3s1]
+        architecture: [amd64, arm64]
 
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
