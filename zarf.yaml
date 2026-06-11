@@ -143,8 +143,8 @@ components:
               fi
               # shellcheck disable=SC2086
               k3d cluster create \
-                "${HTTP_PORT}" \
-                "${HTTPS_PORT}" \
+                ${HTTP_PORT} \
+                ${HTTPS_PORT} \
                 --api-port "${ZARF_VAR_K3D_API_PORT}" \
                 --runtime-ulimit nofile="${ZARF_VAR_K3D_ULIMIT_NOFILE}" \
                 --k3s-arg "--disable=traefik@server:*" \
@@ -155,9 +155,9 @@ components:
                 --k3s-arg "--kube-cloud-controller-manager-arg=client-ca-file=/var/lib/rancher/k3s/server/tls/client-ca.crt@server:*" \
                 --image "${ZARF_VAR_K3D_IMAGE}" \
                 ${ZARF_VAR_K3D_EXTRA_ARGS} \
-                "${NETWORK}" \
+                ${NETWORK} \
                 ${DEBUG_FLAGS} \
-                "${VOLUME_MOUNT}" \
+                ${VOLUME_MOUNT} \
                 "${ZARF_VAR_CLUSTER_NAME}"
             description: Create the cluster
         onSuccess:
