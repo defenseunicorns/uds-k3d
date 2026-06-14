@@ -66,6 +66,8 @@ components:
       onDeploy:
         after:
           - cmd: |
+              # renovate: datasource=docker depName=ghcr.io/k3d-io/k3d-tools
+              export K3D_HELPER_IMAGE_TAG=5.9.0
               k3d image load local-path-provisioner.tar \
                 busybox.tar \
                 wolfi-base.tar \

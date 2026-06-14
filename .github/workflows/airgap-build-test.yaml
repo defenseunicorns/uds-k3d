@@ -109,8 +109,26 @@ jobs:
           uds run actions:install-deps
         shell: bash
 
+      - name: Isolate the cluster network (true airgap)
+        run: |
+          set -euo pipefail
+          SUBNET=172.28.0.0/16
+          docker network create --subnet "${SUBNET}" "${K3D_NETWORK}"
+          sudo iptables -I DOCKER-USER -s "${SUBNET}" -j DROP
+          sudo iptables -I DOCKER-USER -s "${SUBNET}" -d 192.168.0.0/16 -j ACCEPT
+          sudo iptables -I DOCKER-USER -s "${SUBNET}" -d 172.16.0.0/12 -j ACCEPT
+          sudo iptables -I DOCKER-USER -s "${SUBNET}" -d 10.0.0.0/8 -j ACCEPT
+          sudo iptables -I DOCKER-USER -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+          echo "DOCKER-USER chain (top rules evaluated first):"
+          sudo iptables -L DOCKER-USER -n --line-numbers
+        env:
+          K3D_NETWORK: uds-airgap
+        shell: bash
+
       - name: Deploy the airgap package
         run: uds run deploy-airgap-package --no-progress
+        env:
+          K3D_NETWORK: uds-airgap
         shell: bash
 
       - name: Validate uds-k3d package
