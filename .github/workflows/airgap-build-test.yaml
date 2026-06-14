@@ -113,7 +113,8 @@ jobs:
         run: |
           set -euo pipefail
           SUBNET=172.28.0.0/16
-          docker network create --subnet "${SUBNET}" "${K3D_NETWORK}"
+          GATEWAY=172.28.0.1
+          docker network create --subnet "${SUBNET}" --gateway "${GATEWAY}" "${K3D_NETWORK}"
           sudo iptables -I DOCKER-USER -s "${SUBNET}" -j DROP
           sudo iptables -I DOCKER-USER -s "${SUBNET}" -d 192.168.0.0/16 -j ACCEPT
           sudo iptables -I DOCKER-USER -s "${SUBNET}" -d 172.16.0.0/12 -j ACCEPT
