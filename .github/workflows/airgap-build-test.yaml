@@ -109,7 +109,7 @@ jobs:
           uds run actions:install-deps
         shell: bash
 
-      - name: Isolate the cluster network (true airgap)
+      - name: Isolate the cluster network
         run: |
           set -euo pipefail
           SUBNET=172.28.0.0/16
