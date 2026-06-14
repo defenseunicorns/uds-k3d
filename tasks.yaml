@@ -17,6 +17,8 @@ variables:
     default: "[]"
   - name: ARCH
     default: ${UDS_ARCH}
+  - name: K3D_NETWORK
+    default: ""
 
 tasks:
   - name: default
@@ -160,7 +162,9 @@ tasks:
     actions:
       - description: Deploy the airgap package
         cmd: |
-          uds zarf package deploy zarf-package-uds-k3d-"${ARCH}"-*-airgap.tar.zst --confirm
+          uds zarf package deploy zarf-package-uds-k3d-"${ARCH}"-*-airgap.tar.zst \
+            --set K3D_NETWORK="${K3D_NETWORK}" \
+            --confirm
 
   - name: clean-airgap-images
     actions:
