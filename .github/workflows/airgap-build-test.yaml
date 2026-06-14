@@ -126,9 +126,7 @@ jobs:
         shell: bash
 
       - name: Deploy the airgap package
-        run: uds run deploy-airgap-package --no-progress
-        env:
-          K3D_NETWORK: uds-airgap
+        run: uds run deploy-airgap-package --no-progress --set K3D_NETWORK=uds-airgap
         shell: bash
 
       - name: Validate uds-k3d package
