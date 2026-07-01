@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.20.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.1...v0.20.2) (2026-07-01)
+
+
+### Bug Fixes
+
+* airgap deploy test, metallb in tarball, metallb validation ([#357](https://github.com/defenseunicorns/uds-k3d/issues/357)) ([0d5fbe3](https://github.com/defenseunicorns/uds-k3d/commit/0d5fbe3814652ad3b1dc4ef2ef05deeb0391140b))
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack ([#359](https://github.com/defenseunicorns/uds-k3d/issues/359)) ([d8aba46](https://github.com/defenseunicorns/uds-k3d/commit/d8aba461b2c7c8ad08b6ade647d6bdade1e16372))
+* **deps:** update k3s ([#351](https://github.com/defenseunicorns/uds-k3d/issues/351)) ([cb7e1a1](https://github.com/defenseunicorns/uds-k3d/commit/cb7e1a120d445ba837f8c4ed7611637f86fe6797))
+* **deps:** update support-deps ([#353](https://github.com/defenseunicorns/uds-k3d/issues/353)) ([6bbfb50](https://github.com/defenseunicorns/uds-k3d/commit/6bbfb50cfc6ff7e138b0efacbbe778d9d6267481))
+* **deps:** update support-deps to v7 ([#360](https://github.com/defenseunicorns/uds-k3d/issues/360)) ([0871140](https://github.com/defenseunicorns/uds-k3d/commit/087114035f7c0af281a5ca9033377ffa600b2f47))
+* update license and improve linting ([#352](https://github.com/defenseunicorns/uds-k3d/issues/352)) ([3bdb6fd](https://github.com/defenseunicorns/uds-k3d/commit/3bdb6fde24514bfa38f8bfa33b107bac293424d3))
+
 ## [0.20.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.0...v0.20.1) (2026-06-09)
 
 
