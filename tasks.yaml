@@ -8,7 +8,7 @@ includes:
 variables:
   - name: VERSION
     # renovate: datasource=docker depName=rancher/k3s versioning=semver
-    default: v1.35.5-k3s1
+    default: v1.35.6-k3s1
   - name: IMAGE_NAME
     default: ghcr.io/defenseunicorns/uds-k3d/k3s
   - name: K3D_EXTRA_ARGS
@@ -17,6 +17,8 @@ variables:
     default: "[]"
   - name: ARCH
     default: ${UDS_ARCH}
+  - name: K3D_NETWORK
+    default: ""
 
 tasks:
   - name: default
@@ -75,6 +77,7 @@ tasks:
   - name: validate
     actions:
       - task: validate-coredns
+      - task: validate-metallb
       - cmd: uds zarf tools download-init
         description: Download the zarf init package
       - task: validate-zarf-init
@@ -82,7 +85,39 @@ tasks:
   - name: validate-airgap
     actions:
       - task: validate-coredns
+      - task: validate-metallb
       - task: validate-zarf-init
+
+  - name: validate-metallb
+    actions:
+      - description: Validate metallb-controller is up
+        wait:
+          cluster:
+            kind: Pod
+            name: app.kubernetes.io/component=controller
+            namespace: kube-system
+            condition: Ready
+      - description: Validate metallb-speaker is up
+        wait:
+          cluster:
+            kind: Pod
+            name: app.kubernetes.io/component=speaker
+            namespace: kube-system
+            condition: Ready
+      - description: Validate metallb-frr-k8s is up
+        wait:
+          cluster:
+            kind: Pod
+            name: app.kubernetes.io/component=frr-k8s
+            namespace: kube-system
+            condition: Ready
+      - description: Validate metallb-frr-k8s-statuscleaner is up
+        wait:
+          cluster:
+            kind: Pod
+            name: app.kubernetes.io/component=statuscleaner
+            namespace: kube-system
+            condition: Ready
 
   - name: validate-coredns
     actions:
@@ -127,7 +162,9 @@ tasks:
     actions:
       - description: Deploy the airgap package
         cmd: |
-          uds zarf package deploy zarf-package-uds-k3d-"${ARCH}"-*-airgap.tar.zst --confirm
+          uds zarf package deploy zarf-package-uds-k3d-"${ARCH}"-*-airgap.tar.zst \
+            --set K3D_NETWORK="${K3D_NETWORK}" \
+            --confirm
 
   - name: clean-airgap-images
     actions:
