@@ -11,9 +11,10 @@ speaker:
     repository: quay.io/metallb/speaker
     # renovate: datasource=docker depName=quay.io/metallb/speaker
     tag: v0.16.1
-frrk8s:
-  frr:
-    image:
-      repository: quay.io/frrouting/frr
-      # renovate: datasource=docker depName=quay.io/frrouting/frr
-      tag: 10.4.3
+frr-k8s:
+  frrk8s:
+    frr:
+      image:
+        repository: quay.io/frrouting/frr
+        # renovate: datasource=docker depName=quay.io/frrouting/frr
+        tag: 10.4.3
