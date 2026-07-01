@@ -12,7 +12,14 @@
       ],
       "bump-minor-pre-major": true,
       "versioning": "default",
-      "extra-files": ["README.md", "zarf.yaml", "chart/Chart.yaml"]
+      "extra-files": [
+        "README.md",
+        "zarf.yaml",
+        {
+          "type": "generic",
+          "path": "chart/Chart.yaml"
+        }
+      ]
     }
   }
 }
