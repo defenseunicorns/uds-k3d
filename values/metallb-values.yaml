@@ -17,4 +17,4 @@ frr-k8s:
       image:
         repository: quay.io/frrouting/frr
         # renovate: datasource=docker depName=quay.io/frrouting/frr
-        tag: 10.4.3
+        tag: 10.6.1
