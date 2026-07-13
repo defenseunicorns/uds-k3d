@@ -71,6 +71,17 @@ components:
         before:
           - cmd: k3d cluster delete "${ZARF_VAR_CLUSTER_NAME}"
             description: Destroy the cluster
+        after:
+          - cmd: |
+              echo ""
+              echo "########################################"
+              echo "#                                      #"
+              echo "#     THIS IS A DEMO PACKAGE ONLY      #"
+              echo "#   DO NOT DEPLOY THIS TO PRODUCTION   #"
+              echo "#                                      #"
+              echo "########################################"
+              echo ""
+            description: Warn the user that this package is not suitable for production
 
   - name: k3d-airgap-images
     required: true
@@ -93,7 +104,6 @@ components:
               echo "###################################################"
               echo "#                                                 #"
               echo "#      PACKAGE BEING DEPLOYED IN AIRGAP MODE      #"
-              echo "#    THIS IS NOT MEANT TO BE USED IN PRODUCTION   #"
               echo "#                                                 #"
               echo "###################################################"
               echo ""
