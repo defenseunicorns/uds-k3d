@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
 
 includes:
-  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.26.1/tasks/actions.yaml
-  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.26.1/tasks/lint.yaml
+  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.26.2/tasks/actions.yaml
+  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.26.2/tasks/lint.yaml
 
 variables:
   - name: VERSION
