@@ -31,7 +31,7 @@ rules:
   new-lines: enable
   octal-values: disable
   quoted-strings:
-    required: only-when-needed
+    required: false
     quote-type: double
   trailing-spaces: enable
   truthy:

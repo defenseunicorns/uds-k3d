@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         # renovate: datasource=docker depName=rancher/k3s versioning=semver
-        version: [v1.35.5-k3s1]
+        version: ["v1.35.6-k3s1"]
 
     permissions:
       contents: read
