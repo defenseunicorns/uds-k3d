@@ -48,7 +48,7 @@ components:
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" registry.k8s.io/pause:3.10.2 pause.tar
             description: Pull the pause image
           # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/nginx/nginx-unprivileged:1.31.2-alpine nginx.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/nginx/nginx-unprivileged:1.31.3-alpine nginx.tar
             description: Pull the nginx image
           # renovate: datasource=docker depName=quay.io/metallb/controller
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/metallb/controller:v0.16.1 metallb-controller.tar
@@ -60,7 +60,7 @@ components:
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/metallb/frr-k8s:v0.0.25 metallb-frr-k8s.tar
             description: Pull the metallb-frr-k8s image
           # renovate: datasource=docker depName=quay.io/frrouting/frr
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/frrouting/frr:10.6.1 frr.tar
+          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/frrouting/frr:10.7.0 frr.tar
             description: Pull the frr image
           # renovate: datasource=docker depName=quay.io/minio/minio versioning=regex:^RELEASE\.(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)T(?<build>\d+)-(?<revision>\d+)-\d+Z$
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z minio.tar
