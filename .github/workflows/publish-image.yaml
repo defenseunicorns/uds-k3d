@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         # renovate: datasource=docker depName=rancher/k3s versioning=semver
-        version: ["v1.35.6-k3s1"]
+        version: ["v1.35.7-k3s1"]
 
     permissions:
       contents: read
@@ -29,7 +29,7 @@ jobs:
 
       - uses: docker/setup-qemu-action@96fe6ef7f33517b61c61be40b68a1882f3264fb8 # v4.2.0
 
-      - uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
+      - uses: docker/setup-buildx-action@37fe631027851001ddb9b187196cc803df7f5f0e # v4.3.0
 
       - name: Login to GHCR
         uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
@@ -39,10 +39,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install UDS CLI
-        uses: defenseunicorns/setup-uds@ab842abcad1f7a3305c2538e3dd1950d0daacfa5 # v1.0.1
+        uses: defenseunicorns/setup-uds@d6add59d4c2ca789ed7c92741e91bd340b4e950b # v1.0.2
         with:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: v0.35.0
+          version: v0.36.0
 
       - name: Environment setup
         run: |

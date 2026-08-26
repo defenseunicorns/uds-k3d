@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
 
 includes:
-  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.27.1/tasks/actions.yaml
-  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.27.1/tasks/lint.yaml
+  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.28.0/tasks/actions.yaml
+  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.28.0/tasks/lint.yaml
 
 variables:
   - name: VERSION
     # renovate: datasource=docker depName=rancher/k3s versioning=semver
-    default: v1.35.6-k3s1
+    default: v1.35.7-k3s1
   - name: IMAGE_NAME
     default: ghcr.io/defenseunicorns/uds-k3d/k3s
   - name: K3D_EXTRA_ARGS
