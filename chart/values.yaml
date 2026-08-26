@@ -26,7 +26,7 @@ images:
   nginx:
     repository: quay.io/nginx/nginx-unprivileged
     # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
-    tag: 1.31.3-alpine
+    tag: 1.31.4-alpine
   busybox:
     repository: cgr.dev/chainguard/busybox
     tag: latest
@@ -40,7 +40,7 @@ images:
   localPathProvisioner:
     repository: rancher/local-path-provisioner
     # renovate: datasource=docker depName=rancher/local-path-provisioner
-    tag: v0.0.36
+    tag: v0.0.37
 
 metallb:
   ipAddressPool: "###ZARF_VAR_BASE_IP###.200-###ZARF_VAR_BASE_IP###.215"
