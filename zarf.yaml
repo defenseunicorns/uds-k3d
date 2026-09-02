@@ -10,7 +10,7 @@ metadata:
   url: https://github.com/defenseunicorns/uds-k3d
   yolo: true
   # x-release-please-start-version
-  version: 0.20.2
+  version: 0.20.3
   # x-release-please-end
 
 variables:
@@ -223,7 +223,7 @@ components:
         namespace: kube-system
         localPath: chart
         # x-release-please-start-version
-        version: 0.20.2
+        version: 0.20.3
         # x-release-please-end
         valuesFiles:
           - values/dev-stack-values.yaml
