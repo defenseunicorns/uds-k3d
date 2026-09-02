@@ -6,5 +6,5 @@ name: uds-dev-stack
 description: UDS dev stack chart
 type: application
 # x-release-please-start-version
-version: 0.20.2
+version: 0.20.3
 # x-release-please-end
