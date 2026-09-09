@@ -47,7 +47,7 @@
     {
       "matchPackageNames": ["rancher/k3s"],
       "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)[+-]k3s(?<build>\\d+)$",
-      "allowedVersions": "/^v1\\.35\\.\\d+/"
+      "allowedVersions": "/^v1\\.36\\.\\d+/"
     }
   ],
   "customManagers": [

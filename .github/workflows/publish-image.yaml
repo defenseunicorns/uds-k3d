@@ -9,6 +9,8 @@ on:
       - main
     paths:
       - docker/**
+      - tasks.yaml
+      - zarf.yaml
       - .github/workflows/publish-image.yaml
   workflow_dispatch:
 
@@ -18,7 +20,7 @@ jobs:
     strategy:
       matrix:
         # renovate: datasource=docker depName=rancher/k3s versioning=semver
-        version: ["v1.35.8-k3s1"]
+        version: ["v1.36.4-k3s1"]
 
     permissions:
       contents: read
