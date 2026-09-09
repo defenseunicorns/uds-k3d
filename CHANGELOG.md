@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.20.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.2...v0.20.3) (2026-09-09)
+
+
+### Bug Fixes
+
+* add quotes to k3s image tag in workflows to fix renovate matching ([#368](https://github.com/defenseunicorns/uds-k3d/issues/368)) ([4090c68](https://github.com/defenseunicorns/uds-k3d/commit/4090c68b38d0b805bd210a8f25f4e16458b438c8))
+* release please removing license headers ([#361](https://github.com/defenseunicorns/uds-k3d/issues/361)) ([88bfff0](https://github.com/defenseunicorns/uds-k3d/commit/88bfff0864aaef5b29a64e76fb3664a9c78297b2))
+* renovate config to keep track of metallb values images ([#383](https://github.com/defenseunicorns/uds-k3d/issues/383)) ([d432737](https://github.com/defenseunicorns/uds-k3d/commit/d4327374ce14c26e1eccd4c78755c1f784188a00))
+* seperated demo warning log from the airgap mode log ([#366](https://github.com/defenseunicorns/uds-k3d/issues/366)) ([994d278](https://github.com/defenseunicorns/uds-k3d/commit/994d278e72c6b684eb54f352c10d8a41793da8cc))
+
+
+### Miscellaneous
+
+* add full semver comment to release-please-action ([#371](https://github.com/defenseunicorns/uds-k3d/issues/371)) ([6be852c](https://github.com/defenseunicorns/uds-k3d/commit/6be852c759fc7932ed18399f5f78cb09bb00f030))
+* bump default k8s to 1.36 ([#382](https://github.com/defenseunicorns/uds-k3d/issues/382)) ([88ad2e0](https://github.com/defenseunicorns/uds-k3d/commit/88ad2e081c6d6e09dea6ebd67837c3ed8cff7a1e))
+* **deps:** update dev-stack ([#369](https://github.com/defenseunicorns/uds-k3d/issues/369)) ([51ad1a1](https://github.com/defenseunicorns/uds-k3d/commit/51ad1a1dc134edd0b1f3b3077cd14b8a58adaca1))
+* **deps:** update dev-stack ([#375](https://github.com/defenseunicorns/uds-k3d/issues/375)) ([7075c7e](https://github.com/defenseunicorns/uds-k3d/commit/7075c7ea724328bda973e7e7f47a649a04382740))
+* **deps:** update k3s ([#374](https://github.com/defenseunicorns/uds-k3d/issues/374)) ([5094e4a](https://github.com/defenseunicorns/uds-k3d/commit/5094e4aeb6d3b77e52b7ae4f1f9f3442f92d8d37))
+* **deps:** update k3s ([#377](https://github.com/defenseunicorns/uds-k3d/issues/377)) ([fd558d9](https://github.com/defenseunicorns/uds-k3d/commit/fd558d9417b81a1f6b37f3b00e80248822de2887))
+* **deps:** update k3s to 003627d ([#372](https://github.com/defenseunicorns/uds-k3d/issues/372)) ([479d6d3](https://github.com/defenseunicorns/uds-k3d/commit/479d6d3445aea6b2f3016231bb8d158b017c35b8))
+* **deps:** update k3s to 02dab76 ([#364](https://github.com/defenseunicorns/uds-k3d/issues/364)) ([f99ca6c](https://github.com/defenseunicorns/uds-k3d/commit/f99ca6c9459f9a53eed0f4bdb9273960e18cc576))
+* **deps:** update k3s to 918a593 ([#380](https://github.com/defenseunicorns/uds-k3d/issues/380)) ([cc205f9](https://github.com/defenseunicorns/uds-k3d/commit/cc205f9a3d9dcd91430e81187fc0af27d762485a))
+* **deps:** update support-deps ([#363](https://github.com/defenseunicorns/uds-k3d/issues/363)) ([858f39b](https://github.com/defenseunicorns/uds-k3d/commit/858f39b6a1251780d8e6ad52bcbb1d752c76ee6e))
+* **deps:** update support-deps ([#365](https://github.com/defenseunicorns/uds-k3d/issues/365)) ([4de4c0d](https://github.com/defenseunicorns/uds-k3d/commit/4de4c0dc48d832677267822a549a7b9c52329c5c))
+* **deps:** update support-deps ([#367](https://github.com/defenseunicorns/uds-k3d/issues/367)) ([005d4c3](https://github.com/defenseunicorns/uds-k3d/commit/005d4c376b124c5d840bd7c065bcbbbdccff4745))
+* **deps:** update support-deps ([#370](https://github.com/defenseunicorns/uds-k3d/issues/370)) ([544c4a7](https://github.com/defenseunicorns/uds-k3d/commit/544c4a78bf1a6a956860e45bfdcdb9ff26370941))
+* **deps:** update support-deps ([#373](https://github.com/defenseunicorns/uds-k3d/issues/373)) ([fc1eaae](https://github.com/defenseunicorns/uds-k3d/commit/fc1eaae4c9f169edcb2e764b79af1270fff8aea9))
+* **deps:** update support-deps ([#376](https://github.com/defenseunicorns/uds-k3d/issues/376)) ([9b98abe](https://github.com/defenseunicorns/uds-k3d/commit/9b98abecf2c82cb58f990a02497e050d764427ff))
+* **deps:** update support-deps ([#379](https://github.com/defenseunicorns/uds-k3d/issues/379)) ([c050fa1](https://github.com/defenseunicorns/uds-k3d/commit/c050fa1a023b8737843994eb1faed757da6ab44c))
+* **deps:** update support-deps ([#381](https://github.com/defenseunicorns/uds-k3d/issues/381)) ([c556684](https://github.com/defenseunicorns/uds-k3d/commit/c5566845d2f24c6c643be0760788c354a9ac35e7))
+* **deps:** update support-deps to v1.28.1 ([#378](https://github.com/defenseunicorns/uds-k3d/issues/378)) ([708ffb9](https://github.com/defenseunicorns/uds-k3d/commit/708ffb945dd85f5eceab6ebcf85c5fdfdd12f665))
+
 ## [0.20.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.1...v0.20.2) (2026-07-01)
 
 

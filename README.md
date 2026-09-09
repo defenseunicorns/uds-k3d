@@ -28,7 +28,7 @@ To deploy the standard package:
 
 <!-- x-release-please-start-version -->
 
-`uds zarf package deploy oci://defenseunicorns/uds-k3d:0.20.2`
+`uds zarf package deploy oci://defenseunicorns/uds-k3d:0.20.3`
 
 <!-- x-release-please-end -->
 
