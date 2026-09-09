@@ -43,7 +43,7 @@ uds run publish-image --set VERSION=<k3s-version>
 
 ## Renovate Updates
 
-This repo intentionally stays n-1 on k3s (one minor version behind latest). The `allowedVersions: "<1.36"` constraint in `renovate.json` enforces this; update it manually when adopting a new minor version.
+This repo intentionally stays n-1 on k3s (one minor version behind latest). Renovate enforces this with the `allowedVersions` constraint in `renovate.json`; update that constraint manually when adopting a new minor version.
 
 All k3s references track the upstream `rancher/k3s` Docker image directly, so version bumps come in a **single PR** that updates `tasks.yaml`, `build-test.yaml`, and `zarf.yaml`'s `K3D_IMAGE` default together. CI passes because both the connected and airgap builds construct the custom image locally, with no GHCR pull during CI. After the PR merges, `publish-image.yaml` triggers and publishes the new image to GHCR.
 
