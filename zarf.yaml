@@ -199,9 +199,63 @@ components:
       path: airgap/uds-dev-stack
       name: uds-dev-stack-airgap-images
 
+  - name: metallb
+    required: true
+    description: Install MetalLB and wait for its admission webhooks to be ready
+    charts:
+      - name: metallb
+        namespace: kube-system
+        url: https://metallb.github.io/metallb
+        version: 0.16.1
+        valuesFiles:
+          - values/metallb-values.yaml
+    actions:
+      onDeploy:
+        after:
+          - cmd: |
+              set -eu
+
+              # The controller readiness probe only checks /readyz. The API server
+              # can still reach the controller before its validating webhook is
+              # listening on 9443, so probe the admission path directly. Both
+              # resources declare sideEffects: None, making this server-side dry run
+              # safe and non-persistent.
+              attempt=1
+              while [ "${attempt}" -le 60 ]; do
+                if ./zarf tools kubectl apply --dry-run=server -f - <<'EOF'
+              apiVersion: metallb.io/v1beta1
+              kind: IPAddressPool
+              metadata:
+                name: uds-k3d-webhook-readiness
+                namespace: kube-system
+              spec:
+                addresses:
+                  - 192.0.2.1/32
+              ---
+              apiVersion: metallb.io/v1beta1
+              kind: L2Advertisement
+              metadata:
+                name: uds-k3d-webhook-readiness
+                namespace: kube-system
+              spec: {}
+              EOF
+                then
+                  echo "MetalLB admission webhooks are ready"
+                  exit 0
+                fi
+
+                echo "Waiting for MetalLB admission webhooks (attempt ${attempt}/60)"
+                attempt=$((attempt + 1))
+                sleep 1
+              done
+
+              echo "MetalLB admission webhooks did not become ready within 60 seconds"
+              exit 1
+            description: Wait for MetalLB admission webhooks
+
   - name: uds-dev-stack
     required: true
-    description: Install MetalLB, NGINX, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes
+    description: Install NGINX, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes
     actions:
       onDeploy:
         before:
@@ -213,12 +267,6 @@ components:
           - cmd: ./zarf tools kubectl rollout restart deployment coredns -n kube-system
             description: Restart CoreDNS to pick up internal DNS override for uds.dev
     charts:
-      - name: metallb
-        namespace: kube-system
-        url: https://metallb.github.io/metallb
-        version: 0.16.1
-        valuesFiles:
-          - values/metallb-values.yaml
       - name: uds-dev-stack
         namespace: kube-system
         localPath: chart
