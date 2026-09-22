@@ -225,23 +225,22 @@ components:
                   break
                 fi
                 request_timeout=$((remaining < 2 ? remaining : 2))
-                if ./zarf tools kubectl --request-timeout="${request_timeout}s" apply --dry-run=server -f - <<'EOF'
-              apiVersion: metallb.io/v1beta1
-              kind: IPAddressPool
-              metadata:
-                name: uds-k3d-webhook-readiness
-                namespace: kube-system
-              spec:
-                addresses:
-                  - 192.0.2.1/32
-              ---
-              apiVersion: metallb.io/v1beta1
-              kind: L2Advertisement
-              metadata:
-                name: uds-k3d-webhook-readiness
-                namespace: kube-system
-              spec: {}
-              EOF
+                if printf '%s\n' \
+                  'apiVersion: metallb.io/v1beta1' \
+                  'kind: IPAddressPool' \
+                  'metadata:' \
+                  '  name: uds-k3d-webhook-readiness' \
+                  '  namespace: kube-system' \
+                  'spec:' \
+                  '  addresses:' \
+                  '    - 192.0.2.1/32' \
+                  '--- # Separate the MetalLB resources' \
+                  'apiVersion: metallb.io/v1beta1' \
+                  'kind: L2Advertisement' \
+                  'metadata:' \
+                  '  name: uds-k3d-webhook-readiness' \
+                  '  namespace: kube-system' \
+                  'spec: {}' | ./zarf tools kubectl --request-timeout="${request_timeout}s" apply --dry-run=server -f -
                 then
                   echo "MetalLB admission webhooks are ready"
                   exit 0
