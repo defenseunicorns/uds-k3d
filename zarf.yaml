@@ -215,11 +215,8 @@ components:
           - cmd: |
               set -eu
 
-              # The controller readiness probe only checks /readyz. The API server
-              # can still reach the controller before its validating webhook is
-              # listening on 9443, so probe the admission path directly. Both
-              # resources declare sideEffects: None, making this server-side dry run
-              # safe and non-persistent.
+              # /readyz can pass before the validating webhook accepts requests.
+              # Exercise the admission path without persisting these resources.
               attempt=1
               while [ "${attempt}" -le 60 ]; do
                 if ./zarf tools kubectl apply --dry-run=server -f - <<'EOF'
