@@ -15,20 +15,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  run-build-test:
-    uses: ./.github/workflows/build-test.yaml
-    permissions:
-      id-token: write
-      contents: read
-
-  run-airgap-build-test:
-    uses: ./.github/workflows/airgap-build-test.yaml
-    permissions:
-      id-token: write
-      contents: read
-
   release-please:
-    needs: [run-build-test, run-airgap-build-test]
     runs-on: ubuntu-latest
     environment: uds-release
     steps:
