@@ -217,9 +217,15 @@ components:
 
               # /readyz can pass before the validating webhook accepts requests.
               # Exercise the admission path without persisting these resources.
+              deadline=$(( $(date +%s) + 60 ))
               attempt=1
-              while [ "${attempt}" -le 60 ]; do
-                if ./zarf tools kubectl apply --dry-run=server -f - <<'EOF'
+              while [ "$(date +%s)" -lt "${deadline}" ]; do
+                remaining=$((deadline - $(date +%s)))
+                if [ "${remaining}" -le 0 ]; then
+                  break
+                fi
+                request_timeout=$((remaining < 2 ? remaining : 2))
+                if ./zarf tools kubectl --request-timeout="${request_timeout}s" apply --dry-run=server -f - <<'EOF'
               apiVersion: metallb.io/v1beta1
               kind: IPAddressPool
               metadata:
@@ -241,7 +247,7 @@ components:
                   exit 0
                 fi
 
-                echo "Waiting for MetalLB admission webhooks (attempt ${attempt}/60)"
+                echo "Waiting for MetalLB admission webhooks (attempt ${attempt}, ${remaining}s remaining)"
                 attempt=$((attempt + 1))
                 sleep 1
               done
