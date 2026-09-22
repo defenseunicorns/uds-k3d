@@ -1,0 +1,22 @@
+# Copyright 2026 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
+name: Release UDS Capability
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish-uds-k3d-release:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/publish.yaml
+    secrets: inherit
