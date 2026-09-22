@@ -4,11 +4,13 @@ This page documents the developer-focused stack that `uds-k3d` installs to make 
 
 ## What is provided
 
-The UDS K3d package provides a number of components to support realistic and simple loadbalancing, DNS resolution, and storage for packages. MetalLB is installed by the separate `metallb` package component before the UDS Dev Stack. Most components are deployed in the `kube-system` namespace, following where you might find these components in other clusters, but MinIO is deployed in the `uds-dev-stack` namespace.
+The UDS K3d package provides a number of components to support realistic and simple loadbalancing, DNS resolution, and storage for packages. The MetalLB controller, CRDs, and admission webhooks are installed by the separate `metallb` package component before the UDS Dev Stack. The `uds-dev-stack` chart then creates the `IPAddressPool` and `L2Advertisement` resources. Most components are deployed in the `kube-system` namespace, following where you might find these components in other clusters, but MinIO is deployed in the `uds-dev-stack` namespace.
 
 Full list of package-provided components:
 
-- **MetalLB (controller + IP pool)** — Installed by the `metallb` package component and satisfies Istio LoadBalancer services’ need for routable IPs inside k3d.
+- **MetalLB controller and admission webhooks** — Installed by the `metallb` package component.
+
+- **MetalLB IP pool and L2 advertisement** — Rendered by the `uds-dev-stack` chart and satisfy Istio LoadBalancer services’ need for routable IPs inside k3d.
 
 - **NGINX DaemonSet (TLS SNI routing)** — Routes incoming traffic based on TLS SNI to the correct MetalLB IPs for admin/tenant (and optional) gateways.
 
@@ -32,7 +34,7 @@ Full list of package-provided components:
   - `passthrough.enabled` plus `passthrough.subdomains` and matching CoreDNS rewrites enable passthrough scenarios.
 
 - **MetalLB IP range**
-  - `metallb.ipAddressPool` is set from the computed `BASE_IP` based on the Docker network by default, but can be overridden in chart values to specify a custom range.
+  - The `uds-dev-stack` chart’s `metallb.ipAddressPool` value is set from the computed `BASE_IP` based on the Docker network by default, but can be overridden in chart values to specify a custom range.
 
 - **MinIO Buckets/Users**
   - The upstream MinIO chart provides a number of values to customize buckets and users, as well as API driven ways to interact with the server.
