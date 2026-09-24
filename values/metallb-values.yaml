@@ -24,7 +24,7 @@ frr-k8s:
         tag: 10.7.1
 
 crds:
-  # Allow the chart to install before the MetalLB admission service is ready.
-  # The package action switches the webhook configuration back to Fail before
-  # any MetalLB custom resources are deployed.
+  # Allow MetalLB and the dev-stack charts to deploy before the admission
+  # service is ready. The package action switches the webhook back to Fail
+  # after the dev-stack resources are applied.
   validationFailurePolicy: Ignore

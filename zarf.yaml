@@ -199,20 +199,18 @@ components:
       path: airgap/uds-dev-stack
       name: uds-dev-stack-airgap-images
 
-  - name: metallb
+  - name: uds-dev-stack
     required: true
-    description: Install MetalLB and wait for its admission webhooks to be ready
-    charts:
-      - name: metallb
-        namespace: kube-system
-        url: https://metallb.github.io/metallb
-        version: 0.16.1
-        valuesFiles:
-          - values/metallb-values.yaml
+    description: Install MetalLB, NGINX, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes
     actions:
       onDeploy:
+        before:
+          - cmd: ./zarf tools kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}' | cut -d'.' -f1-3
+            description: Load network ip base for MetalLB
+            setVariables:
+              - name: BASE_IP
         after:
-          - description: Set MetalLB admission webhooks to fail closed
+          - description: Set MetalLB admission webhooks to fail closed after the dev stack is deployed
             maxTotalSeconds: 30
             maxRetries: 3
             cmd: |
@@ -224,56 +222,28 @@ components:
               ./zarf tools kubectl patch validatingwebhookconfiguration metallb-webhook-configuration \
                 --type=json \
                 --patch="${webhook_patch}"
-
-          - description: Verify MetalLB admission readiness
-            maxTotalSeconds: 60
-            maxRetries: 10
-            cmd: |
-              # /readyz can pass before the validating webhook accepts requests.
-              # Exercise both admission paths without persisting these resources.
-              # shellcheck disable=SC1009,SC1039,SC1072,SC1073
-              ./zarf tools kubectl create \
-                --request-timeout=5s \
-                --dry-run=server \
-                -o name \
-                -f - <<'EOF'
-              apiVersion: metallb.io/v1beta1
-              kind: IPAddressPool
-              metadata:
-                generateName: uds-k3d-webhook-readiness-
-                namespace: kube-system
-              spec:
-                addresses:
-                  - 192.0.2.1/32
-              EOF
-
-              ./zarf tools kubectl create \
-                --request-timeout=5s \
-                --dry-run=server \
-                -o name \
-                -f - <<'EOF'
-              apiVersion: metallb.io/v1beta1
-              kind: L2Advertisement
-              metadata:
-                generateName: uds-k3d-webhook-readiness-
-                namespace: kube-system
-              spec: {}
-              EOF
-
-  - name: uds-dev-stack
-    required: true
-    description: Install NGINX, Minio, local-path-rwx and Ensure MachineID to meet UDS developer needs without later config changes
-    actions:
-      onDeploy:
-        before:
-          - cmd: ./zarf tools kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}' | cut -d'.' -f1-3
-            description: Load network ip base for MetalLB
-            setVariables:
-              - name: BASE_IP
-        after:
           - cmd: ./zarf tools kubectl rollout restart deployment coredns -n kube-system
             description: Restart CoreDNS to pick up internal DNS override for uds.dev
+        onFailure:
+          - description: Restore MetalLB admission webhooks to fail closed after deployment failure
+            maxTotalSeconds: 30
+            maxRetries: 3
+            cmd: |
+              ./zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration >/dev/null
+              webhook_patch="$({
+                ./zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration -o json |
+                  ./zarf tools yq -o=json '[.webhooks | to_entries[] | {"op": "replace", "path": ("/webhooks/" + (.key | tostring) + "/failurePolicy"), "value": "Fail"}]'
+              })"
+              ./zarf tools kubectl patch validatingwebhookconfiguration metallb-webhook-configuration \
+                --type=json \
+                --patch="${webhook_patch}"
     charts:
+      - name: metallb
+        namespace: kube-system
+        url: https://metallb.github.io/metallb
+        version: 0.16.1
+        valuesFiles:
+          - values/metallb-values.yaml
       - name: uds-dev-stack
         namespace: kube-system
         localPath: chart

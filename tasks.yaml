@@ -118,6 +118,20 @@ tasks:
             name: app.kubernetes.io/component=statuscleaner
             namespace: kube-system
             condition: Ready
+      - description: Validate MetalLB admission webhooks are fail closed
+        cmd: |
+          set -eu
+          policies=$(kubectl get validatingwebhookconfiguration metallb-webhook-configuration -o=jsonpath='{range .webhooks[*]}{.failurePolicy}{"\n"}{end}')
+          if [ -z "${policies}" ]; then
+            echo "MetalLB admission webhook configuration has no failure policies"
+            exit 1
+          fi
+          for policy in ${policies}; do
+            if [ "${policy}" != "Fail" ]; then
+              echo "MetalLB admission webhook has unexpected failure policy: ${policy}"
+              exit 1
+            fi
+          done
 
   - name: validate-coredns
     actions:
