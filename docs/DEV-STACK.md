@@ -28,6 +28,9 @@ Full list of package-provided components:
   - Default domain is `uds.dev`; admin subdomain defaults to `admin.uds.dev`.
   - You can override DNS behavior using the `COREDNS_OVERRIDES` variable for the `uds-dev-stack` chart values. See [DNS Assumptions](DNS.md) for examples and passthrough guidance.
 
+- **Component overrides**
+  - The upstream MetalLB chart is deployed by the `metallb` package component. Existing bundle overrides for that chart must change their component target from `uds-dev-stack` to `metallb`; the chart name remains `metallb`.
+
 - **NGINX and gateways**
   - `extraPorts` can be exposed and forwarded to the tenant gateway.
   - `customGateway.domainName` adds a second domain routed by NGINX.

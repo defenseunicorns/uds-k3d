@@ -212,48 +212,53 @@ components:
     actions:
       onDeploy:
         after:
-          - cmd: |
-              set -eu
+          - description: Set MetalLB admission webhooks to fail closed
+            maxTotalSeconds: 30
+            maxRetries: 3
+            cmd: |
+              ./zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration >/dev/null
+              webhook_patch="$({
+                ./zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration -o json |
+                  ./zarf tools yq -o=json '[.webhooks | to_entries[] | {"op": "replace", "path": ("/webhooks/" + (.key | tostring) + "/failurePolicy"), "value": "Fail"}]'
+              })"
+              ./zarf tools kubectl patch validatingwebhookconfiguration metallb-webhook-configuration \
+                --type=json \
+                --patch="${webhook_patch}"
 
+          - description: Verify MetalLB admission readiness
+            maxTotalSeconds: 60
+            maxRetries: 10
+            cmd: |
               # /readyz can pass before the validating webhook accepts requests.
-              # Exercise the admission path without persisting these resources.
-              deadline=$(( $(date +%s) + 60 ))
-              attempt=1
-              while [ "$(date +%s)" -lt "${deadline}" ]; do
-                remaining=$((deadline - $(date +%s)))
-                if [ "${remaining}" -le 0 ]; then
-                  break
-                fi
-                request_timeout=$((remaining < 2 ? remaining : 2))
-                if printf '%s\n' \
-                  'apiVersion: metallb.io/v1beta1' \
-                  'kind: IPAddressPool' \
-                  'metadata:' \
-                  '  name: uds-k3d-webhook-readiness' \
-                  '  namespace: kube-system' \
-                  'spec:' \
-                  '  addresses:' \
-                  '    - 192.0.2.1/32' \
-                  '--- # Separate the MetalLB resources' \
-                  'apiVersion: metallb.io/v1beta1' \
-                  'kind: L2Advertisement' \
-                  'metadata:' \
-                  '  name: uds-k3d-webhook-readiness' \
-                  '  namespace: kube-system' \
-                  'spec: {}' | ./zarf tools kubectl --request-timeout="${request_timeout}s" apply --dry-run=server -f -
-                then
-                  echo "MetalLB admission webhooks are ready"
-                  exit 0
-                fi
+              # Exercise both admission paths without persisting these resources.
+              # shellcheck disable=SC1009,SC1039,SC1072,SC1073
+              ./zarf tools kubectl create \
+                --request-timeout=5s \
+                --dry-run=server \
+                -o name \
+                -f - <<'EOF'
+              apiVersion: metallb.io/v1beta1
+              kind: IPAddressPool
+              metadata:
+                generateName: uds-k3d-webhook-readiness-
+                namespace: kube-system
+              spec:
+                addresses:
+                  - 192.0.2.1/32
+              EOF
 
-                echo "Waiting for MetalLB admission webhooks (attempt ${attempt}, ${remaining}s remaining)"
-                attempt=$((attempt + 1))
-                sleep 1
-              done
-
-              echo "MetalLB admission webhooks did not become ready within 60 seconds"
-              exit 1
-            description: Wait for MetalLB admission webhooks
+              ./zarf tools kubectl create \
+                --request-timeout=5s \
+                --dry-run=server \
+                -o name \
+                -f - <<'EOF'
+              apiVersion: metallb.io/v1beta1
+              kind: L2Advertisement
+              metadata:
+                generateName: uds-k3d-webhook-readiness-
+                namespace: kube-system
+              spec: {}
+              EOF
 
   - name: uds-dev-stack
     required: true
