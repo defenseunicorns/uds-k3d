@@ -9,9 +9,9 @@ image:
   # renovate: datasource=docker depName=ghcr.io/uds-packages/minio-operator/container/chainguard/minio
   tag: 0.20260717.120751-r16
 mcImage:
-  repository: ghcr.io/uds-packages/minio-operator/container/chainguard/minio-client
-  # renovate: datasource=docker depName=ghcr.io/uds-packages/minio-operator/container/chainguard/minio-client
-  tag: 0.20250813.083541-r24
+  repository: ghcr.io/uds-packages/minio-operator/container/chainguard/minio
+  # renovate: datasource=docker depName=ghcr.io/uds-packages/minio-operator/container/chainguard/minio
+  tag: 0.20260717.120751-r16
 # Some reasonable requests instead of the bonkers defaults
 resources:
   requests:

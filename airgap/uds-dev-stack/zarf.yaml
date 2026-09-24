@@ -32,8 +32,6 @@ components:
         target: frr.tar
       - source: minio.tar
         target: minio.tar
-      - source: minio-mc.tar
-        target: minio-mc.tar
     actions:
       onCreate:
         before:
@@ -65,9 +63,6 @@ components:
           # renovate: datasource=docker depName=ghcr.io/uds-packages/minio-operator/container/chainguard/minio
           - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/uds-packages/minio-operator/container/chainguard/minio:0.20260717.120751-r16 minio.tar
             description: Pull the minio image
-          # renovate: datasource=docker depName=ghcr.io/uds-packages/minio-operator/container/chainguard/minio-client
-          - cmd: ./zarf tools registry pull --platform linux/"###ZARF_PKG_ARCH###" ghcr.io/uds-packages/minio-operator/container/chainguard/minio-client:0.20250813.083541-r24 minio-mc.tar
-            description: Pull the minio client image
       onDeploy:
         after:
           - cmd: |
@@ -82,9 +77,8 @@ components:
                 metallb-speaker.tar \
                 metallb-frr-k8s.tar \
                 minio.tar \
-                minio-mc.tar \
                 frr.tar \
                 -c "${ZARF_VAR_CLUSTER_NAME}"
             description: Load the airgap images for uds-dev-stack into Docker
-          - cmd: rm pause.tar nginx.tar wolfi-base.tar busybox.tar local-path-provisioner.tar metallb-controller.tar metallb-speaker.tar metallb-frr-k8s.tar minio.tar minio-mc.tar frr.tar
+          - cmd: rm pause.tar nginx.tar wolfi-base.tar busybox.tar local-path-provisioner.tar metallb-controller.tar metallb-speaker.tar metallb-frr-k8s.tar minio.tar frr.tar
             description: Cleanup the airgap image tars
