@@ -121,7 +121,7 @@ tasks:
       - description: Validate MetalLB admission webhooks are fail closed
         cmd: |
           set -eu
-          policies=$(kubectl get validatingwebhookconfiguration metallb-webhook-configuration -o=jsonpath='{range .webhooks[*]}{.failurePolicy}{"\n"}{end}')
+          policies=$(./uds zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration -o=jsonpath='{range .webhooks[*]}{.failurePolicy}{"\n"}{end}')
           if [ -z "${policies}" ]; then
             echo "MetalLB admission webhook configuration has no failure policies"
             exit 1
