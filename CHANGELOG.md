@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.21.0](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.3...v0.21.0) (2026-09-24)
+
+
+### Features
+
+* sign zarf packages ([#390](https://github.com/defenseunicorns/uds-k3d/issues/390)) ([d2ad88d](https://github.com/defenseunicorns/uds-k3d/commit/d2ad88d8141d3308d4708eb6c6ffd0593c431e13))
+
+
+### Bug Fixes
+
+* migrate minio images to ghcr ([#393](https://github.com/defenseunicorns/uds-k3d/issues/393)) ([ff8b9cb](https://github.com/defenseunicorns/uds-k3d/commit/ff8b9cbc31b8289e54ff8ab526cdca1108499474))
+* wait for metallb admission webhooks ([#391](https://github.com/defenseunicorns/uds-k3d/issues/391)) ([1215075](https://github.com/defenseunicorns/uds-k3d/commit/121507579876a9b71e8219172f1a3a4664d8ee60))
+
+
+### Miscellaneous
+
+* **deps:** update dev-stack to v1.31.6 ([#387](https://github.com/defenseunicorns/uds-k3d/issues/387)) ([7fdbb37](https://github.com/defenseunicorns/uds-k3d/commit/7fdbb37c1fd64f3472cdd6ba6798fcb01067d4db))
+* **deps:** update k3s to 1d95114 ([#384](https://github.com/defenseunicorns/uds-k3d/issues/384)) ([6106f79](https://github.com/defenseunicorns/uds-k3d/commit/6106f79e5be5299697d48d3aec27b36318b18bac))
+* **deps:** update support-deps ([#389](https://github.com/defenseunicorns/uds-k3d/issues/389)) ([6b38af8](https://github.com/defenseunicorns/uds-k3d/commit/6b38af81fb86d5745dfecfffc201181cb7904156))
+* **deps:** update support-deps to v1.28.3 ([#385](https://github.com/defenseunicorns/uds-k3d/issues/385)) ([737478a](https://github.com/defenseunicorns/uds-k3d/commit/737478a5a828b4ee1e5bab69c6de81e52918d61a))
+* limit permissions on tag-and-release workflow ([#388](https://github.com/defenseunicorns/uds-k3d/issues/388)) ([2c5d77d](https://github.com/defenseunicorns/uds-k3d/commit/2c5d77d69fff1594dd1d18494754553f9e08b622))
+
 ## [0.20.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.20.2...v0.20.3) (2026-09-09)
 
 
