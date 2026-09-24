@@ -8,7 +8,7 @@ The UDS Dev Stack provides a number of components to support realistic and simpl
 
 Full list of components:
 
-- **MetalLB (controller + IP pool)** — Satisfies Istio LoadBalancer services’ need for routable IPs inside k3d. Its admission webhook temporarily allows resources while the stack starts, then switches back to fail-closed after the dev-stack resources are applied.
+- **MetalLB (controller + IP pool)** — Satisfies Istio LoadBalancer services’ need for routable IPs inside k3d.
 
 - **NGINX DaemonSet (TLS SNI routing)** — Routes incoming traffic based on TLS SNI to the correct MetalLB IPs for admin/tenant (and optional) gateways.
 
