@@ -210,8 +210,36 @@ components:
             setVariables:
               - name: BASE_IP
         after:
+          - description: Set MetalLB admission webhooks to fail closed after the dev stack is deployed
+            maxTotalSeconds: 30
+            maxRetries: 3
+            cmd: |
+              ./zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration >/dev/null
+              webhook_patch="$({
+                ./zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration -o json |
+                  ./zarf tools yq -o=json '[.webhooks | to_entries[] | {"op": "replace", "path": ("/webhooks/" + (.key | tostring) + "/failurePolicy"), "value": "Fail"}]'
+              })"
+              ./zarf tools kubectl patch validatingwebhookconfiguration metallb-webhook-configuration \
+                --type=json \
+                --patch="${webhook_patch}"
           - cmd: ./zarf tools kubectl rollout restart deployment coredns -n kube-system
             description: Restart CoreDNS to pick up internal DNS override for uds.dev
+        onFailure:
+          - description: Restore MetalLB admission webhooks to fail closed after deployment failure
+            maxTotalSeconds: 30
+            maxRetries: 3
+            cmd: |
+              set -e
+              webhook_config="$(./zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration --ignore-not-found -o json)"
+              if [ -z "${webhook_config}" ]; then
+                echo "MetalLB admission webhook configuration is not present; skipping cleanup"
+                exit 0
+              fi
+              webhook_patch="$(printf '%s' "${webhook_config}" |
+                ./zarf tools yq -o=json '[.webhooks | to_entries[] | {"op": "replace", "path": ("/webhooks/" + (.key | tostring) + "/failurePolicy"), "value": "Fail"}]')"
+              ./zarf tools kubectl patch validatingwebhookconfiguration metallb-webhook-configuration \
+                --type=json \
+                --patch="${webhook_patch}"
     charts:
       - name: metallb
         namespace: kube-system

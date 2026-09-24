@@ -118,6 +118,20 @@ tasks:
             name: app.kubernetes.io/component=statuscleaner
             namespace: kube-system
             condition: Ready
+      - description: Validate MetalLB admission webhooks are fail closed
+        cmd: |
+          set -eu
+          policies=$(./uds zarf tools kubectl get validatingwebhookconfiguration metallb-webhook-configuration -o=jsonpath='{range .webhooks[*]}{.failurePolicy}{"\n"}{end}')
+          if [ -z "${policies}" ]; then
+            echo "MetalLB admission webhook configuration has no failure policies"
+            exit 1
+          fi
+          for policy in ${policies}; do
+            if [ "${policy}" != "Fail" ]; then
+              echo "MetalLB admission webhook has unexpected failure policy: ${policy}"
+              exit 1
+            fi
+          done
 
   - name: validate-coredns
     actions:
@@ -132,7 +146,7 @@ tasks:
         cmd: |
           set -e
           # renovate: datasource=docker depName=quay.io/nginx/nginx-unprivileged versioning=docker
-          FOO_IP=$(kubectl run test --image=quay.io/nginx/nginx-unprivileged:1.31.6-alpine -q --restart=Never --rm -i -- sh -c "getent hosts foo.uds.dev | awk '{print \$1}'")
+          FOO_IP=$(./uds zarf tools kubectl run test --image=quay.io/nginx/nginx-unprivileged:1.31.6-alpine -q --restart=Never --rm -i -- sh -c "getent hosts foo.uds.dev | awk '{print \$1}'")
           if [ "${FOO_IP}" != "127.0.0.1" ]; then
             echo "CoreDNS is resolving foo.uds.dev to host.k3d.internal"
           else
