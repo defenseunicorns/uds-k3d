@@ -3,7 +3,7 @@
 
 includes:
   - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.30.1/tasks/actions.yaml
-  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/refs/tags/v1.30.1/tasks/lint.yaml
+  - lint: tasks/lint.yaml
 
 variables:
   - name: VERSION
