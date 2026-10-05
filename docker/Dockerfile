@@ -4,7 +4,7 @@
 # K3S_TAG has no default; callers must pass --build-arg K3S_TAG=<version>.
 ARG K3S_TAG
 # Digest-pinned for reproducible builds; managed by Renovate's Docker manager.
-ARG WOLFI_IMAGE="cgr.dev/chainguard/wolfi-base:latest@sha256:1d95114038f76513a9ace6fca107d5582b08c65981f81f61cb56bf7fd2ef216d"
+ARG WOLFI_IMAGE="cgr.dev/chainguard/wolfi-base:latest@sha256:9c2092b053779e14c82fb50f77b37bcc38b7d2c83972352d5813280f9d035b03"
 
 FROM ${WOLFI_IMAGE} AS wolfi
 FROM rancher/k3s:${K3S_TAG}
@@ -19,8 +19,8 @@ COPY --from=wolfi \
     /usr/lib/libpthread.so.0 \
     /usr/lib/
 
-# libcrypto.so.3 is not a static ELF dependency; Go's opensslcrypto backend dlopen's it at runtime.
-COPY --from=wolfi /usr/lib/libcrypto.so.3 /usr/lib/
+# libcrypto.so.4 is not a static ELF dependency; Go's opensslcrypto backend dlopen's it at runtime.
+COPY --from=wolfi /usr/lib/libcrypto.so.4 /usr/lib/
 
 ARG TARGETARCH
 RUN case "${TARGETARCH}" in \
@@ -37,5 +37,5 @@ RUN case "${TARGETARCH}" in \
 
 RUN /usr/lib/ld-linux-*.so* --version 2>&1 | grep -qi "glibc" || \
     (echo "ERROR: glibc ELF interpreter not functional" >&2 && exit 1)
-RUN test -f /usr/lib/libcrypto.so.3 || \
-    (echo "ERROR: libcrypto.so.3 not found" >&2 && exit 1)
+RUN test -f /usr/lib/libcrypto.so.4 || \
+    (echo "ERROR: libcrypto.so.4 not found" >&2 && exit 1)
