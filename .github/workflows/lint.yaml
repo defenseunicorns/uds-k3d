@@ -29,4 +29,7 @@ jobs:
           echo "MARU_AUTH=\"{\"raw.githubusercontent.com\": \"${GH_TOKEN}\"}\"" >> "$GITHUB_ENV"
           uds run actions:setup-environment --set GH_TOKEN="$GH_TOKEN"
       - name: Lint the repository
-        run: uds run lint-ci --no-progress
+        run: |
+          uds run lint:deps --no-progress
+          uds run lint:all --no-progress
+          uds run lint:renovate --no-progress

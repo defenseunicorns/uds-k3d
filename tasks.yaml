@@ -21,13 +21,6 @@ variables:
     default: ""
 
 tasks:
-  - name: lint-ci
-    description: Run shared lint checks and validate Renovate configuration
-    actions:
-      - task: lint:deps
-      - task: lint:all
-      - task: lint:renovate
-
   - name: default
     description: Runs a full build, deploy, and test of the package
     actions:
