@@ -21,7 +21,7 @@ variables:
     default: ""
 
 tasks:
-  - name: lint
+  - name: lint-ci
     description: Run shared lint checks and validate Renovate configuration
     actions:
       - task: lint:deps
