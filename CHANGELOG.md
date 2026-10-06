@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.21.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.1...v0.21.2) (2026-10-06)
+
+
+### Bug Fixes
+
+* disable bundled K3s Gateway API CRDs ([#400](https://github.com/defenseunicorns/uds-k3d/issues/400)) ([68d41e3](https://github.com/defenseunicorns/uds-k3d/commit/68d41e3f7609cb3def4c76580426bc4b430f9d72))
+
 ## [0.21.1](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.0...v0.21.1) (2026-10-05)
 
 
