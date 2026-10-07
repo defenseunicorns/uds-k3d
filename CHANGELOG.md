@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.21.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.2...v0.21.3) (2026-10-07)
+
+
+### Miscellaneous
+
+* **ci:** validate Renovate configuration ([#398](https://github.com/defenseunicorns/uds-k3d/issues/398)) ([dd9b103](https://github.com/defenseunicorns/uds-k3d/commit/dd9b103202f33c70fce7dd573fdd64b7cb7332ad))
+
 ## [0.21.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.1...v0.21.2) (2026-10-06)
 
 
