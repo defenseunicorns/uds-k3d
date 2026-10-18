@@ -17,6 +17,9 @@ on:
 jobs:
   publish-k3s-image:
     runs-on: ubuntu-latest
+    concurrency:
+      group: publish-k3s-image-${{ matrix.version }}
+      cancel-in-progress: false
     strategy:
       matrix:
         version:

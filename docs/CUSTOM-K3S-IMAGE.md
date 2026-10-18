@@ -41,6 +41,8 @@ CI publishes a multi-platform image (`linux/amd64` and `linux/arm64`) to GHCR wh
 uds run publish-image --set VERSION=<k3s-version>
 ```
 
+Publishing skips tags already present in GHCR. Registry lookup errors stop publication. Existing tags are not rebuilt when the Dockerfile or bundled libraries change.
+
 ## Renovate Updates
 
 This repo targets k3s N for UDS Core default testing. Renovate limits updates to this minor version with the `allowedVersions` constraint in `renovate.json`; update that constraint manually when adopting a new minor version.
