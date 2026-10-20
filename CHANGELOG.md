@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.21.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.2...v0.21.3) (2026-10-20)
+
+
+### Bug Fixes
+
+* **ci:** publish supported K3s images ([#407](https://github.com/defenseunicorns/uds-k3d/issues/407)) ([3235387](https://github.com/defenseunicorns/uds-k3d/commit/3235387d5c8b06eb65efb50062539b4f6bed3a41))
+
+
+### Miscellaneous
+
+* **ci:** validate Renovate configuration ([#398](https://github.com/defenseunicorns/uds-k3d/issues/398)) ([dd9b103](https://github.com/defenseunicorns/uds-k3d/commit/dd9b103202f33c70fce7dd573fdd64b7cb7332ad))
+* **deps:** update k3s to 256c88b ([#399](https://github.com/defenseunicorns/uds-k3d/issues/399)) ([fd0ce02](https://github.com/defenseunicorns/uds-k3d/commit/fd0ce02066b313b986322fe969e0ecc4475bdd8b))
+* **deps:** update support-deps ([#402](https://github.com/defenseunicorns/uds-k3d/issues/402)) ([e298a4a](https://github.com/defenseunicorns/uds-k3d/commit/e298a4ae9732ef79a4267a2372496e756e0d9b0b))
+* **deps:** update support-deps to v7 ([#404](https://github.com/defenseunicorns/uds-k3d/issues/404)) ([3a9d6e4](https://github.com/defenseunicorns/uds-k3d/commit/3a9d6e4e4273561cdc32f9814fe19a68ab257b21))
+
 ## [0.21.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.1...v0.21.2) (2026-10-06)
 
 
