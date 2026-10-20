@@ -51,6 +51,17 @@ tasks:
     actions:
       - description: Publish custom k3s image
         cmd: |
+          if manifest=$(docker buildx imagetools inspect "${IMAGE_NAME}:${VERSION}" 2>&1); then
+            echo "Skipping ${IMAGE_NAME}:${VERSION}: already published"
+            exit 0
+          fi
+          case "$manifest" in
+            "ERROR: ${IMAGE_NAME}:${VERSION}: not found") ;;
+            *)
+              printf '%s\n' "$manifest" >&2
+              exit 1
+              ;;
+          esac
           docker buildx build --push \
             --platform linux/amd64,linux/arm64 \
             --build-arg "K3S_TAG=${VERSION}" \
