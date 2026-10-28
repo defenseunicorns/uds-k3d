@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.21.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.2...v0.21.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* **ci:** publish supported K3s images ([#407](https://github.com/defenseunicorns/uds-k3d/issues/407)) ([3235387](https://github.com/defenseunicorns/uds-k3d/commit/3235387d5c8b06eb65efb50062539b4f6bed3a41))
+
+
+### Miscellaneous
+
+* **ci:** validate Renovate configuration ([#398](https://github.com/defenseunicorns/uds-k3d/issues/398)) ([dd9b103](https://github.com/defenseunicorns/uds-k3d/commit/dd9b103202f33c70fce7dd573fdd64b7cb7332ad))
+* **deps:** update dev-stack ([#405](https://github.com/defenseunicorns/uds-k3d/issues/405)) ([75bcfa6](https://github.com/defenseunicorns/uds-k3d/commit/75bcfa6f852406d2ff805b6cdbf41f0e593452cc))
+* **deps:** update k3s to 256c88b ([#399](https://github.com/defenseunicorns/uds-k3d/issues/399)) ([fd0ce02](https://github.com/defenseunicorns/uds-k3d/commit/fd0ce02066b313b986322fe969e0ecc4475bdd8b))
+* **deps:** update k3s to 31cfe08 ([#408](https://github.com/defenseunicorns/uds-k3d/issues/408)) ([1639387](https://github.com/defenseunicorns/uds-k3d/commit/1639387128801aacbf8c11ed7a35ce27abda6b75))
+* **deps:** update support-deps ([#402](https://github.com/defenseunicorns/uds-k3d/issues/402)) ([e298a4a](https://github.com/defenseunicorns/uds-k3d/commit/e298a4ae9732ef79a4267a2372496e756e0d9b0b))
+* **deps:** update support-deps ([#406](https://github.com/defenseunicorns/uds-k3d/issues/406)) ([716cacd](https://github.com/defenseunicorns/uds-k3d/commit/716cacd0d3e7e0e12ce26b7765df8db26f3cc836))
+* **deps:** update support-deps to v26 ([#409](https://github.com/defenseunicorns/uds-k3d/issues/409)) ([eee012a](https://github.com/defenseunicorns/uds-k3d/commit/eee012a15765b30fe986c54ae156fd6282f3405a))
+* **deps:** update support-deps to v7 ([#404](https://github.com/defenseunicorns/uds-k3d/issues/404)) ([3a9d6e4](https://github.com/defenseunicorns/uds-k3d/commit/3a9d6e4e4273561cdc32f9814fe19a68ab257b21))
+
 ## [0.21.2](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.1...v0.21.2) (2026-10-06)
 
 
