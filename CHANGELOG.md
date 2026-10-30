@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.21.4](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.3...v0.21.4) (2026-10-30)
+
+
+### Miscellaneous
+
+* **deps:** update k3s to 6edbe6c ([#410](https://github.com/defenseunicorns/uds-k3d/issues/410)) ([f1d826c](https://github.com/defenseunicorns/uds-k3d/commit/f1d826cf70b97843759dbab2552ba2479ae18e98))
+* **deps:** update k3s to 88a20e2 ([#412](https://github.com/defenseunicorns/uds-k3d/issues/412)) ([03a8c84](https://github.com/defenseunicorns/uds-k3d/commit/03a8c84b76acd46288f6da99155f1e0202040757))
+* **deps:** update support-deps to v2.22.3 ([#413](https://github.com/defenseunicorns/uds-k3d/issues/413)) ([b42d12a](https://github.com/defenseunicorns/uds-k3d/commit/b42d12ab975e9ac803ac237c90c3c6b61d94c8fb))
+
 ## [0.21.3](https://github.com/defenseunicorns/uds-k3d/compare/v0.21.2...v0.21.3) (2026-10-28)
 
 
